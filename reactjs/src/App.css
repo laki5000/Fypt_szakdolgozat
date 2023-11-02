@@ -1,0 +1,236 @@
+#div_navbar{
+  display: flex;
+  flex-direction: row;
+  background-color: #A30000;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 1%;
+}
+
+#div_logo{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 20%;
+  height: 100%;
+  background-color: #808080;
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+}
+
+#div_logo2{
+  padding: 2%;
+  margin: auto;
+  width: 100%;
+  text-align: center;
+}
+
+#logo{
+  width: 60%;
+}
+
+#div_login_and_menu{
+  display: flex;
+  flex-direction: column;
+  background-color: #808080;
+  width: 80%;
+  padding: 1%;
+  padding-bottom: 0%;
+  height: 100%;
+  border-top-right-radius: 7px;
+}
+
+#div_login_options_etc{
+  display: flex;
+  flex-direction: row;
+  background-color: #808080;
+  justify-content: right;
+  margin-bottom: 3%;
+}
+
+#div_menu{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.div_menu_options{
+  font-size: 120%;
+  display: flex;
+  width: 16%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  padding-left: 2%;
+  padding-right: 2%;
+  justify-content: center;
+  cursor: pointer;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  box-shadow: 0 -1px 2px 0 whitesmoke;
+  :hover{
+    box-shadow: 0 0 5px 0 white;
+    border-radius: 7px;
+  }
+}
+
+.div_menu_options2{
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.div_login_functions{
+  margin-left: 1%;
+}
+
+body {
+  background-image: linear-gradient(to bottom, #A30000, #FFFFFF);
+  background-size: 100% 300%;
+  background-repeat: no-repeat;
+}
+
+#div_title{
+  background-color: #E0E0E0;
+  display: flex;
+  justify-content: left;
+  padding-left: 25.7%;
+  padding-top: 1.5%;
+  padding-bottom: 1.5%;
+  font-family: fantasy;
+  font-size: 200%;
+  color:#A30000;
+}
+
+.link_icons{
+  font-family: Arial, Helvetica, sans-serif;
+  color:black;
+  font-weight:bold;
+  :hover{
+    box-shadow: 0 0 5px 0 white;
+    border-radius: 7px;
+  }
+}
+
+.div_login{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-image: linear-gradient(to bottom,#808080, whitesmoke, #808080);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding-top: 3%;
+  padding-bottom: 2%;
+  padding-right: 10%;
+  padding-left: 10%;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+.div_join_register{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-image: linear-gradient(to bottom,#808080, whitesmoke, #808080);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding-top: 1%;
+  padding-bottom: 2%;
+  padding-right: 10%;
+  padding-left: 10%;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+.div_row{
+  display: flex;
+  flex-direction: row;
+}
+
+.div_form_data{
+  width: 60%;
+  margin: auto;
+  margin-top: 1%;
+}
+
+.div_form_data_inputs{
+  font-size: 200%;
+  width: 70%;
+  margin: auto;
+  :hover{
+    box-shadow: 0 0 10px 0 white;
+    border-radius: 7px;
+  }
+}
+
+.div_form_data_inputs2{
+  font-size: 100%;
+  width: 70%;
+  margin: auto;
+  :hover{
+    box-shadow: 0 0 10px 0 white;
+    border-radius: 7px;
+  }
+}
+
+.div_form_data_titles{
+  font-size: 200%;
+  width: 70%;
+  margin: auto;
+  text-align: left;
+  padding-top: 3%;
+}
+
+.div_form_data_titles2{
+  font-size: 100%;
+  width: 70%;
+  margin: auto;
+  text-align: left;
+  padding-top: 3%;
+}
+
+.inputs01{
+  width: 100%;
+  padding: 2%;
+  font-size: 100%;
+  border-radius: 7px;
+}
+
+.div_not_registered_yet{
+  display: flex;
+  flex-direction: column;
+  padding-top: 1%;
+  width: 70%;
+  margin: auto;
+  text-align: left;
+}
+
+.div_submit{
+  width: 70%;
+  margin: auto;
+  text-align: right;
+  padding-top: 5%;
+  :hover{
+    box-shadow: 0 0 10px 0 white;
+    border-radius: 7px;
+  }
+}
+
+.submit_button{
+  background-color: #A30000;
+  opacity: 85%;
+  font-weight: bold;
+  border-radius: 7px;
+  width: 50%;
+  font-size: 100%;
+  padding-top: 4%;
+  padding-bottom: 4%;
+  cursor: pointer;
+}
+
+.div_reg_button_parent{
+  padding-left: 8%;
+  padding-right: 8%;
+}
