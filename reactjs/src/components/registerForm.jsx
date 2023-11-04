@@ -9,7 +9,7 @@ class RegisterForm extends Component{
       this.state = {
         vezetek_nev: '',
         kereszt_nev: '',
-        nem: '',
+        nem: 'Férfi',
         szul_hely: '',
         szul_ido: '',
         iranyitoszam: '',
@@ -43,7 +43,14 @@ class RegisterForm extends Component{
     }
 
     changeNemHandler= (event) => {
-      this.setState({nem: event.target.value});
+      if(event.target.value === 'ferfi')
+      {
+        this.setState({nem: 'Férfi'});
+      }
+      else if(event.target.value === 'no')
+      {
+        this.setState({nem: 'Nő'});
+      }
     }
 
     changeSzulHelyHandler= (event) => {
@@ -80,7 +87,11 @@ class RegisterForm extends Component{
 
     saveUser= (e) => {
       e.preventDefault();
-      if(this.state.email != this.state.email_megegyszer)
+      if(this.state.vezetek_nev === '' || this.state.kereszt_nev === '' || this.state.email === '' || this.state.email_megegyszer === '' || this.state.jelszo === '' || this.state.jelszo_megegyszer === '')
+      {
+        alert('A csillaggal jelölt mezők kitöltése kötelező!');
+      }
+      else if(this.state.email != this.state.email_megegyszer)
       {
         alert('A két e-mail nem egyezik!');
       }
@@ -114,76 +125,90 @@ class RegisterForm extends Component{
       }
     }
 
+    componentDidMount(){
+      const token = localStorage.getItem('token')
+      if(token){
+        UserService.authUser(token).then((res => {
+          if(res.data){
+            this.props.history.push('/homePage');
+          }
+        }))
+      }
+    }
+
     render(){
       return (
         <form>
-          <div className='div_join_register'>
+          <div className='div_col padding_left_right_1 padding_top_1 div_join_register'>
             <div className='div_row'>
               <div className='div_form_data'>
                 <div className='div_form_data_titles2'>
-                  VEZETÉKNÉV*
+                  Vezetéknév*
                 </div>
                 <div className='div_form_data_inputs2'>
                   <input name='vezetek_nev' className='inputs01' value={this.state.vezetek_nev} onChange={this.changeVezetekNevHandler}/>
                 </div>
                 <div className='div_form_data_titles2'>
-                  KERESZTNÉV*
+                  Keresztnév*
                 </div>
                 <div className='div_form_data_inputs2'>
                   <input name='kereszt_nev' className='inputs01' value={this.state.kereszt_nev} onChange={this.changeKeresztNevHandler}/>
                 </div>
                 <div className='div_form_data_titles2'>
-                  NEM*
+                  Nem
                 </div>
                 <div className='div_form_data_inputs2'>
-                  <input name='nem' className='inputs01' value={this.state.nem} onChange={this.changeNemHandler}/>
+                  <select className='inputs01' name="nem" onChange={this.changeNemHandler}>
+                    <option value="ferfi">Férfi</option>
+                    <option value="no">Nő</option>
+                  </select>
                 </div>
                 <div className='div_form_data_titles2'>
-                  SZÜLETÉSI HELY
+                  Születési hely
                 </div>
                 <div className='div_form_data_inputs2'>
                   <input name='szul_hely' className='inputs01' value={this.state.szul_hely} onChange={this.changeSzulHelyHandler}/>
                 </div>
                 <div className='div_form_data_titles2'>
-                  SZÜLETÉSI IDŐ
+                  Születési idő
                 </div>
                 <div className='div_form_data_inputs2'>
-                  <input name='szul_ido' className='inputs01' value={this.state.szul_ido} onChange={this.changeSzulidoHandler}/>
+                  <input type='date' name='szul_ido' className='inputs01' value={this.state.szul_ido} onChange={this.changeSzulidoHandler}/>
                 </div>
                 <div className='div_form_data_titles2'>
-                  IRÁNYÍTÓSZÁM
+                  Irányítószám
                 </div>
                 <div className='div_form_data_inputs2'>
-                  <input name='iranyitoszam' className='inputs01' value={this.state.iranyitoszam} onChange={this.changeIranyitoszamHandler}/>
+                  <input type='number' name='iranyitoszam' className='inputs01' value={this.state.iranyitoszam} onChange={this.changeIranyitoszamHandler}/>
                 </div>
               </div>
               <div className='div_form_data'>
                 <div className='div_form_data_titles2'>
-                  VÁROS
+                  Város
                 </div>
                 <div className='div_form_data_inputs2'>
                   <input name='lakhely_varos' className='inputs01' value={this.state.lakhely_varos} onChange={this.changeLakhelyVarosHandler}/>
                 </div>
                 <div className='div_form_data_titles2'>
-                  E-MAIL*
+                  E-mail*
                 </div>
                 <div className='div_form_data_inputs2'>
                   <input name='email' className='inputs01' value={this.state.email} onChange={this.changeEmailHandler}/>
                 </div>
                 <div className='div_form_data_titles2'>
-                  E-MAIL MÉGEGYSZER*
+                  E-mail mégegyszer*
                 </div>
                 <div className='div_form_data_inputs2'>
                   <input name='email2' className='inputs01' value={this.state.email_megegyszer} onChange={this.changeEmailMegegyszerHandler}/>
                 </div>
                 <div className='div_form_data_titles2'>
-                  JELSZÓ*
+                  Jelszó*
                 </div>
                 <div className='div_form_data_inputs2'>
                   <input type='password' name='jelszo' className='inputs01' value={this.state.jelszo} onChange={this.changeJelszoHandler}/>
                 </div>
                 <div className='div_form_data_titles2'>
-                  JELSZÓ MÉGEGYSZER*
+                  Jelszó mégegyszer*
                 </div>
                 <div className='div_form_data_inputs2'>
                 <input type='password' name='jelszo2' className='inputs01' value={this.state.jelszo_megegyszer} onChange={this.changeJelszoMegegyszerHandler}/>
@@ -191,7 +216,7 @@ class RegisterForm extends Component{
               </div>
             </div>
             <div className='div_row div_reg_button_parent'>
-              <div className='div_not_registered_yet'>
+              <div className='div_col padding_top_1 div_not_registered_yet'>
                 <div>
                   Már van fiókod?
                 </div>
@@ -200,7 +225,7 @@ class RegisterForm extends Component{
                 </div>
               </div>
               <div className='div_submit'>
-                <input type='submit' value='Regisztráció' className='submit_button' onClick={this.saveUser}/>
+                <input type='submit' value='Regisztráció' className='bgcolor_1 submit_button' onClick={this.saveUser}/>
               </div>
             </div>
           </div>

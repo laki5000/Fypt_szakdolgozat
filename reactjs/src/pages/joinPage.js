@@ -1,16 +1,17 @@
+import React from "react";
 import LineWithTitle from "../components/lineWithTitle";
 import JoinForm from "../components/joinForm";
 
-export default function JoinPage() {
-    return (
+const JoinPage = (props) => {
+  return (
+    <div>
       <div>
-        <div>
-          <LineWithTitle title="Csatlakozz"/>
-        </div>
-        <div>
-          <JoinForm/>
-        </div>
+        <LineWithTitle title="Csatlakozz"/>
       </div>
-    );
-  }
-  
+      <div>
+        <JoinForm/>
+      </div>
+    </div>
+  );
+}
+export default JoinPage;

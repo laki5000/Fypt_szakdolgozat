@@ -1,16 +1,17 @@
+import React from "react";
 import AdminMenu from "../components/adminMenu";
 import LineWithTitle from "../components/lineWithTitle";
 
-export default function AdminPage() {
-    return (
+const AdminPage = (props) => {
+  return (
+    <div>
       <div>
-        <div>
-          <LineWithTitle title="Admin menü"/>
-        </div>
-        <div>
-          <AdminMenu/>
-        </div>
+        <LineWithTitle title="Admin menü"/>
       </div>
-    );
-  }
-  
+      <div>
+        <AdminMenu/>
+      </div>
+    </div>
+  );
+}
+export default AdminPage;  

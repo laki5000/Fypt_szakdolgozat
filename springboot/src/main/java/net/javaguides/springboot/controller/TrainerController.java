@@ -44,6 +44,16 @@ public class TrainerController {
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")
+	@GetMapping("/trainers/load/byuserid")
+	public TrainerDto getTrainerByUserId(@RequestHeader("UserId") String UserId){
+		Trainer trainer = trainerRepository.findByUserId(Long.parseLong(UserId));
+		if(trainer != null) {
+			return new TrainerDto(trainer);
+		}
+		return null;
+	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/trainers/load/applications")
 	public List<TrainerAndUserDto> loadTrainerApplications(@RequestHeader("Hiteles") String hiteles) {
 		boolean hitelesBool;

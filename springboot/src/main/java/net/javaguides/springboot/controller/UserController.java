@@ -24,6 +24,26 @@ public class UserController {
 	private UserRepository userRepository;
 	
 	@CrossOrigin(origins = "http://localhost:3000")
+	@PostMapping("/users/save")
+	public User saveUser(@RequestBody User user) {
+		return userRepository.save(user);
+	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@PostMapping("/users/login")
+	public String[] loginUser(@RequestBody User user) {
+		User u = userRepository.findByeMailAndJelszo(user.geteMail(), user.getJelszo());
+		if(u != null) {
+			String[] data = new String[3];
+			data[0] = JTP.createToken(u.geteMail());
+			data[1] = "" + u.getId();
+			data[2] = u.getKeresztNev();
+			return data;
+		}
+		return new String[0];
+	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/users/load")
 	public UserDto getUser(@RequestHeader("Id") String id){
 		User user = userRepository.findById(Long.parseLong(id));
@@ -52,24 +72,4 @@ public class UserController {
             return false;
         }
     }
-	
-	@CrossOrigin(origins = "http://localhost:3000")
-	@PostMapping("/users/save")
-	public User saveUser(@RequestBody User user) {
-		return userRepository.save(user);
-	}
-	
-	@CrossOrigin(origins = "http://localhost:3000")
-	@PostMapping("/users/login")
-	public String[] loginUser(@RequestBody User user) {
-		User u = userRepository.findByeMailAndJelszo(user.geteMail(), user.getJelszo());
-		if(u != null) {
-			String[] data = new String[3];
-			data[0] = JTP.createToken(u.geteMail());
-			data[1] = "" + u.getId();
-			data[2] = u.getKeresztNev();
-			return data;
-		}
-		return new String[0];
-	}
 }

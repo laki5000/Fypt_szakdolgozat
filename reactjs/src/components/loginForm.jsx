@@ -63,10 +63,10 @@ class LoginForm extends Component{
     render(){
       return (
         <form>
-          <div className='div_login'>
+          <div className='div_col div_login'>
             <div className='div_form_data'>
               <div>
-                <img id='logo' src="dumbell_icon.jpg" alt="logo"></img>
+                <img className='logo' src="dumbell_icon.jpg" alt="logo"></img>
               </div> 
               <div className='div_form_data_titles'>
                 E-MAIL
@@ -80,7 +80,7 @@ class LoginForm extends Component{
               <div className='div_form_data_inputs'>
                 <input type='password' className='inputs01' name='jelszo' value={this.state.jelszo} onChange={this.changeJelszoHandler}/>
               </div>
-              <div className='div_not_registered_yet'>
+              <div className='div_col padding_top_1 div_not_registered_yet'>
                 <div>
                   Még nem regisztráltál?
                 </div>
@@ -89,7 +89,7 @@ class LoginForm extends Component{
                 </div>
               </div>
               <div className='div_submit'>
-                <input type='submit' value='Bejelentkezés' className='submit_button' onClick={this.loginUser}/>
+                <input type='submit' value='Bejelentkezés' className='bgcolor_1 submit_button' onClick={this.loginUser}/>
               </div>
             </div>  
           </div>

@@ -1,16 +1,16 @@
 import LineWithTitle from '../components/lineWithTitle';
 import RegisterForm from '../components/registerForm';
 
-export default function RegisterPage() {
-    return (
+const RegisterPage = (props) => {
+  return (
+    <div>
       <div>
-        <div>
-          <LineWithTitle title="Regisztráció"/>
-        </div>
-        <div>
-          <RegisterForm/>
-        </div>
+        <LineWithTitle title="Regisztráció"/>
       </div>
-    );
-  }
-  
+      <div>
+        <RegisterForm/>
+      </div>
+    </div>
+  );
+}
+  export default RegisterPage;

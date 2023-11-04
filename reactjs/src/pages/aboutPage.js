@@ -1,15 +1,17 @@
+import React from "react";
 import LineWithTitle from "../components/lineWithTitle"
 
-export default function AboutPage() {
-    return (
+const AboutPage = (props) => {
+  return (
+    <div>
       <div>
-        <div>
-          <LineWithTitle title="Rólunk"/>
-        </div>
-        <div>
-          About Page
-        </div>
+        <LineWithTitle title="Rólunk"/>
       </div>
-    );
-  }
+      <div>
+        About Page
+      </div>
+    </div>
+  );
+}
+export default AboutPage;
   

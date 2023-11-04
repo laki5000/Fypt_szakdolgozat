@@ -11,4 +11,5 @@ import net.javaguides.springboot.model.Trainer;
 public interface TrainerRepository extends JpaRepository<Trainer, Long>{
 	List<Trainer> findByHiteles(boolean hiteles);
 	Trainer findById(long id);
+	Trainer findByUserId(long userId);
 }

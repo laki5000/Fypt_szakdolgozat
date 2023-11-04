@@ -19,8 +19,8 @@ public class AdminController {
 
 	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/admins/load")
-	public AdminDto getAdmin(@RequestHeader("Id") String id){
-		Admin admin = adminRepository.findByUserId(id);
+	public AdminDto getAdmin(@RequestHeader("UserId") String user_id){
+		Admin admin = adminRepository.findByUserId(user_id);
 		if(admin != null) {
 			return new AdminDto(admin);
 		}

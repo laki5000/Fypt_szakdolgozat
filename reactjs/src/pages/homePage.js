@@ -1,14 +1,16 @@
+import React from "react";
 import LineWithTitle from "../components/lineWithTitle";
 
-export default function HomePage() {
+const HomePage = (props) => {
   return (
     <div>
-        <div>
-          <LineWithTitle title="Kezdőlap"/>
-        </div>
-        <div>
-          Home
-        </div>
-    </div>
+      <div>
+        <LineWithTitle title="Kezdőlap"/>
+      </div>
+      <div>
+        Home
+      </div>
+  </div>
   );
 }
+export default HomePage;

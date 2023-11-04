@@ -1,15 +1,16 @@
+import React from "react";
 import LineWithTitle from "../components/lineWithTitle";
 
-export default function CalCalcPage() {
-    return (
+const CalCalcPage = (props) => {
+  return (
+    <div>
       <div>
-        <div>
-          <LineWithTitle title="Kalória Kalkulátor"/>
-        </div>
-        <div>
-          CalCalc Page
-        </div>
+        <LineWithTitle title="Kalória Kalkulátor"/>
       </div>
-    );
-  }
-  
+      <div>
+        CalCalc Page
+      </div>
+    </div>
+  );
+}
+export default CalCalcPage;
