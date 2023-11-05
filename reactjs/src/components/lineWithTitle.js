@@ -1,6 +1,6 @@
 export default function LineWithTitle(props) {
     return (
-      <div id='div_title'>
+      <div className='bgclr3 divrow fntsz2 divttle'>
         {props.title}
       </div>
     );

@@ -63,24 +63,24 @@ class LoginForm extends Component{
     render(){
       return (
         <form>
-          <div className='div_col div_login'>
-            <div className='div_form_data'>
+          <div className='divcol tac bgisr mrgnlr1 pddngbt1 divlgn'>
+            <div className='mrgna wdth3 divfrmdta'>
               <div>
-                <img className='logo' src="dumbell_icon.jpg" alt="logo"></img>
+                <img className='wdth3' src="dumbell_icon.jpg" alt="logo"></img>
               </div> 
-              <div className='div_form_data_titles'>
+              <div className='mrgna fntsz2 wdth2 divfrmdta_titles'>
                 E-MAIL
               </div>
-              <div className='div_form_data_inputs'>
-                <input name='email' className='inputs01' value={this.state.email} onChange={this.changeEmailHandler}/>
+              <div className='mrgna fntsz2 wdth2 hvr2'>
+                <input name='email' className='pddng1 wdth1 fntsz1 brdrrds' value={this.state.email} onChange={this.changeEmailHandler}/>
               </div>
-              <div className='div_form_data_titles'>
+              <div className='mrgna fntsz2 wdth2 divfrmdta_titles'>
                 JELSZÓ
               </div>
-              <div className='div_form_data_inputs'>
-                <input type='password' className='inputs01' name='jelszo' value={this.state.jelszo} onChange={this.changeJelszoHandler}/>
+              <div className='mrgna fntsz2 wdth2 hvr2'>
+                <input type='password' className='pddng1 wdth1 fntsz1 brdrrds' name='jelszo' value={this.state.jelszo} onChange={this.changeJelszoHandler}/>
               </div>
-              <div className='div_col padding_top_1 div_not_registered_yet'>
+              <div className='divcol pddngt1 mrgna wdth2 divnotregisteredyet'>
                 <div>
                   Még nem regisztráltál?
                 </div>
@@ -88,8 +88,8 @@ class LoginForm extends Component{
                   <Link to='/registerPage'>Kattints ide!</Link>
                 </div>
               </div>
-              <div className='div_submit'>
-                <input type='submit' value='Bejelentkezés' className='bgcolor_1 submit_button' onClick={this.loginUser}/>
+              <div className='mrgna wdth2 hvr2 divsubmit'>
+                <input type='submit' value='Bejelentkezés' className='bgclr1 crsrp fntsz1 brdrrds sbmtbtn' onClick={this.loginUser}/>
               </div>
             </div>  
           </div>

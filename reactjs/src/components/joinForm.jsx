@@ -99,56 +99,56 @@ class JoinForm extends Component {
     render(){
         return (
             <form>
-                <div className='div_col padding_left_right_1 padding_top_1 div_join_register'>
-                    <div className='div_row'>
-                        <div className='div_form_data'>
-                            <div className='div_form_data_titles2'>
+                <div className='divcol pddnglr1 pddngt1 tac bgisr mrgnlr1 pddngbt1 divjnregstr'>
+                    <div className='divrow'>
+                        <div className='mrgna wdth3 divfrmdta'>
+                            <div className='mrgna fntsz1 wdth2 divfrmdta_titles'>
                                 Kiket vállalsz?
                             </div>
-                            <div className='div_form_data_inputs2'>
-                                <select className='inputs01' name="nem" onChange={this.changeKiketVallal}>
+                            <div className='mrgna fntsz1 wdth2 hvr2'>
+                                <select className='pddng1 wdth1 fntsz1 brdrrds' name="nem" onChange={this.changeKiketVallal}>
                                     <option value="ferfi">Férfiak</option>
                                     <option value="no">Nők</option>
                                     <option value="mindketto">Mindkettő</option>
                                 </select>                            
                             </div>
-                            <div className='div_form_data_titles2'>
+                            <div className='mrgna fntsz1 wdth2 divfrmdta_titles'>
                                 Specializáció
                             </div>
-                            <div className='div_form_data_inputs2'>
-                                <input name='specializacio' className='inputs01' onChange={this.changeSpecializacio}/>
+                            <div className='mrgna fntsz1 wdth2 hvr2'>
+                                <input name='specializacio' className='pddng1 wdth1 fntsz1 brdrrds' onChange={this.changeSpecializacio}/>
                             </div>
-                            <div className='div_form_data_titles2'>
+                            <div className='mrgna fntsz1 wdth2 divfrmdta_titles'>
                                 Végzettség</div>
-                            <div className='div_form_data_inputs2'>
-                                <input name='vegzettseg' className='inputs01' onChange={this.changeVegzettseg}/>
+                            <div className='mrgna fntsz1 wdth2 hvr2'>
+                                <input name='vegzettseg' className='pddng1 wdth1 fntsz1 brdrrds' onChange={this.changeVegzettseg}/>
                             </div>
-                            <div className='div_form_data_titles2'>
+                            <div className='mrgna fntsz1 wdth2 divfrmdta_titles'>
                                 Tapasztalat</div>
-                            <div className='div_form_data_inputs2'>
-                                <input name='tapasztalat' className='inputs01' onChange={this.changeTapasztalat}/>
+                            <div className='mrgna fntsz1 wdth2 hvr2'>
+                                <input name='tapasztalat' className='pddng1 wdth1 fntsz1 brdrrds' onChange={this.changeTapasztalat}/>
                             </div>
                         </div>
-                        <div className='div_form_data'>
-                            <div className='div_form_data_titles2'>
+                        <div className='mrgna wdth3 divfrmdta'>
+                            <div className='mrgna fntsz1 wdth2 divfrmdta_titles'>
                                 Telefonszám</div>
-                            <div className='div_form_data_inputs2'>
-                                <input type='number' className='inputs01' name='telefonszam' onChange={this.changeTelefonszam}/>
+                            <div className='mrgna fntsz1 wdth2 hvr2'>
+                                <input type='number' className='pddng1 wdth1 fntsz1 brdrrds' name='telefonszam' onChange={this.changeTelefonszam}/>
                             </div>
-                            <div className='div_form_data_titles2'>
+                            <div className='mrgna fntsz1 wdth2 divfrmdta_titles'>
                                 Bemutatkozás
                             </div>
-                            <div className='div_form_data_inputs2'>
-                                <textarea className='textarea01' onChange={this.changeBemutatkozas}/>
+                            <div className='mrgna fntsz1 wdth2 hvr2'>
+                                <textarea className='pddng1 wdth1 fntsz1 brdrrds textarea1' onChange={this.changeBemutatkozas}/>
                             </div>
-                            <div className='div_left'>
+                            <div className='divrow divlft'>
                                 Minden mező kitöltése kötelező!
                             </div>
                         </div>
                     </div>
-                    <div className='div_reg_button_parent'>
-                        <div className='div_right div_submit'>
-                            <input type='submit' value='Regisztráció' className='bgcolor_1 submit_button' onClick={this.saveTrainer}/>
+                    <div className='divregbtnprnt'>
+                        <div className='divrow jcc mrgna wdth2 hvr2 divsubmit'>
+                            <input type='submit' value='Regisztráció' className='bgclr1 crsrp fntsz1 brdrrds sbmtbtn' onClick={this.saveTrainer}/>
                         </div>
                     </div>
                 </div>

@@ -139,84 +139,84 @@ class RegisterForm extends Component{
     render(){
       return (
         <form>
-          <div className='div_col padding_left_right_1 padding_top_1 div_join_register'>
-            <div className='div_row'>
-              <div className='div_form_data'>
-                <div className='div_form_data_titles2'>
+          <div className='divcol pddnglr1 pddngt1 tac bgisr mrgnlr1 pddngbt1 divjnregstr'>
+            <div className='divrow'>
+              <div className='mrgna wdth3 divfrmdta'>
+                <div className='mrgna fntsz1 wdth2 divfrmdta_titles'>
                   Vezetéknév*
                 </div>
-                <div className='div_form_data_inputs2'>
-                  <input name='vezetek_nev' className='inputs01' value={this.state.vezetek_nev} onChange={this.changeVezetekNevHandler}/>
+                <div className='mrgna fntsz1 wdth2 hvr2'>
+                  <input name='vezetek_nev' className='pddng1 wdth1 fntsz1 brdrrds' value={this.state.vezetek_nev} onChange={this.changeVezetekNevHandler}/>
                 </div>
-                <div className='div_form_data_titles2'>
+                <div className='mrgna fntsz1 wdth2 divfrmdta_titles'>
                   Keresztnév*
                 </div>
-                <div className='div_form_data_inputs2'>
-                  <input name='kereszt_nev' className='inputs01' value={this.state.kereszt_nev} onChange={this.changeKeresztNevHandler}/>
+                <div className='mrgna fntsz1 wdth2 hvr2'>
+                  <input name='kereszt_nev' className='pddng1 wdth1 fntsz1 brdrrds' value={this.state.kereszt_nev} onChange={this.changeKeresztNevHandler}/>
                 </div>
-                <div className='div_form_data_titles2'>
+                <div className='mrgna fntsz1 wdth2 divfrmdta_titles'>
                   Nem
                 </div>
-                <div className='div_form_data_inputs2'>
-                  <select className='inputs01' name="nem" onChange={this.changeNemHandler}>
+                <div className='mrgna fntsz1 wdth2 hvr2'>
+                  <select className='pddng1 wdth1 fntsz1 brdrrds' name="nem" onChange={this.changeNemHandler}>
                     <option value="ferfi">Férfi</option>
                     <option value="no">Nő</option>
                   </select>
                 </div>
-                <div className='div_form_data_titles2'>
+                <div className='mrgna fntsz1 wdth2 divfrmdta_titles'>
                   Születési hely
                 </div>
-                <div className='div_form_data_inputs2'>
-                  <input name='szul_hely' className='inputs01' value={this.state.szul_hely} onChange={this.changeSzulHelyHandler}/>
+                <div className='mrgna fntsz1 wdth2 hvr2'>
+                  <input name='szul_hely' className='pddng1 wdth1 fntsz1 brdrrds' value={this.state.szul_hely} onChange={this.changeSzulHelyHandler}/>
                 </div>
-                <div className='div_form_data_titles2'>
+                <div className='mrgna fntsz1 wdth2 divfrmdta_titles'>
                   Születési idő
                 </div>
-                <div className='div_form_data_inputs2'>
-                  <input type='date' name='szul_ido' className='inputs01' value={this.state.szul_ido} onChange={this.changeSzulidoHandler}/>
+                <div className='mrgna fntsz1 wdth2 hvr2'>
+                  <input type='date' name='szul_ido' className='pddng1 wdth1 fntsz1 brdrrds' value={this.state.szul_ido} onChange={this.changeSzulidoHandler}/>
                 </div>
-                <div className='div_form_data_titles2'>
+                <div className='mrgna fntsz1 wdth2 divfrmdta_titles'>
                   Irányítószám
                 </div>
-                <div className='div_form_data_inputs2'>
-                  <input type='number' name='iranyitoszam' className='inputs01' value={this.state.iranyitoszam} onChange={this.changeIranyitoszamHandler}/>
+                <div className='mrgna fntsz1 wdth2 hvr2'>
+                  <input type='number' name='iranyitoszam' className='pddng1 wdth1 fntsz1 brdrrds' value={this.state.iranyitoszam} onChange={this.changeIranyitoszamHandler}/>
                 </div>
               </div>
-              <div className='div_form_data'>
-                <div className='div_form_data_titles2'>
+              <div className='mrgna wdth3 divfrmdta'>
+                <div className='mrgna fntsz1 wdth2 divfrmdta_titles'>
                   Város
                 </div>
-                <div className='div_form_data_inputs2'>
-                  <input name='lakhely_varos' className='inputs01' value={this.state.lakhely_varos} onChange={this.changeLakhelyVarosHandler}/>
+                <div className='mrgna fntsz1 wdth2 hvr2'>
+                  <input name='lakhely_varos' className='pddng1 wdth1 fntsz1 brdrrds' value={this.state.lakhely_varos} onChange={this.changeLakhelyVarosHandler}/>
                 </div>
-                <div className='div_form_data_titles2'>
+                <div className='mrgna fntsz1 wdth2 divfrmdta_titles'>
                   E-mail*
                 </div>
-                <div className='div_form_data_inputs2'>
-                  <input name='email' className='inputs01' value={this.state.email} onChange={this.changeEmailHandler}/>
+                <div className='mrgna fntsz1 wdth2 hvr2'>
+                  <input name='email' className='pddng1 wdth1 fntsz1 brdrrds' value={this.state.email} onChange={this.changeEmailHandler}/>
                 </div>
-                <div className='div_form_data_titles2'>
+                <div className='mrgna fntsz1 wdth2 divfrmdta_titles'>
                   E-mail mégegyszer*
                 </div>
-                <div className='div_form_data_inputs2'>
-                  <input name='email2' className='inputs01' value={this.state.email_megegyszer} onChange={this.changeEmailMegegyszerHandler}/>
+                <div className='mrgna fntsz1 wdth2 hvr2'>
+                  <input name='email2' className='pddng1 wdth1 fntsz1 brdrrds' value={this.state.email_megegyszer} onChange={this.changeEmailMegegyszerHandler}/>
                 </div>
-                <div className='div_form_data_titles2'>
+                <div className='mrgna fntsz1 wdth2 divfrmdta_titles'>
                   Jelszó*
                 </div>
-                <div className='div_form_data_inputs2'>
-                  <input type='password' name='jelszo' className='inputs01' value={this.state.jelszo} onChange={this.changeJelszoHandler}/>
+                <div className='mrgna fntsz1 wdth2 hvr2'>
+                  <input type='password' name='jelszo' className='pddng1 wdth1 fntsz1 brdrrds' value={this.state.jelszo} onChange={this.changeJelszoHandler}/>
                 </div>
-                <div className='div_form_data_titles2'>
+                <div className='mrgna fntsz1 wdth2 divfrmdta_titles'>
                   Jelszó mégegyszer*
                 </div>
-                <div className='div_form_data_inputs2'>
-                <input type='password' name='jelszo2' className='inputs01' value={this.state.jelszo_megegyszer} onChange={this.changeJelszoMegegyszerHandler}/>
+                <div className='mrgna fntsz1 wdth2 hvr2'>
+                <input type='password' name='jelszo2' className='pddng1 wdth1 fntsz1 brdrrds' value={this.state.jelszo_megegyszer} onChange={this.changeJelszoMegegyszerHandler}/>
                 </div>
               </div>
             </div>
-            <div className='div_row div_reg_button_parent'>
-              <div className='div_col padding_top_1 div_not_registered_yet'>
+            <div className='divrow divregbtnprnt'>
+              <div className='divcol pddngt1 mrgna wdth2 divnotregisteredyet'>
                 <div>
                   Már van fiókod?
                 </div>
@@ -224,8 +224,8 @@ class RegisterForm extends Component{
                   <Link to='/loginPage'>Jelentkezz be!</Link>
                 </div>
               </div>
-              <div className='div_submit'>
-                <input type='submit' value='Regisztráció' className='bgcolor_1 submit_button' onClick={this.saveUser}/>
+              <div className='mrgna wdth2 hvr2 divsubmit'>
+                <input type='submit' value='Regisztráció' className='bgclr1 crsrp fntsz1 brdrrds sbmtbtn' onClick={this.saveUser}/>
               </div>
             </div>
           </div>

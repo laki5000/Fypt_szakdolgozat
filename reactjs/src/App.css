@@ -1,245 +1,258 @@
-.div_row
+body
 {
-  display: flex;
-  flex-direction: row;
-}
-
-.div_col
-{
-  display: flex;
-  flex-direction: column;
-}
-
-.bgcolor_1
-{
-  background-color: #A30000;
-}
-
-.padding_left_right_1
-{
-  padding-left: 10%;
-  padding-right: 10%;
-}
-
-.padding_top_1{
-  padding-top: 1%;
-}
-
-.div_logo{
-  justify-content: center;
-  width: 20%;
-  height: 100%;
-  background-color: #808080;
-  border-top-left-radius: 7px;
-  border-bottom-left-radius: 7px;
-}
-
-.div_logo2{
-  padding: 2%;
-  margin: auto;
-  width: 100%;
-  text-align: center;
-}
-
-.logo{
-  width: 60%;
-}
-
-.div_login_and_menu{
-  background-color: #808080;
-  width: 80%;
-  padding: 1%;
-  padding-bottom: 0%;
-  height: 100%;
-  border-top-right-radius: 7px;
-}
-
-.div_login_options_etc{
-  background-color: #808080;
-  justify-content: right;
-  margin-bottom: 3%;
-}
-
-.div_menu{
-  width: 100%;
-}
-
-.div_menu_options{
-  font-size: 120%;
-  width: 16%;
-  padding-bottom: 1%;
-  padding-left: 2%;
-  padding-right: 2%;
-  justify-content: center;
-  cursor: pointer;
-  border-top-left-radius: 7px;
-  border-top-right-radius: 7px;
-  box-shadow: 0 -1px 2px 0 whitesmoke;
-  :hover{
-    box-shadow: 0 0 5px 0 white;
-    border-radius: 7px;
-  }
-}
-
-.div_menu_options2{
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.div_login_functions{
-  margin-left: 1%;
-}
-
-body {
   background-image: linear-gradient(to bottom, #A30000, #FFFFFF);
   background-size: 100% 300%;
   background-repeat: no-repeat;
 }
 
-#div_title{
-  background-color: #E0E0E0;
+.divrow
+{
   display: flex;
-  justify-content: left;
-  padding-left: 25.7%;
-  padding-top: 1.5%;
-  padding-bottom: 1.5%;
-  font-family: fantasy;
-  font-size: 200%;
-  color:#A30000;
+  flex-direction: row;
 }
 
-.link_icons{
-  font-family: Arial, Helvetica, sans-serif;
-  color:black;
-  font-weight:bold;
-  :hover{
+.divcol
+{
+  display: flex;
+  flex-direction: column;
+}
+
+.bgclr1
+{
+  background-color: #A30000;
+}
+
+.bgclr2
+{
+  background-color: #808080;
+}
+
+.bgclr3
+{
+  background-color: #E0E0E0;
+}
+
+.bgisr
+{
+  background-image: linear-gradient(to bottom,#808080, whitesmoke, #808080);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.pddnglr1
+{
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.pddngt1
+{
+  padding-top: 1%;
+}
+
+.pddngbt1
+{
+  padding-bottom: 2%;
+}
+
+.pddng1
+{
+  padding: 2%;
+}
+
+.jcc
+{
+  justify-content: center;
+}
+
+.wdth1
+{
+  width: 100%;
+}
+
+.wdth2
+{
+  width: 70%;
+}
+
+.wdth3
+{
+  width: 60%;
+}
+
+.mrgnlr1
+{
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.mrgna
+{
+  margin: auto;
+}
+
+.tac
+{
+  text-align: center;
+}
+
+.crsrp
+{
+  cursor: pointer;
+}
+
+.hvr1
+{
+  :hover
+  {
     box-shadow: 0 0 5px 0 white;
     border-radius: 7px;
   }
 }
 
-.div_login{
-  text-align: center;
-  background-image: linear-gradient(to bottom,#808080, whitesmoke, #808080);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  margin-left: 10%;
-  margin-right: 10%;
+.hvr2
+{
+  :hover
+  {
+    box-shadow: 0 0 10px 0 white;
+    border-radius: 7px;
+  }
+}
+
+.fntsz1
+{
+  font-size: 100%;
+}
+
+.fntsz2
+{
+  font-size: 200%;
+}
+
+.brdrrds
+{
+  border-radius: 7px;
+}
+
+.divlogop
+{
+  width: 20%;
+  height: 100%;
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+}
+
+.divlgnandmenu
+{
+  width: 80%;
+  padding: 1%;
+  padding-bottom: 0%;
+  border-top-right-radius: 7px;
+}
+
+.divlgnoptns
+{
+  justify-content: right;
+  margin-bottom: 3%;
+}
+
+.divmnuoptns
+{
+  font-size: 120%;
+  width: 16%;
+  padding-bottom: 1%;
+  padding-left: 2%;
+  padding-right: 2%;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  box-shadow: 0 -1px 2px 0 whitesmoke;
+}
+
+.divmnuoptns2
+{
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.divlgnfunctns
+{
+  margin-left: 1%;
+}
+
+.divttle
+{
+  justify-content: left;
+  padding-left: 25.7%;
+  padding-top: 1.5%;
+  padding-bottom: 1.5%;
+  font-family: fantasy;
+  color:#A30000;
+}
+
+.linkico
+{
+  font-family: Arial, Helvetica, sans-serif;
+  color:black;
+  font-weight:bold;
+}
+
+.divlgn
+{
   padding-top: 3%;
-  padding-bottom: 2%;
   border-bottom-left-radius: 7px;
   border-bottom-right-radius: 7px;
 }
 
-.div_join_register{
-  text-align: center;
-  background-image: linear-gradient(to bottom,#808080, whitesmoke, #808080);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  margin-left: 10%;
-  margin-right: 10%;
-  padding-bottom: 2%;
+.divjnregstr
+{
   border-bottom-left-radius: 7px;
   border-bottom-right-radius: 7px;
 }
 
-.div_form_data{
-  width: 60%;
-  margin: auto;
+.divfrmdta
+{
   margin-top: 1%;
 }
 
-.div_form_data_inputs{
-  font-size: 200%;
-  width: 70%;
-  margin: auto;
-  :hover{
-    box-shadow: 0 0 10px 0 white;
-    border-radius: 7px;
-  }
-}
-
-.div_form_data_inputs2{
-  font-size: 100%;
-  width: 70%;
-  margin: auto;
-  :hover{
-    box-shadow: 0 0 10px 0 white;
-    border-radius: 7px;
-  }
-}
-
-.div_form_data_titles{
-  font-size: 200%;
-  width: 70%;
-  margin: auto;
+.divfrmdta_titles
+{
   text-align: left;
   padding-top: 3%;
 }
 
-.div_form_data_titles2{
-  font-size: 100%;
-  width: 70%;
-  margin: auto;
-  text-align: left;
-  padding-top: 3%;
-}
-
-.inputs01{
-  width: 100%;
-  padding: 2%;
-  font-size: 100%;
-  border-radius: 7px;
-}
-
-.div_not_registered_yet{
-  width: 70%;
-  margin: auto;
+.divnotregisteredyet
+{
   text-align: left;
 }
 
-.div_submit{
-  width: 70%;
-  margin: auto;
+.divsubmit
+{
   text-align: right;
   padding-top: 5%;
-  :hover{
-    box-shadow: 0 0 10px 0 white;
-    border-radius: 7px;
-  }
 }
 
-.submit_button{
+.sbmtbtn
+{
   opacity: 85%;
   font-weight: bold;
-  border-radius: 7px;
   width: 50%;
-  font-size: 100%;
   padding-top: 4%;
   padding-bottom: 4%;
-  cursor: pointer;
 }
 
-.div_reg_button_parent{
+.divregbtnprnt
+{
   padding-left: 8%;
   padding-right: 8%;
 }
 
-.div_right{
-  display: flex;
-  justify-content: center;
-}
-
-.textarea01{
-  width: 100%;
+.textarea1
+{
   height: 125px;
-  padding: 2%;
-  font-size: 100%;
-  border-radius: 7px;
 }
 
-.div_left{
-  display: flex;
+.divlft
+{
   padding-left: 15%;
   padding-top: 2%;
 }

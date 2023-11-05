@@ -49,51 +49,51 @@ const NavBar = (props) => {
     }, [isAuthenticated, keresztNev, admin]);
 
     return (
-        <div className='div_row bgcolor_1 padding_left_right_1 padding_top_1'>
-            <div className='div_row div_logo'>
-                <div className='div_logo2'>
+        <div className='divrow bgclr1 pddnglr1 pddngt1'>
+            <div className='divrow jcc bgclr2 divlogop'>
+                <div className='pddng1 wdth1 mrgna tac'>
                     <Link to='/homePage'>
-                        <div className='link_icons'>
-                            <img className='logo' src="dumbell_icon.jpg" alt="logo"></img> 
+                        <div className='hvr1 linkico'>
+                            <img className='wdth3' src="dumbell_icon.jpg" alt="logo"></img> 
                         </div>
                     </Link>
                 </div>
             </div>
-            <div className='div_col div_login_and_menu'>
-                <div className='div_row div_login_options_etc'>
+            <div className='divcol bgclr2 divlgnandmenu'>
+                <div className='divrow bgclr2 divlgnoptns'>
                     {actualState.isAuthenticated ? (
                         <>
                             {admin &&
-                                <div className='div_login_functions'>
+                                <div className='divlgnfunctns'>
                                     <Link to='/adminPage'>
-                                    <div className='link_icons'>
+                                    <div className='hvr1 linkico'>
                                         <FontAwesomeIcon icon={faUserTie}/>
                                     </div>
                                     </Link>
                                 </div>
                             }
-                            <div className='div_login_functions'>
+                            <div className='divlgnfunctns'>
                                 <Link to='/profilePage'>
-                                    <div className='link_icons'>
+                                    <div className='hvr1 linkico'>
                                         <FontAwesomeIcon icon={faUser}/>
                                     </div>
                                 </Link>
                             </div>
-                            <div className='div_login_functions link_icons'>
+                            <div className='divlgnfunctns hvr1 linkico'>
                                 Hello {actualState.keresztNev}
                             </div>
-                            <div className='div_login_functions'>
+                            <div className='divlgnfunctns'>
                                 <Link to='/profilePage' onClick={logoutUser}>
-                                    <div className='link_icons'>
+                                    <div className='hvr1 linkico'>
                                         <FontAwesomeIcon icon={faRightFromBracket}/>
                                     </div>
                                 </Link>
                             </div>
                         </>
                     ) : (
-                        <div className='div_login_functions'>
+                        <div className='divlgnfunctns'>
                             <Link to='/loginPage' style={{ textDecoration: 'none' }}>
-                                <div className='link_icons'>
+                                <div className='hvr1 linkico'>
                                     <div>
                                         Bejelentkezés
                                     </div>
@@ -102,30 +102,30 @@ const NavBar = (props) => {
                         </div>
                     )}
                 </div>
-                <div className='div_row div_menu'>
-                    <div className='div_row div_padding_top1 div_menu_options'>
+                <div className='divrow wdth1'>
+                    <div className='divrow div_padding_top1 jcc crsrp hvr1 pddngt1 divmnuoptns'>
                         <Link to='/homePage' style={{ textDecoration: 'none' }}>
-                            <div className='div_menu_options2'>Kezdőlap</div>
+                            <div className='divmnuoptns2'>Kezdőlap</div>
                         </Link>
                     </div>
-                    <div className='div_row div_padding_top1 div_menu_options'>
+                    <div className='divrow div_padding_top1 jcc crsrp hvr1 pddngt1 divmnuoptns'>
                         <Link to='/trainersPage' style={{ textDecoration: 'none' }}>
-                            <div className='div_menu_options2'>Edzőink</div>
+                            <div className='divmnuoptns2'>Edzőink</div>
                         </Link>
                     </div>
-                    <div className='div_row div_padding_top1 div_menu_options'>
+                    <div className='divrow div_padding_top1 jcc crsrp hvr1 pddngt1 divmnuoptns'>
                         <Link to='/calCalcPage' style={{ textDecoration: 'none' }}>
-                            <div className='div_menu_options2'>Kalória Kalkulátor</div>
+                            <div className='divmnuoptns2'>Kalória Kalkulátor</div>
                         </Link>
                     </div>
-                    <div className='div_row div_padding_top1 div_menu_options'>
+                    <div className='divrow div_padding_top1 jcc crsrp hvr1 pddngt1 divmnuoptns'>
                         <Link to='/joinPage' style={{ textDecoration: 'none' }}>
-                            <div className='div_menu_options2'>Csatlakozz</div>
+                            <div className='divmnuoptns2'>Csatlakozz</div>
                         </Link>
                     </div>
-                    <div className='div_row div_padding_top1 div_menu_options'>
+                    <div className='divrow div_padding_top1 jcc crsrp hvr1 pddngt1 divmnuoptns'>
                         <Link to='/aboutPage' style={{ textDecoration: 'none' }}>
-                            <div className='div_menu_options2'>Rólunk</div>
+                            <div className='divmnuoptns2'>Rólunk</div>
                         </Link>
                     </div>
                 </div>
