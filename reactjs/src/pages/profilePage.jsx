@@ -6,13 +6,12 @@ const ProfilePage = (props) => {
   return (
     <div>
       <div>
-        <LineWithTitle title="Profil"/>
+        <LineWithTitle title="Profil" />
       </div>
       <div>
-        <ProfileForm/>
+        <ProfileForm />
       </div>
     </div>
   );
-}
+};
 export default ProfilePage;
-  

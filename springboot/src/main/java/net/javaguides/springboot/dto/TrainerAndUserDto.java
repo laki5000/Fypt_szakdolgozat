@@ -8,6 +8,8 @@ public class TrainerAndUserDto {
 	private String kiketVallal;
 	private String specializacio;
 	private String vegzettseg;
+	private String hol;
+	private boolean online;
 	private String tapasztalat;
 	private String telefonszam;
 	private String bemutatkozas;
@@ -32,11 +34,13 @@ public class TrainerAndUserDto {
 		this.kiketVallal = trainer.getKiketVallal();
 		this.specializacio = trainer.getSpecializacio();
 		this.vegzettseg = trainer.getVegzettseg();
+		this.hol = trainer.getHol();
+		this.online = trainer.isOnline();
 		this.tapasztalat = trainer.getTapasztalat();
 		this.telefonszam = trainer.getTelefonszam();
 		this.bemutatkozas = trainer.getBemutatkozas();
-		this.userId = Long.parseLong(trainer.getUserId());
-		this.hiteles = trainer.getHiteles();
+		this.userId = trainer.getUserId();
+		this.hiteles = trainer.isHiteles();
 		this.vezetekNev = user.getVezetekNev();
 		this.keresztNev = user.getKeresztNev();
 		this.nem = user.getNem();
@@ -78,6 +82,22 @@ public class TrainerAndUserDto {
 
 	public void setVegzettseg(String vegzettseg) {
 		this.vegzettseg = vegzettseg;
+	}
+
+	public String getHol() {
+		return hol;
+	}
+
+	public void setHol(String hol) {
+		this.hol = hol;
+	}
+
+	public boolean isOnline() {
+		return online;
+	}
+
+	public void setOnline(boolean online) {
+		this.online = online;
 	}
 
 	public String getTapasztalat() {

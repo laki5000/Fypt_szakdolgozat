@@ -23,6 +23,12 @@ public class Trainer {
 	@Column(name = "vegzettseg")
 	private String vegzettseg;
 	
+	@Column(name = "hol")
+	private String hol;
+	
+	@Column(name = "online")
+	private boolean online;
+	
 	@Column(name = "tapasztalat")
 	private String tapasztalat;
 	
@@ -42,16 +48,19 @@ public class Trainer {
 		
 	}
 
-	public Trainer(String kiketVallal, String specializacio, String vegzettseg, String tapasztalat, String telefonszam,
-			String bemutatkozas, String userId, boolean hiteles) {
+	public Trainer(long id, String kiketVallal, String specializacio, String vegzettseg, String hol, boolean online,
+			String tapasztalat, String telefonszam, String bemutatkozas, long userId, boolean hiteles) {
 		super();
+		this.id = id;
 		this.kiketVallal = kiketVallal;
 		this.specializacio = specializacio;
 		this.vegzettseg = vegzettseg;
+		this.hol = hol;
+		this.online = online;
 		this.tapasztalat = tapasztalat;
 		this.telefonszam = telefonszam;
 		this.bemutatkozas = bemutatkozas;
-		this.userId = Long.parseLong(userId);
+		this.userId = userId;
 		this.hiteles = hiteles;
 	}
 
@@ -87,6 +96,22 @@ public class Trainer {
 		this.vegzettseg = vegzettseg;
 	}
 
+	public String getHol() {
+		return hol;
+	}
+
+	public void setHol(String hol) {
+		this.hol = hol;
+	}
+
+	public boolean isOnline() {
+		return online;
+	}
+
+	public void setOnline(boolean online) {
+		this.online = online;
+	}
+
 	public String getTapasztalat() {
 		return tapasztalat;
 	}
@@ -111,15 +136,15 @@ public class Trainer {
 		this.bemutatkozas = bemutatkozas;
 	}
 
-	public String getUserId() {
-		return "" + userId;
+	public long getUserId() {
+		return userId;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = Long.parseLong(userId);
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 
-	public boolean getHiteles() {
+	public boolean isHiteles() {
 		return hiteles;
 	}
 

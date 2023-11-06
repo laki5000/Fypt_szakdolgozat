@@ -6,12 +6,12 @@ const TrainersPage = (props) => {
   return (
     <div>
       <div>
-        <LineWithTitle title="Edzőink"/>
+        <LineWithTitle title="Edzőink" />
       </div>
       <div>
-        <Trainers/>
+        <Trainers />
       </div>
     </div>
   );
-}
+};
 export default TrainersPage;

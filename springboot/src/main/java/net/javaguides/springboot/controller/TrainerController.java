@@ -66,7 +66,7 @@ public class TrainerController {
 		List<Trainer> trainers = trainerRepository.findByHiteles(hitelesBool);
 		List<TrainerAndUserDto> trainersAndUsers = new ArrayList<TrainerAndUserDto>();
 		for (Trainer t : trainers) {
-			trainersAndUsers.add(new TrainerAndUserDto(t, userRepository.findById(Long.parseLong(t.getUserId()))));
+			trainersAndUsers.add(new TrainerAndUserDto(t, userRepository.findById(t.getUserId())));
 		}
 		return trainersAndUsers;
 	}

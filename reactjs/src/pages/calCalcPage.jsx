@@ -5,12 +5,10 @@ const CalCalcPage = (props) => {
   return (
     <div>
       <div>
-        <LineWithTitle title="Kalória Kalkulátor"/>
+        <LineWithTitle title="Kalória Kalkulátor" />
       </div>
-      <div>
-        CalCalc Page
-      </div>
+      <div>CalCalc Page</div>
     </div>
   );
-}
+};
 export default CalCalcPage;

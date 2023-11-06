@@ -6,12 +6,12 @@ const JoinPage = (props) => {
   return (
     <div>
       <div>
-        <LineWithTitle title="Csatlakozz"/>
+        <LineWithTitle title="Csatlakozz" />
       </div>
       <div>
-        <JoinForm/>
+        <JoinForm />
       </div>
     </div>
   );
-}
+};
 export default JoinPage;

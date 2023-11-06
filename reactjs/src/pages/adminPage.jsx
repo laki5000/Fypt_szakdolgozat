@@ -6,12 +6,12 @@ const AdminPage = (props) => {
   return (
     <div>
       <div>
-        <LineWithTitle title="Admin menü"/>
+        <LineWithTitle title="Admin menü" />
       </div>
       <div>
-        <AdminMenu/>
+        <AdminMenu />
       </div>
     </div>
   );
-}
-export default AdminPage;  
+};
+export default AdminPage;

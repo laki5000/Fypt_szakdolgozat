@@ -1,16 +1,16 @@
-import LineWithTitle from '../components/lineWithTitle';
-import RegisterForm from '../components/registerForm';
+import LineWithTitle from "../components/lineWithTitle";
+import RegisterForm from "../components/registerForm";
 
 const RegisterPage = (props) => {
   return (
     <div>
       <div>
-        <LineWithTitle title="Regisztráció"/>
+        <LineWithTitle title="Regisztráció" />
       </div>
       <div>
-        <RegisterForm/>
+        <RegisterForm />
       </div>
     </div>
   );
-}
-  export default RegisterPage;
+};
+export default RegisterPage;

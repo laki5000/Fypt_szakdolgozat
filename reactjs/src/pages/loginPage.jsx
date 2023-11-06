@@ -1,6 +1,6 @@
-import React from 'react';
-import LoginForm from '../components/loginForm';
-import LineWithTitle from '../components/lineWithTitle';
+import React from "react";
+import LoginForm from "../components/loginForm";
+import LineWithTitle from "../components/lineWithTitle";
 
 const LoginPage = (props) => {
   return (
@@ -13,5 +13,5 @@ const LoginPage = (props) => {
       </div>
     </div>
   );
-}
+};
 export default LoginPage;
