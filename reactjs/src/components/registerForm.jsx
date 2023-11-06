@@ -77,9 +77,9 @@ const RegisterForm = (props) => {
       actualState.jelszo_megegyszer === ""
     ) {
       alert("A csillaggal jelölt mezők kitöltése kötelező!");
-    } else if (actualState.email != actualState.email_megegyszer) {
+    } else if (actualState.email !== actualState.email_megegyszer) {
       alert("A két e-mail nem egyezik!");
-    } else if (actualState.jelszo != actualState.jelszo_megegyszer) {
+    } else if (actualState.jelszo !== actualState.jelszo_megegyszer) {
       alert("A két jelszó nem egyezik!");
     } else if (
       !actualState.email.includes("@") ||

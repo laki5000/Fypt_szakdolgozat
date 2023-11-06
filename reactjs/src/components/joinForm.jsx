@@ -99,13 +99,13 @@ const JoinForm = (props) => {
         if (res) {
           TrainerService.getTrainerByUserId(id).then((res) => {
             if (res.data) {
-              props.history.push("/homePage");
+              history.push("/homePage");
             }
           });
         }
       });
     } else {
-      props.history.push("/loginPage");
+      history.push("/loginPage");
     }
     setNewState({ ...actualState, user_id: id });
   }, []);
