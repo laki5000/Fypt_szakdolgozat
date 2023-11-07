@@ -105,7 +105,7 @@ const RegisterForm = (props) => {
             jelszo: actualState.jelszo,
           };
           UserService.saveUser(user);
-          alert("Sikeres regisztrációxd");
+          alert("Sikeres regisztráció!");
           history.push("/loginPage");
         }
       });
@@ -125,35 +125,31 @@ const RegisterForm = (props) => {
 
   return (
     <form>
-      <div className="divcol pddnglr1 pddngt1 tac bgisr mrgnlr1 pddngbt1 divjnregstr">
-        <div className="divrow">
-          <div className="mrgna wdth3 divfrmdta">
-            <div className="mrgna fntsz1 wdth2 divfrmdta_titles">
-              Vezetéknév*
-            </div>
-            <div className="mrgna fntsz1 wdth2 hvr2">
+      <div className="d-flex flex-column bg-dark">
+        <div className="d-flex m-auto w-50">
+          <div className="w-100 pt-4">
+            <div className="pt-2 h4 text-light px-3 w-75">Vezetéknév*</div>
+            <div className="w-75">
               <input
                 name="vezetek_nev"
-                className="pddng1 wdth1 fntsz1 brdrrds"
+                className="pt-2 pb-2 rounded-4 px-3 w-100"
                 value={actualState.vezetek_nev}
                 onChange={changeVezetekNevHandler}
               />
             </div>
-            <div className="mrgna fntsz1 wdth2 divfrmdta_titles">
-              Keresztnév*
-            </div>
-            <div className="mrgna fntsz1 wdth2 hvr2">
+            <div className="pt-2 h4 text-light px-3 w-75">Keresztnév*</div>
+            <div className="w-75">
               <input
                 name="kereszt_nev"
-                className="pddng1 wdth1 fntsz1 brdrrds"
+                className="pt-2 pb-2 rounded-4 px-3 w-100"
                 value={actualState.kereszt_nev}
                 onChange={changeKeresztNevHandler}
               />
             </div>
-            <div className="mrgna fntsz1 wdth2 divfrmdta_titles">Nem</div>
-            <div className="mrgna fntsz1 wdth2 hvr2">
+            <div className="pt-2 h4 text-light px-3 w-75">Nem</div>
+            <div className="w-75">
               <select
-                className="pddng1 wdth1 fntsz1 brdrrds"
+                className="pt-2 pb-2 rounded-4 px-3 w-100"
                 name="nem"
                 onChange={changeNemHandler}
               >
@@ -161,108 +157,102 @@ const RegisterForm = (props) => {
                 <option value="no">Nő</option>
               </select>
             </div>
-            <div className="mrgna fntsz1 wdth2 divfrmdta_titles">
-              Születési hely
-            </div>
-            <div className="mrgna fntsz1 wdth2 hvr2">
-              <input
-                name="szul_hely"
-                className="pddng1 wdth1 fntsz1 brdrrds"
-                value={actualState.szul_hely}
-                onChange={changeSzulHelyHandler}
-              />
-            </div>
-            <div className="mrgna fntsz1 wdth2 divfrmdta_titles">
-              Születési idő
-            </div>
-            <div className="mrgna fntsz1 wdth2 hvr2">
+            <div className="pt-2 h4 text-light px-3 w-75">Születési idő</div>
+            <div className="w-75">
               <input
                 type="date"
                 name="szul_ido"
-                className="pddng1 wdth1 fntsz1 brdrrds"
+                className="pt-2 pb-2 rounded-4 px-3 w-100"
                 value={actualState.szul_ido}
                 onChange={changeSzulidoHandler}
               />
             </div>
-            <div className="mrgna fntsz1 wdth2 divfrmdta_titles">
-              Irányítószám
+            <div className="pt-2 h4 text-light px-3 w-75">Születési hely</div>
+            <div className="w-75">
+              <input
+                name="szul_hely"
+                className="pt-2 pb-2 rounded-4 px-3 w-100"
+                value={actualState.szul_hely}
+                onChange={changeSzulHelyHandler}
+              />
             </div>
-            <div className="mrgna fntsz1 wdth2 hvr2">
+          </div>
+          <div className="d-flex flex-column w-100 pt-4 align-items-end">
+            <div className="pt-2 h4 text-light px-3 w-75">Irányítószám</div>
+            <div className="w-75">
               <input
                 type="number"
                 name="iranyitoszam"
-                className="pddng1 wdth1 fntsz1 brdrrds"
+                className="pt-2 pb-2 rounded-4 px-3 w-100"
                 value={actualState.iranyitoszam}
                 onChange={changeIranyitoszamHandler}
               />
             </div>
-          </div>
-          <div className="mrgna wdth3 divfrmdta">
-            <div className="mrgna fntsz1 wdth2 divfrmdta_titles">Város</div>
-            <div className="mrgna fntsz1 wdth2 hvr2">
+            <div className="pt-2 h4 text-light px-3 w-75">Város</div>
+            <div className="w-75">
               <input
                 name="lakhely_varos"
-                className="pddng1 wdth1 fntsz1 brdrrds"
+                className="pt-2 pb-2 rounded-4 px-3 w-100"
                 value={actualState.lakhely_varos}
                 onChange={changeLakhelyVarosHandler}
               />
             </div>
-            <div className="mrgna fntsz1 wdth2 divfrmdta_titles">E-mail*</div>
-            <div className="mrgna fntsz1 wdth2 hvr2">
+            <div className="pt-2 h4 text-light px-3 w-75">E-mail*</div>
+            <div className="w-75">
               <input
                 name="email"
-                className="pddng1 wdth1 fntsz1 brdrrds"
+                className="pt-2 pb-2 rounded-4 px-3 w-100"
                 value={actualState.email}
                 onChange={changeEmailHandler}
               />
             </div>
-            <div className="mrgna fntsz1 wdth2 divfrmdta_titles">
+            <div className="pt-2 h4 text-light px-3 w-75">
               E-mail mégegyszer*
             </div>
-            <div className="mrgna fntsz1 wdth2 hvr2">
+            <div className="w-75">
               <input
                 name="email2"
-                className="pddng1 wdth1 fntsz1 brdrrds"
+                className="pt-2 pb-2 rounded-4 px-3 w-100"
                 value={actualState.email_megegyszer}
                 onChange={changeEmailMegegyszerHandler}
               />
             </div>
-            <div className="mrgna fntsz1 wdth2 divfrmdta_titles">Jelszó*</div>
-            <div className="mrgna fntsz1 wdth2 hvr2">
+            <div className="pt-2 h4 text-light px-3 w-75">Jelszó*</div>
+            <div className="w-75">
               <input
                 type="password"
                 name="jelszo"
-                className="pddng1 wdth1 fntsz1 brdrrds"
+                className="pt-2 pb-2 rounded-4 px-3 w-100"
                 value={actualState.jelszo}
                 onChange={changeJelszoHandler}
               />
             </div>
-            <div className="mrgna fntsz1 wdth2 divfrmdta_titles">
+            <div className="pt-2 h4 text-light px-3 w-75">
               Jelszó mégegyszer*
             </div>
-            <div className="mrgna fntsz1 wdth2 hvr2">
+            <div className="w-75">
               <input
                 type="password"
                 name="jelszo2"
-                className="pddng1 wdth1 fntsz1 brdrrds"
+                className="pt-2 pb-2 rounded-4 px-3 w-100"
                 value={actualState.jelszo_megegyszer}
                 onChange={changeJelszoMegegyszerHandler}
               />
             </div>
           </div>
         </div>
-        <div className="divrow divregbtnprnt">
-          <div className="divcol pddngt1 mrgna wdth2 divnotregisteredyet">
+        <div className="d-flex m-auto w-50 pt-5 pb-4">
+          <div className="d-flex flex-column w-50 text-light">
             <div>Már van fiókod?</div>
             <div>
               <Link to="/loginPage">Jelentkezz be!</Link>
             </div>
           </div>
-          <div className="mrgna wdth2 hvr2 divsubmit">
+          <div className="d-flex flex-row-reverse m-auto w-50">
             <input
               type="button"
               value="Regisztráció"
-              className="bgclr1 crsrp fntsz1 brdrrds sbmtbtn"
+              className="w-50 pt-3 pb-3 bg-primary h6 text-light"
               onClick={() => {
                 saveUser();
               }}

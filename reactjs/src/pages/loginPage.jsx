@@ -5,10 +5,10 @@ import LineWithTitle from "../components/lineWithTitle";
 const LoginPage = (props) => {
   return (
     <div>
-      <div>
+      <div className="slide2">
         <LineWithTitle title="Bejelentkezés" />
       </div>
-      <div>
+      <div className="slide1">
         <LoginForm onLogin={props.onLogin} />
       </div>
     </div>

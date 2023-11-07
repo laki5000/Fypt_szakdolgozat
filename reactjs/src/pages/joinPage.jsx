@@ -5,10 +5,10 @@ import JoinForm from "../components/joinForm";
 const JoinPage = (props) => {
   return (
     <div>
-      <div>
+      <div className="slide2">
         <LineWithTitle title="Csatlakozz" />
       </div>
-      <div>
+      <div className="slide1">
         <JoinForm />
       </div>
     </div>

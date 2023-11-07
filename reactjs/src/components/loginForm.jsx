@@ -21,7 +21,7 @@ const LoginForm = (props) => {
         localStorage.setItem("id", res.data[1]);
         localStorage.setItem("keresztnev", res.data[2]);
         props.onLogin(res.data[1], res.data[2]);
-        alert("Sikeres bejelentkezésxd");
+        alert("Sikeres bejelentkezés!");
         history.push("homePage");
       } else {
         alert("Hibás felhasználónév vagy jelszó!");
@@ -50,41 +50,49 @@ const LoginForm = (props) => {
 
   return (
     <form>
-      <div className="divcol tac bgisr mrgnlr1 pddngbt1 divlgn">
-        <div className="mrgna wdth3 divfrmdta">
+      <div className="d-flex bg-dark">
+        <div className="d-flex flex-column mx-auto pt-5 pb-5 w-25">
           <div>
-            <img className="wdth3" src="dumbell_icon.jpg" alt="logo"></img>
+            <img
+              className="d-flex mx-auto w-75"
+              src="dumbell_icon.jpg"
+              alt="logo"
+            ></img>
           </div>
-          <div className="mrgna fntsz2 wdth2 divfrmdta_titles">E-MAIL</div>
-          <div className="mrgna fntsz2 wdth2 hvr2">
+          <div className="d-flex mx-auto w-75 pt-5 h1 px-4 text-light">
+            E-MAIL
+          </div>
+          <div className="d-flex mx-auto w-75 h2">
             <input
               name="email"
-              className="pddng1 wdth1 fntsz1 brdrrds"
+              className="d-flex w-100 pt-2 pb-2 px-4 rounded-4"
               value={actualState.email}
               onChange={changeEmailHandler}
             />
           </div>
-          <div className="mrgna fntsz2 wdth2 divfrmdta_titles">JELSZÓ</div>
-          <div className="mrgna fntsz2 wdth2 hvr2">
+          <div className="d-flex mx-auto w-75 pt-5 h1 px-4 text-light">
+            JELSZÓ
+          </div>
+          <div className="d-flex mx-auto w-75 h2">
             <input
               type="password"
-              className="pddng1 wdth1 fntsz1 brdrrds"
+              className="d-flex w-100 pt-2 pb-2 px-4 rounded-4"
               name="jelszo"
               value={actualState.jelszo}
               onChange={changeJelszoHandler}
             />
           </div>
-          <div className="divcol pddngt1 mrgna wdth2 divnotregisteredyet">
+          <div className="d-flex flex-column w-75 mx-5 px-3 pt-1 pb-2 text-light">
             <div>Még nem regisztráltál?</div>
             <div>
               <Link to="/registerPage">Kattints ide!</Link>
             </div>
           </div>
-          <div className="mrgna wdth2 hvr2 divsubmit">
+          <div className="d-flex flex-row-reverse">
             <input
               type="button"
               value="Bejelentkezés"
-              className="bgclr1 crsrp fntsz1 brdrrds sbmtbtn"
+              className="w-50 pt-3 pb-3 bg-primary h6 text-light"
               onClick={() => {
                 loginUser();
               }}

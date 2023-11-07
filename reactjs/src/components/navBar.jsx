@@ -74,45 +74,29 @@ const NavBar = (props) => {
   }, [isAuthenticated, keresztNev, admin]);
 
   return (
-    <div className="divrow bgclr1 pddnglr1 pddngt1">
-      <div className="divrow jcc bgclr2 divlogop">
-        <div className="pddng1 wdth1 mrgna tac">
+    <div className="d-flex">
+      <div className="d-flex col-sm-3 p-3 bg-dark">
+        <div className="d-flex p-3">
           <div
-            className="hvr1 crsrp linkico"
-            onClick={() => navigateTo("adminPage")}
+            className="d-flex crsrp m-auto"
+            onClick={() => navigateTo("homePage")}
           >
-            <img className="wdth3" src="dumbell_icon.jpg" alt="logo"></img>
+            <img
+              className="d-flex m-auto"
+              style={{ width: "60%", height: "60%" }}
+              src="dumbell_icon.jpg"
+              alt="logo"
+            ></img>
           </div>
         </div>
       </div>
-      <div className="divcol bgclr2 divlgnandmenu">
-        <div className="divrow bgclr2 divlgnoptns">
+      <div className="d-flex flex-column bg-dark col-sm-9 pt-3 px-1">
+        <div className="d-flex flex-row-reverse mx-3 mt-2">
           {actualState.isAuthenticated ? (
             <>
-              {admin && (
-                <div className="divlgnfunctns">
-                  <div
-                    className="hvr1 crsrp linkico"
-                    onClick={() => navigateTo("adminPage")}
-                  >
-                    <FontAwesomeIcon icon={faUserTie} />
-                  </div>
-                </div>
-              )}
-              <div className="divlgnfunctns">
+              <div className="mx-2">
                 <div
-                  className="hvr1 crsrp linkico"
-                  onClick={() => navigateTo("profilePage")}
-                >
-                  <FontAwesomeIcon icon={faUser} />
-                </div>
-              </div>
-              <div className="divlgnfunctns hvr1 linkico">
-                Hello {actualState.keresztNev}
-              </div>
-              <div className="divlgnfunctns">
-                <div
-                  className="hvr1 crsrp linkico"
+                  className="text-light h4 crsrp"
                   onClick={() => {
                     navigateTo("homePage");
                     logoutUser();
@@ -121,11 +105,33 @@ const NavBar = (props) => {
                   <FontAwesomeIcon icon={faRightFromBracket} />
                 </div>
               </div>
+              <div className="mx-2 h4 text-light">
+                Hello {actualState.keresztNev}
+              </div>
+
+              <div className="mx-2">
+                <div
+                  className="text-light h4 crsrp"
+                  onClick={() => navigateTo("profilePage")}
+                >
+                  <FontAwesomeIcon icon={faUser} />
+                </div>
+              </div>
+              {admin && (
+                <div className="mx-2">
+                  <div
+                    className="text-light h4 crsrp"
+                    onClick={() => navigateTo("adminPage")}
+                  >
+                    <FontAwesomeIcon icon={faUserTie} />
+                  </div>
+                </div>
+              )}
             </>
           ) : (
-            <div className="crsrp divlgnfunctns">
+            <div className="mx-2">
               <div
-                className="hvr1 linkico"
+                className="text-light h4 crsrp"
                 onClick={() => navigateTo("loginPage")}
               >
                 <div>Bejelentkezés</div>
@@ -133,36 +139,46 @@ const NavBar = (props) => {
             </div>
           )}
         </div>
-        <div className="divrow wdth1">
-          <div
-            className="divrow div_padding_top1 jcc crsrp hvr1 pddngt1 divmnuoptns"
-            onClick={() => navigateTo("homePage")}
-          >
-            <div className="divmnuoptns2">Kezdőlap</div>
+        <div className="d-flex mt-3">
+          <div className="hvr1 d-flex justify-content-center  w-25 pt-4 pb-4 h4">
+            <div
+              className="text-light crsrp"
+              onClick={() => navigateTo("homePage")}
+            >
+              Kezdőlap
+            </div>
           </div>
-          <div
-            className="divrow div_padding_top1 jcc crsrp hvr1 pddngt1 divmnuoptns"
-            onClick={() => navigateTo("trainersPage")}
-          >
-            <div className="divmnuoptns2">Edzőink</div>
+          <div className="hvr1 d-flex justify-content-center w-25 pt-4 pb-4 h4">
+            <div
+              className="text-light crsrp"
+              onClick={() => navigateTo("trainersPage")}
+            >
+              Edzőink
+            </div>
           </div>
-          <div
-            className="divrow div_padding_top1 jcc crsrp hvr1 pddngt1 divmnuoptns"
-            onClick={() => navigateTo("calCalcPage")}
-          >
-            <div className="divmnuoptns2">Kalória Kalkulátor</div>
+          <div className="hvr1 d-flex justify-content-center w-25 pt-4 pb-4 h4">
+            <div
+              className="text-light crsrp"
+              onClick={() => navigateTo("calCalcPage")}
+            >
+              Kalória Kalkulátor
+            </div>
           </div>
-          <div
-            className="divrow div_padding_top1 jcc crsrp hvr1 pddngt1 divmnuoptns"
-            onClick={() => navigateTo("joinPage")}
-          >
-            <div className="divmnuoptns2">Csatlakozz</div>
+          <div className="hvr1 d-flex justify-content-center w-25 pt-4 pb-4 h4">
+            <div
+              className="text-light crsrp"
+              onClick={() => navigateTo("joinPage")}
+            >
+              Csatlakozz
+            </div>
           </div>
-          <div
-            className="divrow div_padding_top1 jcc crsrp hvr1 pddngt1 divmnuoptns"
-            onClick={() => navigateTo("aboutPage")}
-          >
-            <div className="divmnuoptns2">Rólunk</div>
+          <div className="hvr1 d-flex justify-content-center w-25 pt-4 pb-4 h4">
+            <div
+              className="text-light crsrp"
+              onClick={() => navigateTo("aboutPage")}
+            >
+              Rólunk
+            </div>
           </div>
         </div>
       </div>

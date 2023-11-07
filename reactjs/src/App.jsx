@@ -81,7 +81,7 @@ const App = (props) => {
 
   return (
     <Router>
-      <div>
+      <div className="sticky-top">
         <NavBar
           isAuthenticated={actualState.isAuthenticated}
           keresztNev={actualState.keresztNev}

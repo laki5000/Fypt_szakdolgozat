@@ -5,10 +5,10 @@ import ProfileForm from "../components/profileForm";
 const ProfilePage = (props) => {
   return (
     <div>
-      <div>
+      <div className="slide2">
         <LineWithTitle title="Profil" />
       </div>
-      <div>
+      <div className="slide1">
         <ProfileForm />
       </div>
     </div>
