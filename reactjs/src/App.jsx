@@ -20,6 +20,7 @@ import UserService from "./services/userService";
 import AdminService from "./services/adminService";
 import AdminPage from "./pages/adminPage";
 import TrainerApplications from "./components/trainerApplications";
+import LineWithTitle from "./components/lineWithTitle";
 
 const App = (props) => {
   const [actualState, setNewState] = useState({
@@ -27,6 +28,7 @@ const App = (props) => {
     keresztNev: "",
     id: "",
     admin: "",
+    title: "",
   });
 
   const handleLogin = (id, keresztnev) => {
@@ -88,6 +90,7 @@ const App = (props) => {
           admin={actualState.admin}
           onLogout={handleLogout}
         />
+        <LineWithTitle title={actualState.title} />
       </div>
       <div>
         <Switch>
@@ -95,34 +98,76 @@ const App = (props) => {
             <Redirect to="/homePage" />
           </Route>
           <Route path="/homePage">
-            <HomePage />
+            <HomePage
+              onInit={() => {
+                setNewState({ ...actualState, title: "Kezdőlap" });
+              }}
+            />
           </Route>
           <Route path="/trainersPage">
-            <TrainersPage />
+            <TrainersPage
+              onInit={() => {
+                setNewState({ ...actualState, title: "Edzőink" });
+              }}
+            />
           </Route>
           <Route path="/calCalcPage">
-            <CalCalcPage />
+            <CalCalcPage
+              onInit={() => {
+                setNewState({ ...actualState, title: "Kalória Kalkulátor" });
+              }}
+            />
           </Route>
           <Route path="/joinPage">
-            <JoinPage />
+            <JoinPage
+              onInit={() => {
+                setNewState({ ...actualState, title: "Csatlakozz" });
+              }}
+            />
           </Route>
           <Route path="/aboutPage">
-            <AboutPage />
+            <AboutPage
+              onInit={() => {
+                setNewState({ ...actualState, title: "Rólunk" });
+              }}
+            />
           </Route>
           <Route path="/loginPage">
-            <LoginPage onLogin={handleLogin} />
+            <LoginPage
+              onInit={() => {
+                setNewState({ ...actualState, title: "Bejelentkezés" });
+              }}
+              onLogin={handleLogin}
+            />
           </Route>
           <Route path="/registerPage">
-            <RegisterPage />
+            <RegisterPage
+              onInit={() => {
+                setNewState({ ...actualState, title: "Regisztráció" });
+              }}
+            />
           </Route>
           <Route path="/profilePage">
-            <ProfilePage id={actualState.id} />
+            <ProfilePage
+              onInit={() => {
+                setNewState({ ...actualState, title: "Profil" });
+              }}
+              id={actualState.id}
+            />
           </Route>
           <Route path="/adminPage">
-            <AdminPage />
+            <AdminPage
+              onInit={() => {
+                setNewState({ ...actualState, title: "Admin menü" });
+              }}
+            />
           </Route>
           <Route path="/trainerApplications">
-            <TrainerApplications />
+            <TrainerApplications
+              onInit={() => {
+                setNewState({ ...actualState, title: "Edző jelentkezések" });
+              }}
+            />
           </Route>
         </Switch>
       </div>

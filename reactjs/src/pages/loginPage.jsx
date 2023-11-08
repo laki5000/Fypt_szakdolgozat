@@ -1,16 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import LoginForm from "../components/loginForm";
-import LineWithTitle from "../components/lineWithTitle";
 
 const LoginPage = (props) => {
+  useEffect(() => {
+    props.onInit();
+  }, []);
+
   return (
     <div>
-      <div className="slide2">
-        <LineWithTitle title="Bejelentkezés" />
-      </div>
-      <div className="slide1">
-        <LoginForm onLogin={props.onLogin} />
-      </div>
+      <LoginForm onLogin={props.onLogin} />
     </div>
   );
 };

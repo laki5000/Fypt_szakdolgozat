@@ -1,15 +1,14 @@
-import LineWithTitle from "../components/lineWithTitle";
+import React, { useEffect } from "react";
 import RegisterForm from "../components/registerForm";
 
 const RegisterPage = (props) => {
+  useEffect(() => {
+    props.onInit();
+  }, []);
+
   return (
     <div>
-      <div className="slide2">
-        <LineWithTitle title="Regisztráció" />
-      </div>
-      <div className="slide1">
-        <RegisterForm />
-      </div>
+      <RegisterForm />
     </div>
   );
 };

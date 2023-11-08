@@ -14,6 +14,8 @@ const ProfileForm = (props) => {
     iranyitoszam_varos_input_visibility: false,
     email_input_visibility: false,
     jelszo_input_visibility: false,
+    magassag_input_visibility: false,
+    testsuly_input_visibility: false,
     vezetek_nev: "",
     kereszt_nev: "",
     nem: "",
@@ -33,6 +35,10 @@ const ProfileForm = (props) => {
     lakhely_varos_tmp: "",
     email_tmp: "",
     jelszo_tmp: "",
+    magassag: "",
+    magassag_tmp: "",
+    testsuly: "",
+    testsuly_tmp: "",
   });
 
   const changeField = (statetochange) => {
@@ -61,6 +67,12 @@ const ProfileForm = (props) => {
       case "jelszo":
         setNewState({ ...actualState, jelszo_input_visibility: true });
         break;
+      case "magassag":
+        setNewState({ ...actualState, magassag_input_visibility: true });
+        break;
+      case "testsuly":
+        setNewState({ ...actualState, testsuly_input_visibility: true });
+        break;
     }
   };
 
@@ -75,6 +87,8 @@ const ProfileForm = (props) => {
       lakhelyVaros: actualState.lakhely_varos,
       eMail: actualState.email,
       jelszo: actualState.jelszo,
+      magassag: actualState.magassag,
+      testsuly: actualState.testsuly,
       id: actualState.id,
     };
 
@@ -139,6 +153,22 @@ const ProfileForm = (props) => {
         });
         user.jelszo = actualState.jelszo_tmp;
         break;
+      case "magassag":
+        setNewState({
+          ...actualState,
+          magassag_input_visibility: false,
+          magassag: actualState.magassag_tmp,
+        });
+        user.magassag = actualState.magassag_tmp;
+        break;
+      case "testsuly":
+        setNewState({
+          ...actualState,
+          testsuly_input_visibility: false,
+          testsuly: actualState.testsuly_tmp,
+        });
+        user.testsuly = actualState.testsuly_tmp;
+        break;
     }
     UserService.saveUser(user);
   };
@@ -196,6 +226,20 @@ const ProfileForm = (props) => {
           jelszo_tmp: actualState.jelszo,
         });
         break;
+      case "magassag":
+        setNewState({
+          ...actualState,
+          magassag_input_visibility: false,
+          magassag_tmp: actualState.magassag,
+        });
+        break;
+      case "testsuly":
+        setNewState({
+          ...actualState,
+          testsuly_input_visibility: false,
+          testsuly_tmp: actualState.testsuly,
+        });
+        break;
     }
   };
 
@@ -239,6 +283,14 @@ const ProfileForm = (props) => {
     setNewState({ ...actualState, jelszo_tmp: event.target.value });
   };
 
+  const changeMagassagHandler = (event) => {
+    setNewState({ ...actualState, magassag_tmp: event.target.value });
+  };
+
+  const changeTestsulyHandler = (event) => {
+    setNewState({ ...actualState, testsuly_tmp: event.target.value });
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     const id = localStorage.getItem("id");
@@ -265,6 +317,10 @@ const ProfileForm = (props) => {
             email_tmp: res.data.eMail,
             jelszo: res.data.jelszo,
             jelszo_tmp: res.data.jelszo,
+            magassag: res.data.magassag,
+            magassag_tmp: res.data.magassag,
+            testsuly: res.data.testsuly,
+            testsuly_tmp: res.data.testsuly,
             id: id,
           }));
         });
@@ -278,7 +334,8 @@ const ProfileForm = (props) => {
         <div className="d-flex w-100 pt-4">
           <div className="d-flex flex-column w-50">
             <div className="text-light h2">
-              {actualState.vezetek_nev} {actualState.kereszt_nev}
+              {actualState.vezetek_nev} {actualState.kereszt_nev}{" "}
+              {UserService.getAge(actualState.szul_ido)}
             </div>
             <div className="w-50">
               <img
@@ -291,7 +348,7 @@ const ProfileForm = (props) => {
           <div className="w-50 ps-5 text-light">
             <div className="d-flex justify-content-center h2">Adatok</div>
             <div className="d-flex">
-              <div className="h5 me-2">Vezetéknév: </div>
+              <div className="h6 me-2">Vezetéknév: </div>
               {actualState.vezetek_nev_input_visibility ? (
                 <div className="d-flex">
                   <div className="w-50">
@@ -302,7 +359,7 @@ const ProfileForm = (props) => {
                       onChange={changeVezetekNevHandler}
                     />
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-success">
                     <FontAwesomeIcon
                       icon={faCheck}
                       onClick={() => {
@@ -310,7 +367,7 @@ const ProfileForm = (props) => {
                       }}
                     />
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-danger">
                     <FontAwesomeIcon
                       icon={faX}
                       onClick={() => {
@@ -320,7 +377,7 @@ const ProfileForm = (props) => {
                   </div>
                 </div>
               ) : (
-                <div className="d-flex">
+                <div className="d-flex h6">
                   <div>{actualState.vezetek_nev}</div>
                   <div className="ms-1 crsrp">
                     <FontAwesomeIcon
@@ -334,7 +391,7 @@ const ProfileForm = (props) => {
               )}
             </div>
             <div className="d-flex">
-              <div className="h5 me-2">Keresztnév: </div>
+              <div className="h6 me-2">Keresztnév: </div>
               {actualState.kereszt_nev_input_visibility ? (
                 <div className="d-flex">
                   <div className="w-50">
@@ -345,7 +402,7 @@ const ProfileForm = (props) => {
                       onChange={changeKeresztNevHandler}
                     />
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-success">
                     <FontAwesomeIcon
                       icon={faCheck}
                       onClick={() => {
@@ -353,7 +410,7 @@ const ProfileForm = (props) => {
                       }}
                     />
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-danger">
                     <FontAwesomeIcon
                       icon={faX}
                       onClick={() => {
@@ -377,7 +434,7 @@ const ProfileForm = (props) => {
               )}
             </div>
             <div className="d-flex">
-              <div className="h5 me-2">Nem: </div>
+              <div className="h me-2">Nem: </div>
               {actualState.nem_input_visibility ? (
                 <div className="d-flex">
                   <div className="w-75">
@@ -394,7 +451,7 @@ const ProfileForm = (props) => {
                       <option value="no">Nő</option>
                     </select>
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-success">
                     <FontAwesomeIcon
                       icon={faCheck}
                       onClick={() => {
@@ -402,7 +459,7 @@ const ProfileForm = (props) => {
                       }}
                     />
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-danger">
                     <FontAwesomeIcon
                       icon={faX}
                       onClick={() => {
@@ -412,7 +469,7 @@ const ProfileForm = (props) => {
                   </div>
                 </div>
               ) : (
-                <div className="d-flex">
+                <div className="d-flex h6">
                   <div>{actualState.nem}</div>
                   <div className="ms-1 crsrp">
                     <FontAwesomeIcon
@@ -426,7 +483,7 @@ const ProfileForm = (props) => {
               )}
             </div>
             <div className="d-flex">
-              <div className="h5 me-2">Születési hely, idő: </div>
+              <div className="h6 me-2">Születési hely, idő: </div>
               {actualState.szul_hely_ido_input_visibility ? (
                 <div className="d-flex">
                   <div className="d-flex flex-column w-50">
@@ -444,7 +501,7 @@ const ProfileForm = (props) => {
                       onChange={changeSzulIdoHandler}
                     />
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-success">
                     <FontAwesomeIcon
                       icon={faCheck}
                       onClick={() => {
@@ -452,7 +509,7 @@ const ProfileForm = (props) => {
                       }}
                     />
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-danger">
                     <FontAwesomeIcon
                       icon={faX}
                       onClick={() => {
@@ -478,7 +535,7 @@ const ProfileForm = (props) => {
               )}
             </div>
             <div className="d-flex">
-              <div className="h5 me-2">Irányítószám, város: </div>
+              <div className="h6 me-2">Irányítószám, város: </div>
               {actualState.iranyitoszam_varos_input_visibility ? (
                 <div className="d-flex">
                   <div className="d-flex flex-column w-50">
@@ -496,7 +553,7 @@ const ProfileForm = (props) => {
                       onChange={changeVarosHandler}
                     />
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-success">
                     <FontAwesomeIcon
                       icon={faCheck}
                       onClick={() => {
@@ -504,7 +561,7 @@ const ProfileForm = (props) => {
                       }}
                     />
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-danger">
                     <FontAwesomeIcon
                       icon={faX}
                       onClick={() => {
@@ -532,7 +589,7 @@ const ProfileForm = (props) => {
               )}
             </div>
             <div className="d-flex">
-              <div className="h5 me-2">E-mail: </div>
+              <div className="h6 me-2">E-mail: </div>
               {actualState.email_input_visibility ? (
                 <div className="d-flex">
                   <div className="w-50">
@@ -543,7 +600,7 @@ const ProfileForm = (props) => {
                       onChange={changeEmailHandler}
                     />
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-success">
                     <FontAwesomeIcon
                       icon={faCheck}
                       onClick={() => {
@@ -551,7 +608,7 @@ const ProfileForm = (props) => {
                       }}
                     />
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-danger">
                     <FontAwesomeIcon
                       icon={faX}
                       onClick={() => {
@@ -561,7 +618,7 @@ const ProfileForm = (props) => {
                   </div>
                 </div>
               ) : (
-                <div className="d-flex">
+                <div className="d-flex h6">
                   <div>{actualState.email}</div>
                   <div className="ms-1 crsrp">
                     <FontAwesomeIcon
@@ -575,7 +632,7 @@ const ProfileForm = (props) => {
               )}
             </div>
             <div className="d-flex">
-              <div className="h5 me-2">Jelszó: </div>
+              <div className="h6 me-2">Jelszó: </div>
               {actualState.jelszo_input_visibility ? (
                 <div className="d-flex">
                   <div className="w-50">
@@ -586,7 +643,7 @@ const ProfileForm = (props) => {
                       onChange={changeJelszoHandler}
                     />
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-success">
                     <FontAwesomeIcon
                       icon={faCheck}
                       onClick={() => {
@@ -594,7 +651,7 @@ const ProfileForm = (props) => {
                       }}
                     />
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-danger">
                     <FontAwesomeIcon
                       icon={faX}
                       onClick={() => {
@@ -604,13 +661,101 @@ const ProfileForm = (props) => {
                   </div>
                 </div>
               ) : (
-                <div className="d-flex">
+                <div className="d-flex h6">
                   <div>{actualState.jelszo}</div>
                   <div className="ms-1 crsrp">
                     <FontAwesomeIcon
                       icon={faPencil}
                       onClick={() => {
                         changeField("jelszo");
+                      }}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="d-flex">
+              <div className="h6 me-2">Magasság: </div>
+              {actualState.magassag_input_visibility ? (
+                <div className="d-flex">
+                  <div className="w-50">
+                    <input
+                      type="number"
+                      className="w-100"
+                      name="magassag"
+                      value={actualState.magassag_tmp}
+                      onChange={changeMagassagHandler}
+                    />
+                  </div>
+                  <div className="ms-1 crsrp text-success">
+                    <FontAwesomeIcon
+                      icon={faCheck}
+                      onClick={() => {
+                        saveField("magassag");
+                      }}
+                    />
+                  </div>
+                  <div className="ms-1 crsrp text-danger">
+                    <FontAwesomeIcon
+                      icon={faX}
+                      onClick={() => {
+                        clearChanges("magassag");
+                      }}
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div className="d-flex h6">
+                  <div>{actualState.magassag + " cm"}</div>
+                  <div className="ms-1 crsrp">
+                    <FontAwesomeIcon
+                      icon={faPencil}
+                      onClick={() => {
+                        changeField("magassag");
+                      }}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="d-flex">
+              <div className="h6 me-2">Testsúly: </div>
+              {actualState.testsuly_input_visibility ? (
+                <div className="d-flex">
+                  <div className="w-50">
+                    <input
+                      type="number"
+                      className="w-100"
+                      name="testsuly"
+                      value={actualState.testsuly_tmp}
+                      onChange={changeTestsulyHandler}
+                    />
+                  </div>
+                  <div className="ms-1 crsrp text-success">
+                    <FontAwesomeIcon
+                      icon={faCheck}
+                      onClick={() => {
+                        saveField("testsuly");
+                      }}
+                    />
+                  </div>
+                  <div className="ms-1 crsrp text-danger">
+                    <FontAwesomeIcon
+                      icon={faX}
+                      onClick={() => {
+                        clearChanges("testsuly");
+                      }}
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div className="d-flex h6">
+                  <div>{actualState.testsuly + " kg"}</div>
+                  <div className="ms-1 crsrp">
+                    <FontAwesomeIcon
+                      icon={faPencil}
+                      onClick={() => {
+                        changeField("testsuly");
                       }}
                     />
                   </div>

@@ -41,12 +41,18 @@ public class User {
 	@Column(name = "jelszo")
 	private String jelszo;
 	
+	@Column(name = "magassag")
+	private String magassag;
+	
+	@Column(name = "testsuly")
+	private String testsuly;
+	
 	public User() {
 		
 	}
 	
 	public User(String vezetekNev, String keresztNev, String nem, String szulHely, String szulIdo, String iranyitoSzam,
-			String lakhelyVaros, String eMail, String password) {
+			String lakhelyVaros, String eMail, String password, String magassag, String testsuly) {
 		super();
 		this.vezetekNev = vezetekNev;
 		this.keresztNev = keresztNev;
@@ -57,6 +63,8 @@ public class User {
 		this.lakhelyVaros = lakhelyVaros;
 		this.eMail = eMail;
 		this.jelszo = password;
+		this.magassag = magassag;
+		this.testsuly = testsuly;
 	}
 	
 	public long getId() {
@@ -137,5 +145,21 @@ public class User {
 	
 	public void setJelszo(String jelszo) {
 		this.jelszo = jelszo;
+	}
+
+	public String getMagassag() {
+		return magassag;
+	}
+
+	public void setMagassag(String magassag) {
+		this.magassag = magassag;
+	}
+
+	public String getTestsuly() {
+		return testsuly;
+	}
+
+	public void setTestsuly(String testsuly) {
+		this.testsuly = testsuly;
 	}
 }

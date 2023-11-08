@@ -75,14 +75,14 @@ const NavBar = (props) => {
 
   return (
     <div className="d-flex">
-      <div className="d-flex col-sm-3 p-3 bg-dark">
-        <div className="d-flex p-3">
+      <div className="d-flex col-sm-3 bg-dark">
+        <div className="d-flex">
           <div
             className="d-flex crsrp m-auto"
             onClick={() => navigateTo("homePage")}
           >
             <img
-              className="d-flex m-auto"
+              className="d-flex m-auto p-3"
               style={{ width: "60%", height: "60%" }}
               src="dumbell_icon.jpg"
               alt="logo"
@@ -90,7 +90,7 @@ const NavBar = (props) => {
           </div>
         </div>
       </div>
-      <div className="d-flex flex-column bg-dark col-sm-9 pt-3 px-1">
+      <div className="d-flex flex-column bg-dark col-sm-9 pt-2 px-1">
         <div className="d-flex flex-row-reverse mx-3 mt-2">
           {actualState.isAuthenticated ? (
             <>
@@ -140,7 +140,7 @@ const NavBar = (props) => {
           )}
         </div>
         <div className="d-flex mt-3">
-          <div className="hvr1 d-flex justify-content-center  w-25 pt-4 pb-4 h4">
+          <div className="hvr1 d-flex justify-content-center w-25 pt-2 pb-2 h4">
             <div
               className="text-light crsrp"
               onClick={() => navigateTo("homePage")}
@@ -148,7 +148,7 @@ const NavBar = (props) => {
               Kezdőlap
             </div>
           </div>
-          <div className="hvr1 d-flex justify-content-center w-25 pt-4 pb-4 h4">
+          <div className="hvr1 d-flex justify-content-center w-25 pt-2 pb-2 h4">
             <div
               className="text-light crsrp"
               onClick={() => navigateTo("trainersPage")}
@@ -156,7 +156,7 @@ const NavBar = (props) => {
               Edzőink
             </div>
           </div>
-          <div className="hvr1 d-flex justify-content-center w-25 pt-4 pb-4 h4">
+          <div className="hvr1 d-flex justify-content-center w-25 pt-2 pb-2 h4">
             <div
               className="text-light crsrp"
               onClick={() => navigateTo("calCalcPage")}
@@ -164,7 +164,7 @@ const NavBar = (props) => {
               Kalória Kalkulátor
             </div>
           </div>
-          <div className="hvr1 d-flex justify-content-center w-25 pt-4 pb-4 h4">
+          <div className="hvr1 d-flex justify-content-center w-25 pt-2 pb-2 h4">
             <div
               className="text-light crsrp"
               onClick={() => navigateTo("joinPage")}
@@ -172,7 +172,7 @@ const NavBar = (props) => {
               Csatlakozz
             </div>
           </div>
-          <div className="hvr1 d-flex justify-content-center w-25 pt-4 pb-4 h4">
+          <div className="hvr1 d-flex justify-content-center w-25 pt-2 pb-2 h4">
             <div
               className="text-light crsrp"
               onClick={() => navigateTo("aboutPage")}

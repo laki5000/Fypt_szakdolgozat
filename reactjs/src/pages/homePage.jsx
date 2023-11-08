@@ -1,14 +1,10 @@
-import React from "react";
-import LineWithTitle from "../components/lineWithTitle";
+import React, { useEffect } from "react";
 
 const HomePage = (props) => {
-  return (
-    <div>
-      <div>
-        <LineWithTitle title="Kezdőlap" />
-      </div>
-      <div>Home</div>
-    </div>
-  );
+  useEffect(() => {
+    props.onInit();
+  }, []);
+
+  return <div>Home</div>;
 };
 export default HomePage;

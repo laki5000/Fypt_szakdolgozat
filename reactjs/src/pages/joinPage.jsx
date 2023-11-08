@@ -1,16 +1,14 @@
-import React from "react";
-import LineWithTitle from "../components/lineWithTitle";
+import React, { useEffect } from "react";
 import JoinForm from "../components/joinForm";
 
 const JoinPage = (props) => {
+  useEffect(() => {
+    props.onInit();
+  }, []);
+
   return (
     <div>
-      <div className="slide2">
-        <LineWithTitle title="Csatlakozz" />
-      </div>
-      <div className="slide1">
-        <JoinForm />
-      </div>
+      <JoinForm />
     </div>
   );
 };
