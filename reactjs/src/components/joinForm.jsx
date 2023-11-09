@@ -25,7 +25,7 @@ const JoinForm = (props) => {
     } else if (event.target.value === "no") {
       setNewState({ ...actualState, kiket_vallal: "Nő" });
     } else {
-      setNewState({ ...actualState, kiket_vallal: "Mindkettő" });
+      setNewState({ ...actualState, kiket_vallal: "Mindenki" });
     }
   };
 

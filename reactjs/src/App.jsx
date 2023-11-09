@@ -73,6 +73,8 @@ const App = (props) => {
               keresztNev: localStorage.getItem("keresztnev"),
             });
             checkIsAdmin(id);
+          } else {
+            handleLogout();
           }
         })
         .catch((error) => {

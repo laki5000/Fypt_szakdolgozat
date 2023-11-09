@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import DetectMobile from "../services/detectMobile";
 
 const LineWithTitle = (props) => {
+  const isMobile = DetectMobile();
   const [actualState, setNewState] = useState({
     title: "",
   });
@@ -39,7 +41,10 @@ const LineWithTitle = (props) => {
   }, [props.title]);
 
   return (
-    <div className="bg-primary text-light h1 pt-2 pb-2 pl_sajat1">
+    <div
+      className={`bg-primary text-light h1 pl_sajat1 
+      ${isMobile ? "pt-3 pb-3" : "pt-2 pb-2"}`}
+    >
       {actualState.title}
     </div>
   );
