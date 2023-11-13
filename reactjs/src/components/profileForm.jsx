@@ -5,8 +5,11 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import UserService from "../services/userService";
 import TrainerService from "../services/trainerService";
+import DetectMobile from "../services/detectMobile";
 
 const ProfileForm = (props) => {
+  const isMobile = DetectMobile();
+
   const [actualState, setNewState] = useState({
     vezetek_nev_input_visibility: false,
     kereszt_nev_input_visibility: false,
@@ -67,7 +70,6 @@ const ProfileForm = (props) => {
     tapasztalat_tmp: "",
     telefonszam_tmp: "",
     bemutatkozas_tmp: "",
-    hiteles_tmp: "",
     edzo: false,
   });
 
@@ -505,7 +507,11 @@ const ProfileForm = (props) => {
   };
 
   const changeOnlineHandler = (event) => {
-    setNewState({ ...actualState, online_tmp: event.target.value });
+    if (event.target.value === "igen") {
+      setNewState({ ...actualState, online_tmp: "True" });
+    } else if (event.target.value === "nem") {
+      setNewState({ ...actualState, online_tmp: "False" });
+    }
   };
 
   const changeTapasztalatHandler = (event) => {
@@ -585,14 +591,29 @@ const ProfileForm = (props) => {
 
   return (
     <div className="bg-dark pb-5">
-      <div className="d-flex m-auto w-50">
-        <div className="d-flex w-100 pt-4">
-          <div className="d-flex flex-column w-50">
-            <div className="text-light h2">
+      <div
+        className={`d-flex m-auto w-50 
+          ${isMobile ? "w-100 px-5" : "w-50"}`}
+      >
+        <div
+          className={`d-flex w-100 pt-4
+            ${isMobile ? "flex-column" : "flex-row"}`}
+        >
+          <div
+            className={`d-flex flex-column 
+              ${isMobile ? "w-100" : "w-50"}`}
+          >
+            <div
+              className={`text-light 
+                ${isMobile ? "m-auto h1" : "h2"}`}
+            >
               {actualState.vezetek_nev} {actualState.kereszt_nev}{" "}
               {UserService.getAge(actualState.szul_ido)}
             </div>
-            <div className="w-50">
+            <div
+              className={`w-50 
+                ${isMobile ? "m-auto mt-3" : ""}`}
+            >
               <img
                 src="profile_pic_def.jpg"
                 style={{ width: "100%" }}
@@ -600,13 +621,32 @@ const ProfileForm = (props) => {
               ></img>
             </div>
           </div>
-          <div className="w-50 ps-5 text-light">
-            <div className="d-flex justify-content-center h2">Adatok</div>
-            <div className="d-flex">
-              <div className="h6 me-2">Vezetéknév: </div>
+          <div
+            className={`text-light 
+                ${isMobile ? "mt-5" : "ps-5"}`}
+          >
+            <div
+              className={`d-flex justify-content-center 
+                ${isMobile ? "m-auto mt-5 mb-5 w-100 h1" : "w-50 h2"}`}
+            >
+              Adatok
+            </div>
+            <div
+              className={`d-flex 
+                ${isMobile ? "mb-3" : ""}`}
+            >
+              <div
+                className={`me-2
+                  ${isMobile ? "h2" : "h6"}`}
+              >
+                Vezetéknév:
+              </div>
               {actualState.vezetek_nev_input_visibility ? (
                 <div className="d-flex">
-                  <div className="w-50">
+                  <div
+                    className={`w-50
+                      ${isMobile ? "h2" : "h6"}`}
+                  >
                     <input
                       className="w-100"
                       name="vezetek_nev"
@@ -614,7 +654,10 @@ const ProfileForm = (props) => {
                       onChange={changeVezetekNevHandler}
                     />
                   </div>
-                  <div className="ms-1 crsrp text-success">
+                  <div
+                    className={`crsrp text-success
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                  >
                     <FontAwesomeIcon
                       icon={faCheck}
                       onClick={() => {
@@ -622,7 +665,10 @@ const ProfileForm = (props) => {
                       }}
                     />
                   </div>
-                  <div className="ms-1 crsrp text-danger">
+                  <div
+                    className={`crsrp text-danger
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                  >
                     <FontAwesomeIcon
                       icon={faX}
                       onClick={() => {
@@ -632,7 +678,10 @@ const ProfileForm = (props) => {
                   </div>
                 </div>
               ) : (
-                <div className="d-flex h6">
+                <div
+                  className={`d-flex 
+                    ${isMobile ? "h2" : "h6"}`}
+                >
                   <div>{actualState.vezetek_nev}</div>
                   <div className="ms-1 crsrp">
                     <FontAwesomeIcon
@@ -645,11 +694,22 @@ const ProfileForm = (props) => {
                 </div>
               )}
             </div>
-            <div className="d-flex">
-              <div className="h6 me-2">Keresztnév: </div>
+            <div
+              className={`d-flex 
+                ${isMobile ? "mb-3" : ""}`}
+            >
+              <div
+                className={`me-2
+                  ${isMobile ? "h2" : "h6"}`}
+              >
+                Keresztnév:
+              </div>
               {actualState.kereszt_nev_input_visibility ? (
                 <div className="d-flex">
-                  <div className="w-50">
+                  <div
+                    className={`w-50
+                      ${isMobile ? "h2" : "h6"}`}
+                  >
                     <input
                       className="w-100"
                       name="vezetek_nev"
@@ -657,7 +717,10 @@ const ProfileForm = (props) => {
                       onChange={changeKeresztNevHandler}
                     />
                   </div>
-                  <div className="ms-1 crsrp text-success">
+                  <div
+                    className={`crsrp text-success
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                  >
                     <FontAwesomeIcon
                       icon={faCheck}
                       onClick={() => {
@@ -665,7 +728,10 @@ const ProfileForm = (props) => {
                       }}
                     />
                   </div>
-                  <div className="ms-1 crsrp text-danger">
+                  <div
+                    className={`crsrp text-danger
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                  >
                     <FontAwesomeIcon
                       icon={faX}
                       onClick={() => {
@@ -675,7 +741,10 @@ const ProfileForm = (props) => {
                   </div>
                 </div>
               ) : (
-                <div className="d-flex">
+                <div
+                  className={`d-flex 
+                    ${isMobile ? "h2" : "h6"}`}
+                >
                   <div>{actualState.kereszt_nev}</div>
                   <div className="ms-1 crsrp">
                     <FontAwesomeIcon
@@ -688,11 +757,22 @@ const ProfileForm = (props) => {
                 </div>
               )}
             </div>
-            <div className="d-flex">
-              <div className="h me-2">Nem: </div>
+            <div
+              className={`d-flex 
+                ${isMobile ? "mb-3" : ""}`}
+            >
+              <div
+                className={`me-2
+                  ${isMobile ? "h2" : "h6"}`}
+              >
+                Nem:
+              </div>
               {actualState.nem_input_visibility ? (
                 <div className="d-flex">
-                  <div className="w-75">
+                  <div
+                    className={`w-75
+                      ${isMobile ? "h2" : "h6"}`}
+                  >
                     <select
                       className="w-100"
                       name="nem"
@@ -706,7 +786,10 @@ const ProfileForm = (props) => {
                       <option value="no">Nő</option>
                     </select>
                   </div>
-                  <div className="ms-1 crsrp text-success">
+                  <div
+                    className={`crsrp text-success
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                  >
                     <FontAwesomeIcon
                       icon={faCheck}
                       onClick={() => {
@@ -714,7 +797,10 @@ const ProfileForm = (props) => {
                       }}
                     />
                   </div>
-                  <div className="ms-1 crsrp text-danger">
+                  <div
+                    className={`crsrp text-danger
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                  >
                     <FontAwesomeIcon
                       icon={faX}
                       onClick={() => {
@@ -724,7 +810,10 @@ const ProfileForm = (props) => {
                   </div>
                 </div>
               ) : (
-                <div className="d-flex h6">
+                <div
+                  className={`d-flex 
+                    ${isMobile ? "h2" : "h6"}`}
+                >
                   <div>{actualState.nem}</div>
                   <div className="ms-1 crsrp">
                     <FontAwesomeIcon
@@ -737,11 +826,22 @@ const ProfileForm = (props) => {
                 </div>
               )}
             </div>
-            <div className="d-flex">
-              <div className="h6 me-2">Születési hely, idő: </div>
+            <div
+              className={`d-flex 
+                ${isMobile ? "mb-3" : ""}`}
+            >
+              <div
+                className={`me-2
+                  ${isMobile ? "h2" : "h6"}`}
+              >
+                Születési hely, idő:
+              </div>
               {actualState.szul_hely_ido_input_visibility ? (
                 <div className="d-flex">
-                  <div className="d-flex flex-column w-50">
+                  <div
+                    className={`d-flex flex-column w-50
+                      ${isMobile ? "h2" : "h6"}`}
+                  >
                     <input
                       className="w-100"
                       name="szul_hely"
@@ -756,7 +856,10 @@ const ProfileForm = (props) => {
                       onChange={changeSzulIdoHandler}
                     />
                   </div>
-                  <div className="ms-1 crsrp text-success">
+                  <div
+                    className={`crsrp text-success
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                  >
                     <FontAwesomeIcon
                       icon={faCheck}
                       onClick={() => {
@@ -764,7 +867,10 @@ const ProfileForm = (props) => {
                       }}
                     />
                   </div>
-                  <div className="ms-1 crsrp text-danger">
+                  <div
+                    className={`crsrp text-danger
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                  >
                     <FontAwesomeIcon
                       icon={faX}
                       onClick={() => {
@@ -774,7 +880,10 @@ const ProfileForm = (props) => {
                   </div>
                 </div>
               ) : (
-                <div className="d-flex">
+                <div
+                  className={`d-flex 
+                    ${isMobile ? "h2" : "h6"}`}
+                >
                   <div>
                     {actualState.szul_hely + ", " + actualState.szul_ido}
                   </div>
@@ -789,11 +898,22 @@ const ProfileForm = (props) => {
                 </div>
               )}
             </div>
-            <div className="d-flex">
-              <div className="h6 me-2">Irányítószám, város: </div>
+            <div
+              className={`d-flex 
+                ${isMobile ? "mb-3" : ""}`}
+            >
+              <div
+                className={`me-2
+                  ${isMobile ? "h2" : "h6"}`}
+              >
+                Irányítószám, város:
+              </div>
               {actualState.iranyitoszam_varos_input_visibility ? (
                 <div className="d-flex">
-                  <div className="d-flex flex-column w-50">
+                  <div
+                    className={`d-flex flex-column w-50
+                      ${isMobile ? "h2" : "h6"}`}
+                  >
                     <input
                       type="number"
                       className="w-100"
@@ -808,7 +928,10 @@ const ProfileForm = (props) => {
                       onChange={changeVarosHandler}
                     />
                   </div>
-                  <div className="ms-1 crsrp text-success">
+                  <div
+                    className={`crsrp text-success
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                  >
                     <FontAwesomeIcon
                       icon={faCheck}
                       onClick={() => {
@@ -816,7 +939,10 @@ const ProfileForm = (props) => {
                       }}
                     />
                   </div>
-                  <div className="ms-1 crsrp text-danger">
+                  <div
+                    className={`crsrp text-danger
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                  >
                     <FontAwesomeIcon
                       icon={faX}
                       onClick={() => {
@@ -826,7 +952,10 @@ const ProfileForm = (props) => {
                   </div>
                 </div>
               ) : (
-                <div className="d-flex">
+                <div
+                  className={`d-flex 
+                    ${isMobile ? "h2" : "h6"}`}
+                >
                   <div>
                     {actualState.iranyitoszam +
                       ", " +
@@ -843,11 +972,22 @@ const ProfileForm = (props) => {
                 </div>
               )}
             </div>
-            <div className="d-flex">
-              <div className="h6 me-2">E-mail: </div>
+            <div
+              className={`d-flex 
+                ${isMobile ? "mb-3" : ""}`}
+            >
+              <div
+                className={`me-2
+                  ${isMobile ? "h2" : "h6"}`}
+              >
+                E-mail:
+              </div>
               {actualState.email_input_visibility ? (
                 <div className="d-flex">
-                  <div className="w-50">
+                  <div
+                    className={`w-50
+                      ${isMobile ? "h2" : "h6"}`}
+                  >
                     <input
                       className="w-100"
                       name="e-mail"
@@ -855,7 +995,10 @@ const ProfileForm = (props) => {
                       onChange={changeEmailHandler}
                     />
                   </div>
-                  <div className="ms-1 crsrp text-success">
+                  <div
+                    className={`crsrp text-success
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                  >
                     <FontAwesomeIcon
                       icon={faCheck}
                       onClick={() => {
@@ -863,7 +1006,10 @@ const ProfileForm = (props) => {
                       }}
                     />
                   </div>
-                  <div className="ms-1 crsrp text-danger">
+                  <div
+                    className={`crsrp text-danger
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                  >
                     <FontAwesomeIcon
                       icon={faX}
                       onClick={() => {
@@ -873,7 +1019,10 @@ const ProfileForm = (props) => {
                   </div>
                 </div>
               ) : (
-                <div className="d-flex h6">
+                <div
+                  className={`d-flex 
+                    ${isMobile ? "h2" : "h6"}`}
+                >
                   <div>{actualState.email}</div>
                   <div className="ms-1 crsrp">
                     <FontAwesomeIcon
@@ -886,11 +1035,22 @@ const ProfileForm = (props) => {
                 </div>
               )}
             </div>
-            <div className="d-flex">
-              <div className="h6 me-2">Jelszó: </div>
+            <div
+              className={`d-flex 
+                ${isMobile ? "mb-3" : ""}`}
+            >
+              <div
+                className={`me-2
+                  ${isMobile ? "h2" : "h6"}`}
+              >
+                Jelszó:
+              </div>
               {actualState.jelszo_input_visibility ? (
                 <div className="d-flex">
-                  <div className="w-50">
+                  <div
+                    className={`w-50
+                      ${isMobile ? "h2" : "h6"}`}
+                  >
                     <input
                       className="w-100"
                       name="jelszo"
@@ -898,7 +1058,10 @@ const ProfileForm = (props) => {
                       onChange={changeJelszoHandler}
                     />
                   </div>
-                  <div className="ms-1 crsrp text-success">
+                  <div
+                    className={`crsrp text-success
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                  >
                     <FontAwesomeIcon
                       icon={faCheck}
                       onClick={() => {
@@ -906,7 +1069,10 @@ const ProfileForm = (props) => {
                       }}
                     />
                   </div>
-                  <div className="ms-1 crsrp text-danger">
+                  <div
+                    className={`crsrp text-danger
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                  >
                     <FontAwesomeIcon
                       icon={faX}
                       onClick={() => {
@@ -916,7 +1082,10 @@ const ProfileForm = (props) => {
                   </div>
                 </div>
               ) : (
-                <div className="d-flex h6">
+                <div
+                  className={`d-flex 
+                    ${isMobile ? "h2" : "h6"}`}
+                >
                   <div>{actualState.jelszo}</div>
                   <div className="ms-1 crsrp">
                     <FontAwesomeIcon
@@ -929,11 +1098,22 @@ const ProfileForm = (props) => {
                 </div>
               )}
             </div>
-            <div className="d-flex">
-              <div className="h6 me-2">Magasság: </div>
+            <div
+              className={`d-flex 
+                ${isMobile ? "mb-3" : ""}`}
+            >
+              <div
+                className={`me-2
+                  ${isMobile ? "h2" : "h6"}`}
+              >
+                Magasság:
+              </div>
               {actualState.magassag_input_visibility ? (
                 <div className="d-flex">
-                  <div className="w-50">
+                  <div
+                    className={`w-50
+                      ${isMobile ? "h2" : "h6"}`}
+                  >
                     <input
                       type="number"
                       className="w-100"
@@ -942,7 +1122,10 @@ const ProfileForm = (props) => {
                       onChange={changeMagassagHandler}
                     />
                   </div>
-                  <div className="ms-1 crsrp text-success">
+                  <div
+                    className={`crsrp text-success
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                  >
                     <FontAwesomeIcon
                       icon={faCheck}
                       onClick={() => {
@@ -950,7 +1133,10 @@ const ProfileForm = (props) => {
                       }}
                     />
                   </div>
-                  <div className="ms-1 crsrp text-danger">
+                  <div
+                    className={`crsrp text-danger
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                  >
                     <FontAwesomeIcon
                       icon={faX}
                       onClick={() => {
@@ -960,7 +1146,10 @@ const ProfileForm = (props) => {
                   </div>
                 </div>
               ) : (
-                <div className="d-flex h6">
+                <div
+                  className={`d-flex 
+                    ${isMobile ? "h2" : "h6"}`}
+                >
                   <div>{actualState.magassag + " cm"}</div>
                   <div className="ms-1 crsrp">
                     <FontAwesomeIcon
@@ -973,11 +1162,22 @@ const ProfileForm = (props) => {
                 </div>
               )}
             </div>
-            <div className="d-flex">
-              <div className="h6 me-2">Testsúly: </div>
+            <div
+              className={`d-flex 
+                ${isMobile ? "mb-3" : ""}`}
+            >
+              <div
+                className={`me-2
+                  ${isMobile ? "h2" : "h6"}`}
+              >
+                Testsúly:
+              </div>
               {actualState.testsuly_input_visibility ? (
                 <div className="d-flex">
-                  <div className="w-50">
+                  <div
+                    className={`w-50
+                      ${isMobile ? "h2" : "h6"}`}
+                  >
                     <input
                       type="number"
                       className="w-100"
@@ -986,7 +1186,10 @@ const ProfileForm = (props) => {
                       onChange={changeTestsulyHandler}
                     />
                   </div>
-                  <div className="ms-1 crsrp text-success">
+                  <div
+                    className={`crsrp text-success
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                  >
                     <FontAwesomeIcon
                       icon={faCheck}
                       onClick={() => {
@@ -994,7 +1197,10 @@ const ProfileForm = (props) => {
                       }}
                     />
                   </div>
-                  <div className="ms-1 crsrp text-danger">
+                  <div
+                    className={`crsrp text-danger
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                  >
                     <FontAwesomeIcon
                       icon={faX}
                       onClick={() => {
@@ -1004,7 +1210,10 @@ const ProfileForm = (props) => {
                   </div>
                 </div>
               ) : (
-                <div className="d-flex h6">
+                <div
+                  className={`d-flex 
+                    ${isMobile ? "h2" : "h6"}`}
+                >
                   <div>{actualState.testsuly + " kg"}</div>
                   <div className="ms-1 crsrp">
                     <FontAwesomeIcon
@@ -1019,11 +1228,22 @@ const ProfileForm = (props) => {
             </div>
             {actualState.edzo && (
               <div>
-                <div className="d-flex">
-                  <div className="h6 me-2">Kiket vállal: </div>
+                <div
+                  className={`d-flex 
+                ${isMobile ? "mb-3" : ""}`}
+                >
+                  <div
+                    className={`me-2
+                  ${isMobile ? "h2" : "h6"}`}
+                  >
+                    Kiket vállal:
+                  </div>
                   {actualState.kiket_vallal_input_visibility ? (
                     <div className="d-flex">
-                      <div className="w-50">
+                      <div
+                        className={`w-50
+                      ${isMobile ? "h2" : "h6"}`}
+                      >
                         <select
                           className="w-100"
                           name="kiket_vallal"
@@ -1038,7 +1258,10 @@ const ProfileForm = (props) => {
                           <option value="mindenki">Mindenki</option>
                         </select>
                       </div>
-                      <div className="ms-1 crsrp text-success">
+                      <div
+                        className={`crsrp text-success
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                      >
                         <FontAwesomeIcon
                           icon={faCheck}
                           onClick={() => {
@@ -1046,7 +1269,10 @@ const ProfileForm = (props) => {
                           }}
                         />
                       </div>
-                      <div className="ms-1 crsrp text-danger">
+                      <div
+                        className={`crsrp text-danger
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                      >
                         <FontAwesomeIcon
                           icon={faX}
                           onClick={() => {
@@ -1056,7 +1282,10 @@ const ProfileForm = (props) => {
                       </div>
                     </div>
                   ) : (
-                    <div className="d-flex h6">
+                    <div
+                      className={`d-flex 
+                    ${isMobile ? "h2" : "h6"}`}
+                    >
                       <div>{actualState.kiket_vallal}</div>
                       <div className="ms-1 crsrp">
                         <FontAwesomeIcon
@@ -1069,11 +1298,22 @@ const ProfileForm = (props) => {
                     </div>
                   )}
                 </div>
-                <div className="d-flex">
-                  <div className="h6 me-2">Specializáció: </div>
+                <div
+                  className={`d-flex 
+                ${isMobile ? "mb-3" : ""}`}
+                >
+                  <div
+                    className={`me-2
+                  ${isMobile ? "h2" : "h6"}`}
+                  >
+                    Specializáció:
+                  </div>
                   {actualState.specializacio_input_visibility ? (
                     <div className="d-flex">
-                      <div className="w-50">
+                      <div
+                        className={`w-50
+                      ${isMobile ? "h2" : "h6"}`}
+                      >
                         <input
                           className="w-100"
                           name="specializacio"
@@ -1081,7 +1321,10 @@ const ProfileForm = (props) => {
                           onChange={changeSpecializacioHandler}
                         />
                       </div>
-                      <div className="ms-1 crsrp text-success">
+                      <div
+                        className={`crsrp text-success
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                      >
                         <FontAwesomeIcon
                           icon={faCheck}
                           onClick={() => {
@@ -1089,7 +1332,10 @@ const ProfileForm = (props) => {
                           }}
                         />
                       </div>
-                      <div className="ms-1 crsrp text-danger">
+                      <div
+                        className={`crsrp text-danger
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                      >
                         <FontAwesomeIcon
                           icon={faX}
                           onClick={() => {
@@ -1099,7 +1345,10 @@ const ProfileForm = (props) => {
                       </div>
                     </div>
                   ) : (
-                    <div className="d-flex h6">
+                    <div
+                      className={`d-flex 
+                    ${isMobile ? "h2" : "h6"}`}
+                    >
                       <div>{actualState.specializacio}</div>
                       <div className="ms-1 crsrp">
                         <FontAwesomeIcon
@@ -1112,11 +1361,22 @@ const ProfileForm = (props) => {
                     </div>
                   )}
                 </div>
-                <div className="d-flex">
-                  <div className="h6 me-2">Végzettség: </div>
+                <div
+                  className={`d-flex 
+                ${isMobile ? "mb-3" : ""}`}
+                >
+                  <div
+                    className={`me-2
+                  ${isMobile ? "h2" : "h6"}`}
+                  >
+                    Végzettség:
+                  </div>
                   {actualState.vegzettseg_input_visibility ? (
                     <div className="d-flex">
-                      <div className="w-50">
+                      <div
+                        className={`w-50
+                      ${isMobile ? "h2" : "h6"}`}
+                      >
                         <input
                           className="w-100"
                           name="vegzettseg"
@@ -1124,7 +1384,10 @@ const ProfileForm = (props) => {
                           onChange={changeVegzettsegHandler}
                         />
                       </div>
-                      <div className="ms-1 crsrp text-success">
+                      <div
+                        className={`crsrp text-success
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                      >
                         <FontAwesomeIcon
                           icon={faCheck}
                           onClick={() => {
@@ -1132,7 +1395,10 @@ const ProfileForm = (props) => {
                           }}
                         />
                       </div>
-                      <div className="ms-1 crsrp text-danger">
+                      <div
+                        className={`crsrp text-danger
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                      >
                         <FontAwesomeIcon
                           icon={faX}
                           onClick={() => {
@@ -1142,7 +1408,10 @@ const ProfileForm = (props) => {
                       </div>
                     </div>
                   ) : (
-                    <div className="d-flex h6">
+                    <div
+                      className={`d-flex 
+                    ${isMobile ? "h2" : "h6"}`}
+                    >
                       <div>{actualState.vegzettseg}</div>
                       <div className="ms-1 crsrp">
                         <FontAwesomeIcon
@@ -1155,11 +1424,22 @@ const ProfileForm = (props) => {
                     </div>
                   )}
                 </div>
-                <div className="d-flex">
-                  <div className="h6 me-2">Hol: </div>
+                <div
+                  className={`d-flex 
+                ${isMobile ? "mb-3" : ""}`}
+                >
+                  <div
+                    className={`me-2
+                  ${isMobile ? "h2" : "h6"}`}
+                  >
+                    Hol:
+                  </div>
                   {actualState.hol_input_visibility ? (
                     <div className="d-flex">
-                      <div className="w-50">
+                      <div
+                        className={`w-50
+                      ${isMobile ? "h2" : "h6"}`}
+                      >
                         <input
                           className="w-100"
                           name="hol"
@@ -1167,7 +1447,10 @@ const ProfileForm = (props) => {
                           onChange={changeHolHandler}
                         />
                       </div>
-                      <div className="ms-1 crsrp text-success">
+                      <div
+                        className={`crsrp text-success
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                      >
                         <FontAwesomeIcon
                           icon={faCheck}
                           onClick={() => {
@@ -1175,7 +1458,10 @@ const ProfileForm = (props) => {
                           }}
                         />
                       </div>
-                      <div className="ms-1 crsrp text-danger">
+                      <div
+                        className={`crsrp text-danger
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                      >
                         <FontAwesomeIcon
                           icon={faX}
                           onClick={() => {
@@ -1185,7 +1471,10 @@ const ProfileForm = (props) => {
                       </div>
                     </div>
                   ) : (
-                    <div className="d-flex h6">
+                    <div
+                      className={`d-flex 
+                    ${isMobile ? "h2" : "h6"}`}
+                    >
                       <div>{actualState.hol}</div>
                       <div className="ms-1 crsrp">
                         <FontAwesomeIcon
@@ -1198,19 +1487,39 @@ const ProfileForm = (props) => {
                     </div>
                   )}
                 </div>
-                <div className="d-flex">
-                  <div className="h6 me-2">Online tréninget vállal: </div>
+                <div
+                  className={`d-flex 
+                ${isMobile ? "mb-3" : ""}`}
+                >
+                  <div
+                    className={`me-2
+                  ${isMobile ? "h2" : "h6"}`}
+                  >
+                    Online tréninget vállal:
+                  </div>
                   {actualState.online_input_visibility ? (
                     <div className="d-flex">
-                      <div className="w-50">
-                        <input
+                      <div
+                        className={`w-75
+                      ${isMobile ? "h2" : "h6"}`}
+                      >
+                        <select
                           className="w-100"
-                          name="online"
-                          value={actualState.online_tmp}
+                          name="nem"
+                          defaultValue="none"
                           onChange={changeOnlineHandler}
-                        />
+                        >
+                          <option value="none" disabled hidden>
+                            Válassz
+                          </option>
+                          <option value="igen">Igen</option>
+                          <option value="nem">Nem</option>
+                        </select>
                       </div>
-                      <div className="ms-1 crsrp text-success">
+                      <div
+                        className={`crsrp text-success
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                      >
                         <FontAwesomeIcon
                           icon={faCheck}
                           onClick={() => {
@@ -1218,7 +1527,10 @@ const ProfileForm = (props) => {
                           }}
                         />
                       </div>
-                      <div className="ms-1 crsrp text-danger">
+                      <div
+                        className={`crsrp text-danger
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                      >
                         <FontAwesomeIcon
                           icon={faX}
                           onClick={() => {
@@ -1228,8 +1540,11 @@ const ProfileForm = (props) => {
                       </div>
                     </div>
                   ) : (
-                    <div className="d-flex h6">
-                      <div>{actualState.online}</div>
+                    <div
+                      className={`d-flex 
+                    ${isMobile ? "h2" : "h6"}`}
+                    >
+                      {actualState.online ? <div>Igen</div> : <div>Nem</div>}
                       <div className="ms-1 crsrp">
                         <FontAwesomeIcon
                           icon={faPencil}
@@ -1241,11 +1556,22 @@ const ProfileForm = (props) => {
                     </div>
                   )}
                 </div>
-                <div className="d-flex">
-                  <div className="h6 me-2">Tapasztalat: </div>
+                <div
+                  className={`d-flex 
+                ${isMobile ? "mb-3" : ""}`}
+                >
+                  <div
+                    className={`me-2
+                  ${isMobile ? "h2" : "h6"}`}
+                  >
+                    Tapasztalat:
+                  </div>
                   {actualState.tapasztalat_input_visibility ? (
                     <div className="d-flex">
-                      <div className="w-50">
+                      <div
+                        className={`w-50
+                      ${isMobile ? "h2" : "h6"}`}
+                      >
                         <input
                           className="w-100"
                           name="tapasztalat"
@@ -1253,7 +1579,10 @@ const ProfileForm = (props) => {
                           onChange={changeTapasztalatHandler}
                         />
                       </div>
-                      <div className="ms-1 crsrp text-success">
+                      <div
+                        className={`crsrp text-success
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                      >
                         <FontAwesomeIcon
                           icon={faCheck}
                           onClick={() => {
@@ -1261,7 +1590,10 @@ const ProfileForm = (props) => {
                           }}
                         />
                       </div>
-                      <div className="ms-1 crsrp text-danger">
+                      <div
+                        className={`crsrp text-danger
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                      >
                         <FontAwesomeIcon
                           icon={faX}
                           onClick={() => {
@@ -1271,7 +1603,10 @@ const ProfileForm = (props) => {
                       </div>
                     </div>
                   ) : (
-                    <div className="d-flex h6">
+                    <div
+                      className={`d-flex 
+                    ${isMobile ? "h2" : "h6"}`}
+                    >
                       <div>{actualState.tapasztalat}</div>
                       <div className="ms-1 crsrp">
                         <FontAwesomeIcon
@@ -1284,11 +1619,22 @@ const ProfileForm = (props) => {
                     </div>
                   )}
                 </div>
-                <div className="d-flex">
-                  <div className="h6 me-2">Telefonszám: </div>
+                <div
+                  className={`d-flex 
+                ${isMobile ? "mb-3" : ""}`}
+                >
+                  <div
+                    className={`me-2
+                  ${isMobile ? "h2" : "h6"}`}
+                  >
+                    Telefonszám:
+                  </div>
                   {actualState.telefonszam_input_visibility ? (
                     <div className="d-flex">
-                      <div className="w-50">
+                      <div
+                        className={`w-50
+                      ${isMobile ? "h2" : "h6"}`}
+                      >
                         <input
                           type="number"
                           className="w-100"
@@ -1297,7 +1643,10 @@ const ProfileForm = (props) => {
                           onChange={changeTelefonszamHandler}
                         />
                       </div>
-                      <div className="ms-1 crsrp text-success">
+                      <div
+                        className={`crsrp text-success
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                      >
                         <FontAwesomeIcon
                           icon={faCheck}
                           onClick={() => {
@@ -1305,7 +1654,10 @@ const ProfileForm = (props) => {
                           }}
                         />
                       </div>
-                      <div className="ms-1 crsrp text-danger">
+                      <div
+                        className={`crsrp text-danger
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                      >
                         <FontAwesomeIcon
                           icon={faX}
                           onClick={() => {
@@ -1315,7 +1667,10 @@ const ProfileForm = (props) => {
                       </div>
                     </div>
                   ) : (
-                    <div className="d-flex h6">
+                    <div
+                      className={`d-flex 
+                    ${isMobile ? "h2" : "h6"}`}
+                    >
                       <div>{actualState.telefonszam}</div>
                       <div className="ms-1 crsrp">
                         <FontAwesomeIcon
@@ -1328,11 +1683,22 @@ const ProfileForm = (props) => {
                     </div>
                   )}
                 </div>
-                <div className="d-flex">
-                  <div className="h6 me-2">Bemutatkozás: </div>
+                <div
+                  className={`d-flex 
+                ${isMobile ? "mb-3" : ""}`}
+                >
+                  <div
+                    className={`me-2
+                  ${isMobile ? "h2" : "h6"}`}
+                  >
+                    Bemutatkozás:
+                  </div>
                   {actualState.bemutatkozas_input_visibility ? (
                     <div className="d-flex">
-                      <div className="w-50">
+                      <div
+                        className={`w-50
+                      ${isMobile ? "h2" : "h6"}`}
+                      >
                         <textarea
                           className="w-100"
                           name="bemutatkozas"
@@ -1340,7 +1706,10 @@ const ProfileForm = (props) => {
                           onChange={changeBemutatkozasHandler}
                         />
                       </div>
-                      <div className="ms-1 crsrp text-success">
+                      <div
+                        className={`crsrp text-success
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                      >
                         <FontAwesomeIcon
                           icon={faCheck}
                           onClick={() => {
@@ -1348,7 +1717,10 @@ const ProfileForm = (props) => {
                           }}
                         />
                       </div>
-                      <div className="ms-1 crsrp text-danger">
+                      <div
+                        className={`crsrp text-danger
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                      >
                         <FontAwesomeIcon
                           icon={faX}
                           onClick={() => {
@@ -1358,7 +1730,10 @@ const ProfileForm = (props) => {
                       </div>
                     </div>
                   ) : (
-                    <div className="d-flex h6">
+                    <div
+                      className={`d-flex 
+                    ${isMobile ? "h2" : "h6"}`}
+                    >
                       <div>{actualState.bemutatkozas}</div>
                       <div className="ms-1 crsrp">
                         <FontAwesomeIcon
@@ -1370,6 +1745,27 @@ const ProfileForm = (props) => {
                       </div>
                     </div>
                   )}
+                </div>
+                <div
+                  className={`d-flex 
+                ${isMobile ? "mb-3" : ""}`}
+                >
+                  <div
+                    className={`me-2
+                  ${isMobile ? "h2" : "h6"}`}
+                  >
+                    Hiteles:
+                  </div>
+                  <div
+                    className={`d-flex 
+                    ${isMobile ? "h2" : "h6"}`}
+                  >
+                    {actualState.hiteles ? (
+                      <div className="text-success">{"Igen"}</div>
+                    ) : (
+                      <div className="text-danger">{"Nem"}</div>
+                    )}
+                  </div>
                 </div>
               </div>
             )}
