@@ -17,7 +17,7 @@ const LineWithTitle = (props) => {
         setNewState({ title: "Admin menü" });
         break;
       case "calCalcPage":
-        setNewState({ title: "Kalória Kalkulátor" });
+        setNewState({ title: "Napi kalória" });
         break;
       case "homePage":
         setNewState({ title: "Kezdőlap" });

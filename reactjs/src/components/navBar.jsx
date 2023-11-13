@@ -4,9 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faUserTie } from "@fortawesome/free-solid-svg-icons";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import DetectMobile from "../services/detectMobile";
 
 const NavBar = (props) => {
   const { isAuthenticated, keresztNev, admin, onLogout } = props;
+  const isMobile = DetectMobile();
 
   const [actualState, setNewState] = useState({
     isAuthenticated: isAuthenticated,
@@ -75,28 +77,34 @@ const NavBar = (props) => {
 
   return (
     <div className="d-flex">
-      <div className="d-flex col-sm-3 bg-dark">
-        <div className="d-flex">
-          <div
-            className="d-flex crsrp m-auto"
-            onClick={() => navigateTo("homePage")}
-          >
-            <img
-              className="d-flex m-auto p-3"
-              style={{ width: "60%", height: "60%" }}
-              src="dumbell_icon.jpg"
-              alt="logo"
-            ></img>
+      {!isMobile && (
+        <div className="d-flex bg-dark col-sm-3">
+          <div className="d-flex">
+            <div
+              className="d-flex crsrp m-auto"
+              onClick={() => navigateTo("homePage")}
+            >
+              <img
+                className="d-flex m-auto p-3"
+                style={{ width: "60%", height: "60%" }}
+                src="dumbell_icon.jpg"
+                alt="logo"
+              />
+            </div>
           </div>
         </div>
-      </div>
-      <div className="d-flex flex-column bg-dark col-sm-9 pt-2 px-1">
+      )}
+      <div
+        className={`d-flex flex-column bg-dark  pt-2 px-1 ${
+          isMobile ? "w-100" : "col-sm-9"
+        }`}
+      >
         <div className="d-flex flex-row-reverse mx-3 mt-2">
           {actualState.isAuthenticated ? (
             <>
               <div className="mx-2">
                 <div
-                  className="text-light h4 crsrp"
+                  className={`text-light crsrp ${isMobile ? "h1" : "h5"}`}
                   onClick={() => {
                     navigateTo("homePage");
                     logoutUser();
@@ -105,13 +113,13 @@ const NavBar = (props) => {
                   <FontAwesomeIcon icon={faRightFromBracket} />
                 </div>
               </div>
-              <div className="mx-2 h4 text-light">
+              <div className={`text-light crsrp ${isMobile ? "h1" : "h5"}`}>
                 Hello {actualState.keresztNev}
               </div>
 
               <div className="mx-2">
                 <div
-                  className="text-light h4 crsrp"
+                  className={`text-light crsrp ${isMobile ? "h1" : "h5"}`}
                   onClick={() => navigateTo("profilePage")}
                 >
                   <FontAwesomeIcon icon={faUser} />
@@ -120,7 +128,7 @@ const NavBar = (props) => {
               {admin && (
                 <div className="mx-2">
                   <div
-                    className="text-light h4 crsrp"
+                    className={`text-light crsrp ${isMobile ? "h1" : "h5"}`}
                     onClick={() => navigateTo("adminPage")}
                   >
                     <FontAwesomeIcon icon={faUserTie} />
@@ -131,7 +139,7 @@ const NavBar = (props) => {
           ) : (
             <div className="mx-2">
               <div
-                className="text-light h4 crsrp"
+                className={`text-light crsrp ${isMobile ? "h1" : "h5"}`}
                 onClick={() => navigateTo("loginPage")}
               >
                 <div>Bejelentkezés</div>
@@ -161,7 +169,7 @@ const NavBar = (props) => {
               className="text-light crsrp"
               onClick={() => navigateTo("calCalcPage")}
             >
-              Kalória Kalkulátor
+              Napi kalória
             </div>
           </div>
           <div className="hvr1 d-flex justify-content-center w-25 pt-2 pb-2 h4">
