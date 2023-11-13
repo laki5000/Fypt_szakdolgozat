@@ -13,6 +13,8 @@ public class UserDto {
 	private String lakhelyVaros;
 	private String eMail;
 	private String jelszo;
+	private String magassag;
+	private String testsuly;
 	
 	public UserDto() {
 		
@@ -29,6 +31,8 @@ public class UserDto {
 		this.lakhelyVaros = user.getLakhelyVaros();
 		this.eMail = user.geteMail();
 		this.jelszo = user.getJelszo();
+		this.magassag = user.getMagassag();
+		this.testsuly = user.getTestsuly();
 	}
 
 	public long getId() {
@@ -109,5 +113,21 @@ public class UserDto {
 
 	public void setJelszo(String jelszo) {
 		this.jelszo = jelszo;
+	}
+
+	public String getMagassag() {
+		return magassag;
+	}
+
+	public void setMagassag(String magassag) {
+		this.magassag = magassag;
+	}
+
+	public String getTestsuly() {
+		return testsuly;
+	}
+
+	public void setTestsuly(String testsuly) {
+		this.testsuly = testsuly;
 	}
 }

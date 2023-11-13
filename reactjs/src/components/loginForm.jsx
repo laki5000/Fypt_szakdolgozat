@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link, withRouter, useHistory } from "react-router-dom";
 import UserService from "../services/userService";
+import DetectMobile from "../services/detectMobile";
 
 const LoginForm = (props) => {
   const history = useHistory();
+  const isMobile = DetectMobile();
 
   const [actualState, setNewState] = useState({
     email: "",
@@ -50,8 +52,15 @@ const LoginForm = (props) => {
 
   return (
     <form>
-      <div className="d-flex bg-dark">
-        <div className="d-flex flex-column mx-auto pt-5 pb-5 w-25">
+      <div
+        className={`d-flex bg-dark 
+          ${isMobile ? "pt-5 pb-5 h1 w-100 px-1" : "pt-2 pb-2 h6"}`}
+      >
+        <div
+          className={`d-flex flex-column mx-auto pt-5 pb-5 ${
+            isMobile ? "w-100" : "w-50"
+          }`}
+        >
           <div>
             <img
               className="d-flex mx-auto w-75"
@@ -65,7 +74,8 @@ const LoginForm = (props) => {
           <div className="d-flex mx-auto w-75 h2">
             <input
               name="email"
-              className="d-flex w-100 pt-2 pb-2 px-4 rounded-4"
+              className={`d-flex w-100 px-4 rounded-4 
+                ${isMobile ? "h1 pt-4 pb-4" : "h2 pt-2 pb-2"}`}
               value={actualState.email}
               onChange={changeEmailHandler}
             />
@@ -76,23 +86,31 @@ const LoginForm = (props) => {
           <div className="d-flex mx-auto w-75 h2">
             <input
               type="password"
-              className="d-flex w-100 pt-2 pb-2 px-4 rounded-4"
+              className={`d-flex w-100 px-4 rounded-4 
+                ${isMobile ? "h1 pt-4 pb-4" : "h2 pt-2 pb-2"}`}
               name="jelszo"
               value={actualState.jelszo}
               onChange={changeJelszoHandler}
             />
           </div>
-          <div className="d-flex flex-column w-75 mx-5 px-3 pt-1 pb-2 text-light">
+          <div
+            className={`d-flex flex-column w-75 mx-auto px-3 pt-1 pb-2 text-light 
+              ${isMobile ? "h4" : "h6"}`}
+          >
             <div>Még nem regisztráltál?</div>
             <div>
               <Link to="/registerPage">Kattints ide!</Link>
             </div>
           </div>
-          <div className="d-flex flex-row-reverse">
+          <div
+            className={`d-flex mx-auto mt-3 h1
+              ${isMobile ? "w-100" : "w-75"}`}
+          >
             <input
               type="button"
               value="Bejelentkezés"
-              className="w-50 pt-3 pb-3 bg-primary h6 text-light"
+              className={`bg-primary text-light mx-auto
+                ${isMobile ? "pt-3 pb-3 h1 w-50" : "pt-2 pb-2 px-4 h3 w-60"}`}
               onClick={() => {
                 loginUser();
               }}

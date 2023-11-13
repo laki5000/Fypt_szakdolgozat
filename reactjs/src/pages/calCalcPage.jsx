@@ -1,14 +1,10 @@
-import React from "react";
-import LineWithTitle from "../components/lineWithTitle";
+import React, { useEffect } from "react";
 
 const CalCalcPage = (props) => {
-  return (
-    <div>
-      <div>
-        <LineWithTitle title="Kalória Kalkulátor" />
-      </div>
-      <div>CalCalc Page</div>
-    </div>
-  );
+  useEffect(() => {
+    props.onInit();
+  }, []);
+
+  return <div>CalCalc Page</div>;
 };
 export default CalCalcPage;

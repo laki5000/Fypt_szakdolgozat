@@ -1,16 +1,15 @@
-import React from "react";
-import LineWithTitle from "../components/lineWithTitle";
+import React, { useEffect } from "react";
+
 import Trainers from "../components/trainers";
 
 const TrainersPage = (props) => {
+  useEffect(() => {
+    props.onInit();
+  }, []);
+
   return (
     <div>
-      <div>
-        <LineWithTitle title="Edzőink" />
-      </div>
-      <div>
-        <Trainers />
-      </div>
+      <Trainers />
     </div>
   );
 };

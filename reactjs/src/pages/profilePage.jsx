@@ -1,16 +1,14 @@
-import React from "react";
-import LineWithTitle from "../components/lineWithTitle";
+import React, { useEffect } from "react";
 import ProfileForm from "../components/profileForm";
 
 const ProfilePage = (props) => {
+  useEffect(() => {
+    props.onInit();
+  }, []);
+
   return (
     <div>
-      <div className="slide2">
-        <LineWithTitle title="Profil" />
-      </div>
-      <div className="slide1">
-        <ProfileForm />
-      </div>
+      <ProfileForm />
     </div>
   );
 };

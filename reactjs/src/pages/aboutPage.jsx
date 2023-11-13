@@ -1,14 +1,10 @@
-import React from "react";
-import LineWithTitle from "../components/lineWithTitle";
+import React, { useEffect } from "react";
 
 const AboutPage = (props) => {
-  return (
-    <div>
-      <div>
-        <LineWithTitle title="Rólunk" />
-      </div>
-      <div>About Page</div>
-    </div>
-  );
+  useEffect(() => {
+    props.onInit();
+  }, []);
+
+  return <div>About Page</div>;
 };
 export default AboutPage;

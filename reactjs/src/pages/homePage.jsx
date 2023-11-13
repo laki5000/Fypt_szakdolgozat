@@ -1,13 +1,14 @@
-import React from "react";
-import LineWithTitle from "../components/lineWithTitle";
+import React, { useEffect } from "react";
+import HomeForm from "../components/homeForm";
 
 const HomePage = (props) => {
+  useEffect(() => {
+    props.onInit();
+  }, []);
+
   return (
     <div>
-      <div>
-        <LineWithTitle title="Kezdőlap" />
-      </div>
-      <div>Home</div>
+      <HomeForm />
     </div>
   );
 };

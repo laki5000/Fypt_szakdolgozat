@@ -4,6 +4,7 @@ import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import UserService from "../services/userService";
+import TrainerService from "../services/trainerService";
 
 const ProfileForm = (props) => {
   const [actualState, setNewState] = useState({
@@ -14,6 +15,17 @@ const ProfileForm = (props) => {
     iranyitoszam_varos_input_visibility: false,
     email_input_visibility: false,
     jelszo_input_visibility: false,
+    magassag_input_visibility: false,
+    testsuly_input_visibility: false,
+    kiket_vallal_input_visibility: false,
+    specializacio_input_visibility: false,
+    vegzettseg_input_visibility: false,
+    hol_input_visibility: false,
+    online_input_visibility: false,
+    tapasztalat_input_visibility: false,
+    telefonszam_input_visibility: false,
+    bemutatkozas_input_visibility: false,
+    hiteles_input_visibility: false,
     vezetek_nev: "",
     kereszt_nev: "",
     nem: "",
@@ -23,7 +35,19 @@ const ProfileForm = (props) => {
     lakhely_varos: "",
     email: "",
     jelszo: "",
+    magassag: "",
+    testsuly: "",
+    kiket_vallal: "",
+    specializacio: "",
+    vegzettseg: "",
+    hol: "",
+    online: "",
+    tapasztalat: "",
+    telefonszam: "",
+    bemutatkozas: "",
+    hiteles: "",
     id: "",
+    trainer_id: "",
     vezetek_nev_tmp: "",
     kereszt_nev_tmp: "",
     nem_tmp: "",
@@ -33,6 +57,18 @@ const ProfileForm = (props) => {
     lakhely_varos_tmp: "",
     email_tmp: "",
     jelszo_tmp: "",
+    magassag_tmp: "",
+    testsuly_tmp: "",
+    kiket_vallal_tmp: "",
+    specializacio_tmp: "",
+    vegzettseg_tmp: "",
+    hol_tmp: "",
+    online_tmp: "",
+    tapasztalat_tmp: "",
+    telefonszam_tmp: "",
+    bemutatkozas_tmp: "",
+    hiteles_tmp: "",
+    edzo: false,
   });
 
   const changeField = (statetochange) => {
@@ -61,6 +97,36 @@ const ProfileForm = (props) => {
       case "jelszo":
         setNewState({ ...actualState, jelszo_input_visibility: true });
         break;
+      case "magassag":
+        setNewState({ ...actualState, magassag_input_visibility: true });
+        break;
+      case "testsuly":
+        setNewState({ ...actualState, testsuly_input_visibility: true });
+        break;
+      case "kiket_vallal":
+        setNewState({ ...actualState, kiket_vallal_input_visibility: true });
+        break;
+      case "specializacio":
+        setNewState({ ...actualState, specializacio_input_visibility: true });
+        break;
+      case "vegzettseg":
+        setNewState({ ...actualState, vegzettseg_input_visibility: true });
+        break;
+      case "hol":
+        setNewState({ ...actualState, hol_input_visibility: true });
+        break;
+      case "online":
+        setNewState({ ...actualState, online_input_visibility: true });
+        break;
+      case "tapasztalat":
+        setNewState({ ...actualState, tapasztalat_input_visibility: true });
+        break;
+      case "telefonszam":
+        setNewState({ ...actualState, telefonszam_input_visibility: true });
+        break;
+      case "bemutatkozas":
+        setNewState({ ...actualState, bemutatkozas_input_visibility: true });
+        break;
     }
   };
 
@@ -75,7 +141,23 @@ const ProfileForm = (props) => {
       lakhelyVaros: actualState.lakhely_varos,
       eMail: actualState.email,
       jelszo: actualState.jelszo,
+      magassag: actualState.magassag,
+      testsuly: actualState.testsuly,
       id: actualState.id,
+    };
+
+    let trainer = {
+      id: actualState.trainer_id,
+      kiketVallal: actualState.kiket_vallal,
+      specializacio: actualState.specializacio,
+      vegzettseg: actualState.vegzettseg,
+      hol: actualState.hol,
+      online: actualState.online,
+      tapasztalat: actualState.tapasztalat,
+      telefonszam: actualState.telefonszam,
+      bemutatkozas: actualState.bemutatkozas,
+      userId: actualState.id,
+      hiteles: actualState.hiteles,
     };
 
     switch (statetochange) {
@@ -139,8 +221,91 @@ const ProfileForm = (props) => {
         });
         user.jelszo = actualState.jelszo_tmp;
         break;
+      case "magassag":
+        setNewState({
+          ...actualState,
+          magassag_input_visibility: false,
+          magassag: actualState.magassag_tmp,
+        });
+        user.magassag = actualState.magassag_tmp;
+        break;
+      case "testsuly":
+        setNewState({
+          ...actualState,
+          testsuly_input_visibility: false,
+          testsuly: actualState.testsuly_tmp,
+        });
+        user.testsuly = actualState.testsuly_tmp;
+        break;
+      case "kiket_vallal":
+        setNewState({
+          ...actualState,
+          kiket_vallal_input_visibility: false,
+          kiket_vallal: actualState.kiket_vallal_tmp,
+        });
+        trainer.kiketVallal = actualState.kiket_vallal_tmp;
+        break;
+      case "specializacio":
+        setNewState({
+          ...actualState,
+          specializacio_input_visibility: false,
+          specializacio: actualState.specializacio_tmp,
+        });
+        trainer.specializacio = actualState.specializacio_tmp;
+        break;
+      case "vegzettseg":
+        setNewState({
+          ...actualState,
+          vegzettseg_input_visibility: false,
+          vegzettseg: actualState.vegzettseg_tmp,
+        });
+        trainer.vegzettseg = actualState.vegzettseg_tmp;
+        break;
+      case "hol":
+        setNewState({
+          ...actualState,
+          hol_input_visibility: false,
+          hol: actualState.hol_tmp,
+        });
+        trainer.hol = actualState.hol_tmp;
+        break;
+      case "online":
+        setNewState({
+          ...actualState,
+          online_input_visibility: false,
+          online: actualState.online_tmp,
+        });
+        trainer.online = actualState.online_tmp;
+        break;
+      case "tapasztalat":
+        setNewState({
+          ...actualState,
+          tapasztalat_input_visibility: false,
+          tapasztalat: actualState.tapasztalat_tmp,
+        });
+        trainer.tapasztalat = actualState.tapasztalat_tmp;
+        break;
+      case "telefonszam":
+        setNewState({
+          ...actualState,
+          telefonszam_input_visibility: false,
+          telefonszam: actualState.telefonszam_tmp,
+        });
+        trainer.telefonszam = actualState.telefonszam_tmp;
+        break;
+      case "bemutatkozas":
+        setNewState({
+          ...actualState,
+          bemutatkozas_input_visibility: false,
+          bemutatkozas: actualState.bemutatkozas_tmp,
+        });
+        trainer.bemutatkozas = actualState.bemutatkozas_tmp;
+        break;
     }
     UserService.saveUser(user);
+    if (trainer.id) {
+      TrainerService.saveTrainer(trainer);
+    }
   };
 
   const clearChanges = (statetochange) => {
@@ -196,6 +361,76 @@ const ProfileForm = (props) => {
           jelszo_tmp: actualState.jelszo,
         });
         break;
+      case "magassag":
+        setNewState({
+          ...actualState,
+          magassag_input_visibility: false,
+          magassag_tmp: actualState.magassag,
+        });
+        break;
+      case "testsuly":
+        setNewState({
+          ...actualState,
+          testsuly_input_visibility: false,
+          testsuly_tmp: actualState.testsuly,
+        });
+        break;
+      case "kiket_vallal":
+        setNewState({
+          ...actualState,
+          kiket_vallal_input_visibility: false,
+          kiket_vallal_tmp: actualState.kiket_vallal,
+        });
+        break;
+      case "specializacio":
+        setNewState({
+          ...actualState,
+          specializacio_input_visibility: false,
+          specializacio_tmp: actualState.specializacio,
+        });
+        break;
+      case "vegzettseg":
+        setNewState({
+          ...actualState,
+          vegzettseg_input_visibility: false,
+          vegzettseg_tmp: actualState.vegzettseg,
+        });
+        break;
+      case "hol":
+        setNewState({
+          ...actualState,
+          hol_input_visibility: false,
+          hol_tmp: actualState.hol,
+        });
+        break;
+      case "online":
+        setNewState({
+          ...actualState,
+          online_input_visibility: false,
+          online_tmp: actualState.online,
+        });
+        break;
+      case "tapasztalat":
+        setNewState({
+          ...actualState,
+          tapasztalat_input_visibility: false,
+          tapasztalat_tmp: actualState.tapasztalat,
+        });
+        break;
+      case "telefonszam":
+        setNewState({
+          ...actualState,
+          telefonszam_input_visibility: false,
+          telefonszam_tmp: actualState.telefonszam,
+        });
+        break;
+      case "bemutatkozas":
+        setNewState({
+          ...actualState,
+          bemutatkozas_input_visibility: false,
+          bemutatkozas_tmp: actualState.bemutatkozas,
+        });
+        break;
     }
   };
 
@@ -239,6 +474,52 @@ const ProfileForm = (props) => {
     setNewState({ ...actualState, jelszo_tmp: event.target.value });
   };
 
+  const changeMagassagHandler = (event) => {
+    setNewState({ ...actualState, magassag_tmp: event.target.value });
+  };
+
+  const changeTestsulyHandler = (event) => {
+    setNewState({ ...actualState, testsuly_tmp: event.target.value });
+  };
+
+  const changeKiketVallalHandler = (event) => {
+    if (event.target.value === "ferfi") {
+      setNewState({ ...actualState, kiket_vallal_tmp: "Férfi" });
+    } else if (event.target.value === "no") {
+      setNewState({ ...actualState, kiket_vallal_tmp: "Nő" });
+    } else if (event.target.value === "mindenki") {
+      setNewState({ ...actualState, kiket_vallal_tmp: "Mindenki" });
+    }
+  };
+
+  const changeSpecializacioHandler = (event) => {
+    setNewState({ ...actualState, specializacio_tmp: event.target.value });
+  };
+
+  const changeVegzettsegHandler = (event) => {
+    setNewState({ ...actualState, vegzettseg_tmp: event.target.value });
+  };
+
+  const changeHolHandler = (event) => {
+    setNewState({ ...actualState, hol_tmp: event.target.value });
+  };
+
+  const changeOnlineHandler = (event) => {
+    setNewState({ ...actualState, online_tmp: event.target.value });
+  };
+
+  const changeTapasztalatHandler = (event) => {
+    setNewState({ ...actualState, tapasztalat_tmp: event.target.value });
+  };
+
+  const changeTelefonszamHandler = (event) => {
+    setNewState({ ...actualState, telefonszam_tmp: event.target.value });
+  };
+
+  const changeBemutatkozasHandler = (event) => {
+    setNewState({ ...actualState, bemutatkozas_tmp: event.target.value });
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     const id = localStorage.getItem("id");
@@ -265,8 +546,38 @@ const ProfileForm = (props) => {
             email_tmp: res.data.eMail,
             jelszo: res.data.jelszo,
             jelszo_tmp: res.data.jelszo,
+            magassag: res.data.magassag,
+            magassag_tmp: res.data.magassag,
+            testsuly: res.data.testsuly,
+            testsuly_tmp: res.data.testsuly,
             id: id,
           }));
+          TrainerService.getTrainerByUserId(id).then((resp) => {
+            if (resp.data) {
+              setNewState((prevState) => ({
+                ...prevState,
+                edzo: true,
+                kiket_vallal: resp.data.kiketVallal,
+                specializacio: resp.data.specializacio,
+                vegzettseg: resp.data.vegzettseg,
+                hol: resp.data.hol,
+                online: resp.data.online,
+                tapasztalat: resp.data.tapasztalat,
+                telefonszam: resp.data.telefonszam,
+                bemutatkozas: resp.data.bemutatkozas,
+                hiteles: resp.data.hiteles,
+                trainer_id: resp.data.id,
+                kiket_vallal_tmp: resp.data.kiketVallal,
+                specializacio_tmp: resp.data.specializacio,
+                vegzettseg_tmp: resp.data.vegzettseg,
+                hol_tmp: resp.data.hol,
+                online_tmp: resp.data.online,
+                tapasztalat_tmp: resp.data.tapasztalat,
+                telefonszam_tmp: resp.data.telefonszam,
+                bemutatkozas_tmp: resp.data.bemutatkozas,
+              }));
+            }
+          });
         });
       }
     }
@@ -278,7 +589,8 @@ const ProfileForm = (props) => {
         <div className="d-flex w-100 pt-4">
           <div className="d-flex flex-column w-50">
             <div className="text-light h2">
-              {actualState.vezetek_nev} {actualState.kereszt_nev}
+              {actualState.vezetek_nev} {actualState.kereszt_nev}{" "}
+              {UserService.getAge(actualState.szul_ido)}
             </div>
             <div className="w-50">
               <img
@@ -291,7 +603,7 @@ const ProfileForm = (props) => {
           <div className="w-50 ps-5 text-light">
             <div className="d-flex justify-content-center h2">Adatok</div>
             <div className="d-flex">
-              <div className="h5 me-2">Vezetéknév: </div>
+              <div className="h6 me-2">Vezetéknév: </div>
               {actualState.vezetek_nev_input_visibility ? (
                 <div className="d-flex">
                   <div className="w-50">
@@ -302,7 +614,7 @@ const ProfileForm = (props) => {
                       onChange={changeVezetekNevHandler}
                     />
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-success">
                     <FontAwesomeIcon
                       icon={faCheck}
                       onClick={() => {
@@ -310,7 +622,7 @@ const ProfileForm = (props) => {
                       }}
                     />
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-danger">
                     <FontAwesomeIcon
                       icon={faX}
                       onClick={() => {
@@ -320,7 +632,7 @@ const ProfileForm = (props) => {
                   </div>
                 </div>
               ) : (
-                <div className="d-flex">
+                <div className="d-flex h6">
                   <div>{actualState.vezetek_nev}</div>
                   <div className="ms-1 crsrp">
                     <FontAwesomeIcon
@@ -334,7 +646,7 @@ const ProfileForm = (props) => {
               )}
             </div>
             <div className="d-flex">
-              <div className="h5 me-2">Keresztnév: </div>
+              <div className="h6 me-2">Keresztnév: </div>
               {actualState.kereszt_nev_input_visibility ? (
                 <div className="d-flex">
                   <div className="w-50">
@@ -345,7 +657,7 @@ const ProfileForm = (props) => {
                       onChange={changeKeresztNevHandler}
                     />
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-success">
                     <FontAwesomeIcon
                       icon={faCheck}
                       onClick={() => {
@@ -353,7 +665,7 @@ const ProfileForm = (props) => {
                       }}
                     />
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-danger">
                     <FontAwesomeIcon
                       icon={faX}
                       onClick={() => {
@@ -377,7 +689,7 @@ const ProfileForm = (props) => {
               )}
             </div>
             <div className="d-flex">
-              <div className="h5 me-2">Nem: </div>
+              <div className="h me-2">Nem: </div>
               {actualState.nem_input_visibility ? (
                 <div className="d-flex">
                   <div className="w-75">
@@ -394,7 +706,7 @@ const ProfileForm = (props) => {
                       <option value="no">Nő</option>
                     </select>
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-success">
                     <FontAwesomeIcon
                       icon={faCheck}
                       onClick={() => {
@@ -402,7 +714,7 @@ const ProfileForm = (props) => {
                       }}
                     />
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-danger">
                     <FontAwesomeIcon
                       icon={faX}
                       onClick={() => {
@@ -412,7 +724,7 @@ const ProfileForm = (props) => {
                   </div>
                 </div>
               ) : (
-                <div className="d-flex">
+                <div className="d-flex h6">
                   <div>{actualState.nem}</div>
                   <div className="ms-1 crsrp">
                     <FontAwesomeIcon
@@ -426,7 +738,7 @@ const ProfileForm = (props) => {
               )}
             </div>
             <div className="d-flex">
-              <div className="h5 me-2">Születési hely, idő: </div>
+              <div className="h6 me-2">Születési hely, idő: </div>
               {actualState.szul_hely_ido_input_visibility ? (
                 <div className="d-flex">
                   <div className="d-flex flex-column w-50">
@@ -444,7 +756,7 @@ const ProfileForm = (props) => {
                       onChange={changeSzulIdoHandler}
                     />
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-success">
                     <FontAwesomeIcon
                       icon={faCheck}
                       onClick={() => {
@@ -452,7 +764,7 @@ const ProfileForm = (props) => {
                       }}
                     />
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-danger">
                     <FontAwesomeIcon
                       icon={faX}
                       onClick={() => {
@@ -478,7 +790,7 @@ const ProfileForm = (props) => {
               )}
             </div>
             <div className="d-flex">
-              <div className="h5 me-2">Irányítószám, város: </div>
+              <div className="h6 me-2">Irányítószám, város: </div>
               {actualState.iranyitoszam_varos_input_visibility ? (
                 <div className="d-flex">
                   <div className="d-flex flex-column w-50">
@@ -496,7 +808,7 @@ const ProfileForm = (props) => {
                       onChange={changeVarosHandler}
                     />
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-success">
                     <FontAwesomeIcon
                       icon={faCheck}
                       onClick={() => {
@@ -504,7 +816,7 @@ const ProfileForm = (props) => {
                       }}
                     />
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-danger">
                     <FontAwesomeIcon
                       icon={faX}
                       onClick={() => {
@@ -532,7 +844,7 @@ const ProfileForm = (props) => {
               )}
             </div>
             <div className="d-flex">
-              <div className="h5 me-2">E-mail: </div>
+              <div className="h6 me-2">E-mail: </div>
               {actualState.email_input_visibility ? (
                 <div className="d-flex">
                   <div className="w-50">
@@ -543,7 +855,7 @@ const ProfileForm = (props) => {
                       onChange={changeEmailHandler}
                     />
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-success">
                     <FontAwesomeIcon
                       icon={faCheck}
                       onClick={() => {
@@ -551,7 +863,7 @@ const ProfileForm = (props) => {
                       }}
                     />
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-danger">
                     <FontAwesomeIcon
                       icon={faX}
                       onClick={() => {
@@ -561,7 +873,7 @@ const ProfileForm = (props) => {
                   </div>
                 </div>
               ) : (
-                <div className="d-flex">
+                <div className="d-flex h6">
                   <div>{actualState.email}</div>
                   <div className="ms-1 crsrp">
                     <FontAwesomeIcon
@@ -575,7 +887,7 @@ const ProfileForm = (props) => {
               )}
             </div>
             <div className="d-flex">
-              <div className="h5 me-2">Jelszó: </div>
+              <div className="h6 me-2">Jelszó: </div>
               {actualState.jelszo_input_visibility ? (
                 <div className="d-flex">
                   <div className="w-50">
@@ -586,7 +898,7 @@ const ProfileForm = (props) => {
                       onChange={changeJelszoHandler}
                     />
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-success">
                     <FontAwesomeIcon
                       icon={faCheck}
                       onClick={() => {
@@ -594,7 +906,7 @@ const ProfileForm = (props) => {
                       }}
                     />
                   </div>
-                  <div className="ms-1 crsrp">
+                  <div className="ms-1 crsrp text-danger">
                     <FontAwesomeIcon
                       icon={faX}
                       onClick={() => {
@@ -604,7 +916,7 @@ const ProfileForm = (props) => {
                   </div>
                 </div>
               ) : (
-                <div className="d-flex">
+                <div className="d-flex h6">
                   <div>{actualState.jelszo}</div>
                   <div className="ms-1 crsrp">
                     <FontAwesomeIcon
@@ -617,6 +929,450 @@ const ProfileForm = (props) => {
                 </div>
               )}
             </div>
+            <div className="d-flex">
+              <div className="h6 me-2">Magasság: </div>
+              {actualState.magassag_input_visibility ? (
+                <div className="d-flex">
+                  <div className="w-50">
+                    <input
+                      type="number"
+                      className="w-100"
+                      name="magassag"
+                      value={actualState.magassag_tmp}
+                      onChange={changeMagassagHandler}
+                    />
+                  </div>
+                  <div className="ms-1 crsrp text-success">
+                    <FontAwesomeIcon
+                      icon={faCheck}
+                      onClick={() => {
+                        saveField("magassag");
+                      }}
+                    />
+                  </div>
+                  <div className="ms-1 crsrp text-danger">
+                    <FontAwesomeIcon
+                      icon={faX}
+                      onClick={() => {
+                        clearChanges("magassag");
+                      }}
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div className="d-flex h6">
+                  <div>{actualState.magassag + " cm"}</div>
+                  <div className="ms-1 crsrp">
+                    <FontAwesomeIcon
+                      icon={faPencil}
+                      onClick={() => {
+                        changeField("magassag");
+                      }}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="d-flex">
+              <div className="h6 me-2">Testsúly: </div>
+              {actualState.testsuly_input_visibility ? (
+                <div className="d-flex">
+                  <div className="w-50">
+                    <input
+                      type="number"
+                      className="w-100"
+                      name="testsuly"
+                      value={actualState.testsuly_tmp}
+                      onChange={changeTestsulyHandler}
+                    />
+                  </div>
+                  <div className="ms-1 crsrp text-success">
+                    <FontAwesomeIcon
+                      icon={faCheck}
+                      onClick={() => {
+                        saveField("testsuly");
+                      }}
+                    />
+                  </div>
+                  <div className="ms-1 crsrp text-danger">
+                    <FontAwesomeIcon
+                      icon={faX}
+                      onClick={() => {
+                        clearChanges("testsuly");
+                      }}
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div className="d-flex h6">
+                  <div>{actualState.testsuly + " kg"}</div>
+                  <div className="ms-1 crsrp">
+                    <FontAwesomeIcon
+                      icon={faPencil}
+                      onClick={() => {
+                        changeField("testsuly");
+                      }}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+            {actualState.edzo && (
+              <div>
+                <div className="d-flex">
+                  <div className="h6 me-2">Kiket vállal: </div>
+                  {actualState.kiket_vallal_input_visibility ? (
+                    <div className="d-flex">
+                      <div className="w-50">
+                        <select
+                          className="w-100"
+                          name="kiket_vallal"
+                          defaultValue="none"
+                          onChange={changeKiketVallalHandler}
+                        >
+                          <option value="none" disabled hidden>
+                            Válassz
+                          </option>
+                          <option value="ferfi">Férfi</option>
+                          <option value="no">Nő</option>
+                          <option value="mindenki">Mindenki</option>
+                        </select>
+                      </div>
+                      <div className="ms-1 crsrp text-success">
+                        <FontAwesomeIcon
+                          icon={faCheck}
+                          onClick={() => {
+                            saveField("kiket_vallal");
+                          }}
+                        />
+                      </div>
+                      <div className="ms-1 crsrp text-danger">
+                        <FontAwesomeIcon
+                          icon={faX}
+                          onClick={() => {
+                            clearChanges("kiket_vallal");
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="d-flex h6">
+                      <div>{actualState.kiket_vallal}</div>
+                      <div className="ms-1 crsrp">
+                        <FontAwesomeIcon
+                          icon={faPencil}
+                          onClick={() => {
+                            changeField("kiket_vallal");
+                          }}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className="d-flex">
+                  <div className="h6 me-2">Specializáció: </div>
+                  {actualState.specializacio_input_visibility ? (
+                    <div className="d-flex">
+                      <div className="w-50">
+                        <input
+                          className="w-100"
+                          name="specializacio"
+                          value={actualState.specializacio_tmp}
+                          onChange={changeSpecializacioHandler}
+                        />
+                      </div>
+                      <div className="ms-1 crsrp text-success">
+                        <FontAwesomeIcon
+                          icon={faCheck}
+                          onClick={() => {
+                            saveField("specializacio");
+                          }}
+                        />
+                      </div>
+                      <div className="ms-1 crsrp text-danger">
+                        <FontAwesomeIcon
+                          icon={faX}
+                          onClick={() => {
+                            clearChanges("specializacio");
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="d-flex h6">
+                      <div>{actualState.specializacio}</div>
+                      <div className="ms-1 crsrp">
+                        <FontAwesomeIcon
+                          icon={faPencil}
+                          onClick={() => {
+                            changeField("specializacio");
+                          }}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className="d-flex">
+                  <div className="h6 me-2">Végzettség: </div>
+                  {actualState.vegzettseg_input_visibility ? (
+                    <div className="d-flex">
+                      <div className="w-50">
+                        <input
+                          className="w-100"
+                          name="vegzettseg"
+                          value={actualState.vegzettseg_tmp}
+                          onChange={changeVegzettsegHandler}
+                        />
+                      </div>
+                      <div className="ms-1 crsrp text-success">
+                        <FontAwesomeIcon
+                          icon={faCheck}
+                          onClick={() => {
+                            saveField("vegzettseg");
+                          }}
+                        />
+                      </div>
+                      <div className="ms-1 crsrp text-danger">
+                        <FontAwesomeIcon
+                          icon={faX}
+                          onClick={() => {
+                            clearChanges("vegzettseg");
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="d-flex h6">
+                      <div>{actualState.vegzettseg}</div>
+                      <div className="ms-1 crsrp">
+                        <FontAwesomeIcon
+                          icon={faPencil}
+                          onClick={() => {
+                            changeField("vegzettseg");
+                          }}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className="d-flex">
+                  <div className="h6 me-2">Hol: </div>
+                  {actualState.hol_input_visibility ? (
+                    <div className="d-flex">
+                      <div className="w-50">
+                        <input
+                          className="w-100"
+                          name="hol"
+                          value={actualState.hol_tmp}
+                          onChange={changeHolHandler}
+                        />
+                      </div>
+                      <div className="ms-1 crsrp text-success">
+                        <FontAwesomeIcon
+                          icon={faCheck}
+                          onClick={() => {
+                            saveField("hol");
+                          }}
+                        />
+                      </div>
+                      <div className="ms-1 crsrp text-danger">
+                        <FontAwesomeIcon
+                          icon={faX}
+                          onClick={() => {
+                            clearChanges("hol");
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="d-flex h6">
+                      <div>{actualState.hol}</div>
+                      <div className="ms-1 crsrp">
+                        <FontAwesomeIcon
+                          icon={faPencil}
+                          onClick={() => {
+                            changeField("hol");
+                          }}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className="d-flex">
+                  <div className="h6 me-2">Online tréninget vállal: </div>
+                  {actualState.online_input_visibility ? (
+                    <div className="d-flex">
+                      <div className="w-50">
+                        <input
+                          className="w-100"
+                          name="online"
+                          value={actualState.online_tmp}
+                          onChange={changeOnlineHandler}
+                        />
+                      </div>
+                      <div className="ms-1 crsrp text-success">
+                        <FontAwesomeIcon
+                          icon={faCheck}
+                          onClick={() => {
+                            saveField("online");
+                          }}
+                        />
+                      </div>
+                      <div className="ms-1 crsrp text-danger">
+                        <FontAwesomeIcon
+                          icon={faX}
+                          onClick={() => {
+                            clearChanges("online");
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="d-flex h6">
+                      <div>{actualState.online}</div>
+                      <div className="ms-1 crsrp">
+                        <FontAwesomeIcon
+                          icon={faPencil}
+                          onClick={() => {
+                            changeField("online");
+                          }}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className="d-flex">
+                  <div className="h6 me-2">Tapasztalat: </div>
+                  {actualState.tapasztalat_input_visibility ? (
+                    <div className="d-flex">
+                      <div className="w-50">
+                        <input
+                          className="w-100"
+                          name="tapasztalat"
+                          value={actualState.tapasztalat_tmp}
+                          onChange={changeTapasztalatHandler}
+                        />
+                      </div>
+                      <div className="ms-1 crsrp text-success">
+                        <FontAwesomeIcon
+                          icon={faCheck}
+                          onClick={() => {
+                            saveField("tapasztalat");
+                          }}
+                        />
+                      </div>
+                      <div className="ms-1 crsrp text-danger">
+                        <FontAwesomeIcon
+                          icon={faX}
+                          onClick={() => {
+                            clearChanges("tapasztalat");
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="d-flex h6">
+                      <div>{actualState.tapasztalat}</div>
+                      <div className="ms-1 crsrp">
+                        <FontAwesomeIcon
+                          icon={faPencil}
+                          onClick={() => {
+                            changeField("tapasztalat");
+                          }}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className="d-flex">
+                  <div className="h6 me-2">Telefonszám: </div>
+                  {actualState.telefonszam_input_visibility ? (
+                    <div className="d-flex">
+                      <div className="w-50">
+                        <input
+                          type="number"
+                          className="w-100"
+                          name="telefonszam"
+                          value={actualState.telefonszam_tmp}
+                          onChange={changeTelefonszamHandler}
+                        />
+                      </div>
+                      <div className="ms-1 crsrp text-success">
+                        <FontAwesomeIcon
+                          icon={faCheck}
+                          onClick={() => {
+                            saveField("telefonszam");
+                          }}
+                        />
+                      </div>
+                      <div className="ms-1 crsrp text-danger">
+                        <FontAwesomeIcon
+                          icon={faX}
+                          onClick={() => {
+                            clearChanges("telefonszam");
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="d-flex h6">
+                      <div>{actualState.telefonszam}</div>
+                      <div className="ms-1 crsrp">
+                        <FontAwesomeIcon
+                          icon={faPencil}
+                          onClick={() => {
+                            changeField("telefonszam");
+                          }}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className="d-flex">
+                  <div className="h6 me-2">Bemutatkozás: </div>
+                  {actualState.bemutatkozas_input_visibility ? (
+                    <div className="d-flex">
+                      <div className="w-50">
+                        <textarea
+                          className="w-100"
+                          name="bemutatkozas"
+                          value={actualState.bemutatkozas_tmp}
+                          onChange={changeBemutatkozasHandler}
+                        />
+                      </div>
+                      <div className="ms-1 crsrp text-success">
+                        <FontAwesomeIcon
+                          icon={faCheck}
+                          onClick={() => {
+                            saveField("bemutatkozas");
+                          }}
+                        />
+                      </div>
+                      <div className="ms-1 crsrp text-danger">
+                        <FontAwesomeIcon
+                          icon={faX}
+                          onClick={() => {
+                            clearChanges("bemutatkozas");
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="d-flex h6">
+                      <div>{actualState.bemutatkozas}</div>
+                      <div className="ms-1 crsrp">
+                        <FontAwesomeIcon
+                          icon={faPencil}
+                          onClick={() => {
+                            changeField("bemutatkozas");
+                          }}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

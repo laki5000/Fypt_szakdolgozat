@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link, withRouter, useHistory } from "react-router-dom";
 import UserService from "../services/userService";
+import DetectMobile from "../services/detectMobile";
 
 const RegisterForm = (props) => {
   const history = useHistory();
+  const isMobile = DetectMobile();
 
   const [actualState, setNewState] = useState({
     vezetek_nev: "",
@@ -125,11 +127,21 @@ const RegisterForm = (props) => {
 
   return (
     <form>
-      <div className="d-flex flex-column bg-dark">
-        <div className="d-flex m-auto w-50">
+      <div
+        className={`d-flex flex-column bg-dark 
+          ${isMobile ? "pt-3 pb-5 h1 w-100 px-1" : "pt-2 pb-2 h6"}`}
+      >
+        <div
+          className={`d-flex m-auto w-50
+            ${
+              isMobile
+                ? "flex-column h1 w-100 px-5 justify-content-center"
+                : "pt-2 pb-2 h6"
+            }`}
+        >
           <div className="w-100 pt-4">
             <div className="pt-2 h4 text-light px-3 w-75">Vezetéknév*</div>
-            <div className="w-75">
+            <div className={`${isMobile ? "w-100 pb-5" : "w-75"}`}>
               <input
                 name="vezetek_nev"
                 className="pt-2 pb-2 rounded-4 px-3 w-100"
@@ -138,7 +150,7 @@ const RegisterForm = (props) => {
               />
             </div>
             <div className="pt-2 h4 text-light px-3 w-75">Keresztnév*</div>
-            <div className="w-75">
+            <div className={`${isMobile ? "w-100 pb-5" : "w-75"}`}>
               <input
                 name="kereszt_nev"
                 className="pt-2 pb-2 rounded-4 px-3 w-100"
@@ -147,7 +159,7 @@ const RegisterForm = (props) => {
               />
             </div>
             <div className="pt-2 h4 text-light px-3 w-75">Nem</div>
-            <div className="w-75">
+            <div className={`${isMobile ? "w-100 pb-5" : "w-75"}`}>
               <select
                 className="pt-2 pb-2 rounded-4 px-3 w-100"
                 name="nem"
@@ -158,7 +170,7 @@ const RegisterForm = (props) => {
               </select>
             </div>
             <div className="pt-2 h4 text-light px-3 w-75">Születési idő</div>
-            <div className="w-75">
+            <div className={`${isMobile ? "w-100 pb-5" : "w-75"}`}>
               <input
                 type="date"
                 name="szul_ido"
@@ -168,7 +180,7 @@ const RegisterForm = (props) => {
               />
             </div>
             <div className="pt-2 h4 text-light px-3 w-75">Születési hely</div>
-            <div className="w-75">
+            <div className={`${isMobile ? "w-100 pb-5" : "w-75"}`}>
               <input
                 name="szul_hely"
                 className="pt-2 pb-2 rounded-4 px-3 w-100"
@@ -177,9 +189,13 @@ const RegisterForm = (props) => {
               />
             </div>
           </div>
-          <div className="d-flex flex-column w-100 pt-4 align-items-end">
+          <div
+            className={`d-flex flex-column w-100 pt-4 ${
+              isMobile ? "" : "align-items-end"
+            }`}
+          >
             <div className="pt-2 h4 text-light px-3 w-75">Irányítószám</div>
-            <div className="w-75">
+            <div className={`${isMobile ? "w-100 pb-5" : "w-75"}`}>
               <input
                 type="number"
                 name="iranyitoszam"
@@ -189,7 +205,7 @@ const RegisterForm = (props) => {
               />
             </div>
             <div className="pt-2 h4 text-light px-3 w-75">Város</div>
-            <div className="w-75">
+            <div className={`${isMobile ? "w-100 pb-5" : "w-75"}`}>
               <input
                 name="lakhely_varos"
                 className="pt-2 pb-2 rounded-4 px-3 w-100"
@@ -198,7 +214,7 @@ const RegisterForm = (props) => {
               />
             </div>
             <div className="pt-2 h4 text-light px-3 w-75">E-mail*</div>
-            <div className="w-75">
+            <div className={`${isMobile ? "w-100 pb-5" : "w-75"}`}>
               <input
                 name="email"
                 className="pt-2 pb-2 rounded-4 px-3 w-100"
@@ -209,7 +225,7 @@ const RegisterForm = (props) => {
             <div className="pt-2 h4 text-light px-3 w-75">
               E-mail mégegyszer*
             </div>
-            <div className="w-75">
+            <div className={`${isMobile ? "w-100 pb-5" : "w-75"}`}>
               <input
                 name="email2"
                 className="pt-2 pb-2 rounded-4 px-3 w-100"
@@ -218,7 +234,7 @@ const RegisterForm = (props) => {
               />
             </div>
             <div className="pt-2 h4 text-light px-3 w-75">Jelszó*</div>
-            <div className="w-75">
+            <div className={`${isMobile ? "w-100 pb-5" : "w-75"}`}>
               <input
                 type="password"
                 name="jelszo"
@@ -230,7 +246,7 @@ const RegisterForm = (props) => {
             <div className="pt-2 h4 text-light px-3 w-75">
               Jelszó mégegyszer*
             </div>
-            <div className="w-75">
+            <div className={`${isMobile ? "w-100 pb-5" : "w-75"}`}>
               <input
                 type="password"
                 name="jelszo2"
@@ -241,18 +257,32 @@ const RegisterForm = (props) => {
             </div>
           </div>
         </div>
-        <div className="d-flex m-auto w-50 pt-5 pb-4">
-          <div className="d-flex flex-column w-50 text-light">
+        <div
+          className={`d-flex w-50 pb-4 
+          ${isMobile ? "flex-column w-100" : "flex-row pt-5 m-auto w-50"}`}
+        >
+          <div
+            className={`d-flex flex-column text-light 
+            ${isMobile ? "w-100 px-5" : "w-50"}`}
+          >
             <div>Már van fiókod?</div>
             <div>
               <Link to="/loginPage">Jelentkezz be!</Link>
             </div>
           </div>
-          <div className="d-flex flex-row-reverse m-auto w-50">
+          <div
+            className={`d-flex flex-row-reverse m-auto w-50 
+              ${isMobile ? "pt-4" : ""}`}
+          >
             <input
               type="button"
               value="Regisztráció"
-              className="w-50 pt-3 pb-3 bg-primary h6 text-light"
+              className={`bg-primary text-light
+                ${
+                  isMobile
+                    ? "w-100 pt-3 pb-3 h1 w-50"
+                    : "w-50 pt-2 pb-2 px-4 h5"
+                }`}
               onClick={() => {
                 saveUser();
               }}

@@ -1,32 +1,33 @@
-import axios from 'axios';
+import axios from "axios";
 
-const LOAD_USER_API_URL = 'http://localhost:8080/api/v1/users/load';
-const LOAD_BY_EMAIL_USER_API_URL = 'http://localhost:8080/api/v1/users/load/byemail';
-const LOGIN_USER_API_URL = 'http://localhost:8080/api/v1/users/login';
-const AUTH_USER_API_URL = 'http://localhost:8080/api/v1/users/auth';
-const SAVE_USER_API_URL = 'http://localhost:8080/api/v1/users/save';
+const LOAD_USER_API_URL = "http://localhost:8080/api/v1/users/load";
+const LOAD_BY_EMAIL_USER_API_URL =
+  "http://localhost:8080/api/v1/users/load/byemail";
+const LOGIN_USER_API_URL = "http://localhost:8080/api/v1/users/login";
+const AUTH_USER_API_URL = "http://localhost:8080/api/v1/users/auth";
+const SAVE_USER_API_URL = "http://localhost:8080/api/v1/users/save";
 
 const UserService = {
   getUserdata: (id) => {
     return axios.get(LOAD_USER_API_URL, {
       headers: {
-        'ID': id
-      }
-    })
+        ID: id,
+      },
+    });
   },
   getUserdataByEmail: (email) => {
     return axios.get(LOAD_BY_EMAIL_USER_API_URL, {
       headers: {
-        'Email': email
-      }
-    })
+        Email: email,
+      },
+    });
   },
-  authUser: (token) =>{
+  authUser: (token) => {
     return axios.get(AUTH_USER_API_URL, {
       headers: {
-        'Authorization': token
-      }
-    })
+        Authorization: token,
+      },
+    });
   },
   saveUser: (user) => {
     return axios.post(SAVE_USER_API_URL, user);
@@ -34,5 +35,15 @@ const UserService = {
   loginUser: (user) => {
     return axios.post(LOGIN_USER_API_URL, user);
   },
-} 
+  getAge: (dateString) => {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  },
+};
 export default UserService;
