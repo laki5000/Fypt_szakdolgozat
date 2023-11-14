@@ -19,7 +19,7 @@ import ProfilePage from "./pages/profilePage";
 import UserService from "./services/userService";
 import AdminService from "./services/adminService";
 import AdminPage from "./pages/adminPage";
-import TrainerApplications from "./components/trainerApplications";
+import TrainersAndUsers from "./components/trainersAndUsers";
 import LineWithTitle from "./components/lineWithTitle";
 
 const App = (props) => {
@@ -165,7 +165,7 @@ const App = (props) => {
             />
           </Route>
           <Route path="/trainerApplications">
-            <TrainerApplications
+            <TrainersAndUsers
               onInit={() => {
                 setNewState({ ...actualState, title: "Edző jelentkezések" });
               }}
