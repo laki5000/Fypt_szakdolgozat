@@ -58,7 +58,7 @@ public class TrainerController {
 	
 	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/trainers/load/applications")
-	public List<TrainerAndUserDto> loadtrainersAndUsers(@RequestHeader("Hiteles") String hiteles) {
+	public List<TrainerAndUserDto> loadTrainersAndUsers(@RequestHeader("Hiteles") String hiteles) {
 		boolean hitelesBool;
 		if(hiteles.equals("0")) {
 			hitelesBool = false;
@@ -67,6 +67,17 @@ public class TrainerController {
 			hitelesBool = true;
 		}
 		List<Trainer> trainers = trainerRepository.findByHiteles(hitelesBool);
+		List<TrainerAndUserDto> trainersAndUsers = new ArrayList<TrainerAndUserDto>();
+		for (Trainer t : trainers) {
+			trainersAndUsers.add(new TrainerAndUserDto(t, userRepository.findById(t.getUserId())));
+		}
+		return trainersAndUsers;
+	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@GetMapping("/trainers/load/alltrainersusers")
+	public List<TrainerAndUserDto> loadAllTrainersAndUsers() {
+		List<Trainer> trainers = trainerRepository.findAll();
 		List<TrainerAndUserDto> trainersAndUsers = new ArrayList<TrainerAndUserDto>();
 		for (Trainer t : trainers) {
 			trainersAndUsers.add(new TrainerAndUserDto(t, userRepository.findById(t.getUserId())));

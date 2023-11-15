@@ -169,6 +169,23 @@ const App = (props) => {
               onInit={() => {
                 setNewState({ ...actualState, title: "Edző jelentkezések" });
               }}
+              mode="applications"
+            />
+          </Route>
+          <Route path="/allTrainers">
+            <TrainersAndUsers
+              onInit={() => {
+                setNewState({ ...actualState, title: "Összes edző" });
+              }}
+              mode="trainers"
+            />
+          </Route>
+          <Route path="/allUsers">
+            <TrainersAndUsers
+              onInit={() => {
+                setNewState({ ...actualState, title: "Összes felhasználó" });
+              }}
+              mode="users"
             />
           </Route>
         </Switch>

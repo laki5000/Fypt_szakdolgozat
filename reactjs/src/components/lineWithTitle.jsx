@@ -40,6 +40,12 @@ const LineWithTitle = (props) => {
       case "trainerApplications":
         setNewState({ title: "Edző Jelentkezések" });
         break;
+      case "allTrainers":
+        setNewState({ title: "Összes edző" });
+        break;
+      case "allUsers":
+        setNewState({ title: "Összes felhasználó" });
+        break;
       default:
         setNewState({ title: "" });
         break;

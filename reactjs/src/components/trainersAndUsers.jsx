@@ -29,10 +29,32 @@ const TrainersAndUsers = (props) => {
     });
   };
 
-  const edzoJelentkezesekBetoltese = () => {
-    TrainerService.loadtrainersAndUsers("0").then((res) => {
-      setNewState({ trainersAndUsers: res.data });
+  const felhasznaloTorlese = (id) => {
+    TrainerService.deleteTrainer(id).then(() => {
+      UserService.deleteUser(id).then(() => {
+        edzoJelentkezesekBetoltese();
+      });
     });
+  };
+
+  const edzoJelentkezesekBetoltese = () => {
+    switch (props.mode) {
+      case "applications":
+        TrainerService.loadTrainersAndUsers("0").then((res) => {
+          setNewState({ trainersAndUsers: res.data });
+        });
+        break;
+      case "trainers":
+        TrainerService.loadAllTrainersAndUsers().then((res) => {
+          setNewState({ trainersAndUsers: res.data });
+        });
+        break;
+      case "users":
+        UserService.getAllUser().then((res) => {
+          setNewState({ trainersAndUsers: res.data });
+        });
+        break;
+    }
   };
 
   useEffect(() => {
@@ -75,27 +97,45 @@ const TrainersAndUsers = (props) => {
                   alt="profile_pic"
                 ></img>
               </div>
-              <div
-                className={`d-flex mt-4 m-auto 
+              {trainer.userId ? (
+                <div
+                  className={`d-flex mt-4 m-auto 
                   ${isMobile ? "h1 mb-5" : "h3"}`}
-              >
-                <div className="text-success crsrp">
-                  <FontAwesomeIcon
-                    icon={faCheck}
-                    onClick={() => {
-                      edzoHitelesitese(trainer.id);
-                    }}
-                  />
+                >
+                  {!trainer.hiteles && (
+                    <div className="text-success crsrp">
+                      <FontAwesomeIcon
+                        icon={faCheck}
+                        onClick={() => {
+                          edzoHitelesitese(trainer.id);
+                        }}
+                      />
+                    </div>
+                  )}
+                  <div className="text-danger crsrp ms-5">
+                    <FontAwesomeIcon
+                      icon={faX}
+                      onClick={() => {
+                        edzoTorlese(trainer.id);
+                      }}
+                    />
+                  </div>
                 </div>
-                <div className="text-danger crsrp ms-5">
-                  <FontAwesomeIcon
-                    icon={faX}
-                    onClick={() => {
-                      edzoTorlese(trainer.id);
-                    }}
-                  />
+              ) : (
+                <div
+                  className={`d-flex mt-4 m-auto 
+                ${isMobile ? "h1 mb-5" : "h3"}`}
+                >
+                  <div className="text-danger crsrp ms-5">
+                    <FontAwesomeIcon
+                      icon={faX}
+                      onClick={() => {
+                        felhasznaloTorlese(trainer.id);
+                      }}
+                    />
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
             <div
               className={`d-flex flex-column w-75
@@ -108,7 +148,7 @@ const TrainersAndUsers = (props) => {
                 Adatok
               </div>
               <div
-                className={`d-flex w-100
+                className={`d-flex w-100 justify-content-center
                   ${isMobile ? "flex-column" : "flex-row"}`}
               >
                 <div
@@ -129,21 +169,23 @@ const TrainersAndUsers = (props) => {
                   <p>Magasság: {trainer.magassag} cm</p>
                   <p>Testsúly: {trainer.testsuly} kg</p>
                 </div>
-                <div
-                  className={`d-flex flex-column
+                {trainer.userId && (
+                  <div
+                    className={`d-flex flex-column
                     ${isMobile ? "" : "ms-5"}`}
-                >
-                  <p>Kiket vállal: {trainer.kiketVallal}</p>
-                  <p>Specializáció: {trainer.specializacio}</p>
-                  <p>Végzettség: {trainer.vegzettseg}</p>
-                  <p>Hol: {trainer.hol}</p>
-                  <p>
-                    Online tréninget vállal: {trainer.online ? "Igen" : "Nem"}
-                  </p>
-                  <p>Tapasztalat: {trainer.tapasztalat}</p>
-                  <p>Telefonszám: {trainer.telefonszam}</p>
-                  <p>Bemutatkozás: {trainer.bemutatkozas}</p>
-                </div>
+                  >
+                    <p>Kiket vállal: {trainer.kiketVallal}</p>
+                    <p>Specializáció: {trainer.specializacio}</p>
+                    <p>Végzettség: {trainer.vegzettseg}</p>
+                    <p>Hol: {trainer.hol}</p>
+                    <p>
+                      Online tréninget vállal: {trainer.online ? "Igen" : "Nem"}
+                    </p>
+                    <p>Tapasztalat: {trainer.tapasztalat}</p>
+                    <p>Telefonszám: {trainer.telefonszam}</p>
+                    <p>Bemutatkozás: {trainer.bemutatkozas}</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
