@@ -1,8 +1,14 @@
 package net.javaguides.springboot.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -54,6 +60,17 @@ public class UserController {
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")
+	@GetMapping("/users/load/all")
+	public List<UserDto> getAllUser(){
+		List<User> users = userRepository.findAll();
+		List<UserDto> userdtos = new ArrayList<UserDto>();
+		for (User u : users) {
+			userdtos.add(new UserDto(u));
+		}
+		return userdtos;
+	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/users/load/byemail")
 	public UserDto getUserByEmail(@RequestHeader("Email") String email){
 		User user = userRepository.findByeMail(email);
@@ -72,4 +89,14 @@ public class UserController {
             return false;
         }
     }
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@DeleteMapping("/users/delete/{id}")
+	public void deleteUser(@PathVariable Long id) {
+		Optional<User> optionalUser = userRepository.findById(id);
+		if (optionalUser.isPresent()) {
+		       User user = optionalUser.get();
+		       userRepository.delete(user);
+	    }
+	}
 }

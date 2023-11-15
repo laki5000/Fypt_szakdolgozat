@@ -2,10 +2,13 @@ package net.javaguides.springboot.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -55,7 +58,7 @@ public class TrainerController {
 	
 	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/trainers/load/applications")
-	public List<TrainerAndUserDto> loadTrainerApplications(@RequestHeader("Hiteles") String hiteles) {
+	public List<TrainerAndUserDto> loadTrainersAndUsers(@RequestHeader("Hiteles") String hiteles) {
 		boolean hitelesBool;
 		if(hiteles.equals("0")) {
 			hitelesBool = false;
@@ -70,4 +73,25 @@ public class TrainerController {
 		}
 		return trainersAndUsers;
 	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@GetMapping("/trainers/load/alltrainersusers")
+	public List<TrainerAndUserDto> loadAllTrainersAndUsers() {
+		List<Trainer> trainers = trainerRepository.findAll();
+		List<TrainerAndUserDto> trainersAndUsers = new ArrayList<TrainerAndUserDto>();
+		for (Trainer t : trainers) {
+			trainersAndUsers.add(new TrainerAndUserDto(t, userRepository.findById(t.getUserId())));
+		}
+		return trainersAndUsers;
+	}
+	
+	 @CrossOrigin(origins = "http://localhost:3000")
+	 @DeleteMapping("/trainers/delete/{id}")
+	 public void deleteTrainer(@PathVariable Long id) {
+		 Optional<Trainer> optionalTrainer = trainerRepository.findById(id);
+		 if (optionalTrainer.isPresent()) {
+		        Trainer trainer = optionalTrainer.get();
+		        trainerRepository.delete(trainer);
+		    }
+	 }
 }

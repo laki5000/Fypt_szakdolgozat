@@ -15,14 +15,14 @@ const HomeForm = (props) => {
         }`}
       >
         <div className="h1 pb-4">Üdvözöllek az FyPT Webalkalmazásában!</div>
-        <div className={`pb-2 ${isMobile ? "h4" : "h6"}`}>
+        <div className={`pb-4 ${isMobile ? "h4" : "h6"}`}>
           Üdvözöllek a FyPT webalkalmazásán, ahol magánszemélyek és személyi
           edzők könnyen megtalálhatják egymást céljaik eléréséhez.
         </div>
         <div className={`pb-2 ${isMobile ? "h3" : "h4"}`}>
           Miért válassz minket?
         </div>
-        <div className={`pb-2 ${isMobile ? "h4" : "h6"}`}>
+        <div className={`pb-4 ${isMobile ? "h4" : "h6"}`}>
           <b>Egyedi profilok: </b>
           Hozd létre egyedi profilod, ahol bemutathatod tapasztaltaid edzőként.
           <b>Keresés és Találat: </b>

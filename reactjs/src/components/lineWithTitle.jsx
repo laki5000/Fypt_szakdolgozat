@@ -37,6 +37,18 @@ const LineWithTitle = (props) => {
       case "trainersPage":
         setNewState({ title: "Edzőink" });
         break;
+      case "trainerApplications":
+        setNewState({ title: "Edző Jelentkezések" });
+        break;
+      case "allTrainers":
+        setNewState({ title: "Összes edző" });
+        break;
+      case "allUsers":
+        setNewState({ title: "Összes felhasználó" });
+        break;
+      default:
+        setNewState({ title: "" });
+        break;
     }
   }, [props.title]);
 
