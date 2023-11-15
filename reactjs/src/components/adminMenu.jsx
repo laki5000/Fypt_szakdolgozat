@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter, useHistory } from "react-router-dom";
 import DetectMobile from "../services/detectMobile";
+import AdminService from "../services/adminService";
+import UserService from "../services/userService";
 
 const AdminMenu = (props) => {
   const history = useHistory();
@@ -17,6 +19,22 @@ const AdminMenu = (props) => {
   const HandleAllUsersButton = () => {
     history.push("/allUsers");
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const id = localStorage.getItem("id");
+    if (token && id) {
+      UserService.authUser(token).then((res) => {
+        if (res) {
+          AdminService.getAdmindata(id).then((res) => {
+            if (!res.data) {
+              history.push("/homePage");
+            }
+          });
+        }
+      });
+    }
+  }, []);
 
   return (
     <div

@@ -170,6 +170,7 @@ const App = (props) => {
                 setNewState({ ...actualState, title: "Edző jelentkezések" });
               }}
               mode="applications"
+              with="admin"
             />
           </Route>
           <Route path="/allTrainers">
@@ -178,6 +179,7 @@ const App = (props) => {
                 setNewState({ ...actualState, title: "Összes edző" });
               }}
               mode="trainers"
+              with="admin"
             />
           </Route>
           <Route path="/allUsers">
@@ -186,6 +188,7 @@ const App = (props) => {
                 setNewState({ ...actualState, title: "Összes felhasználó" });
               }}
               mode="users"
+              with="admin"
             />
           </Route>
         </Switch>

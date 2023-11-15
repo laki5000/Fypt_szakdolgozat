@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
+import { withRouter, useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import TrainerService from "../services/trainerService";
 import UserService from "../services/userService";
 import DetectMobile from "../services/detectMobile";
+import AdminService from "../services/adminService";
 
 const TrainersAndUsers = (props) => {
   const isMobile = DetectMobile();
+  const history = useHistory();
 
   const [actualState, setNewState] = useState({
     trainersAndUsers: [],
@@ -57,8 +60,33 @@ const TrainersAndUsers = (props) => {
     }
   };
 
+  const edzokBetoltese = () => {
+    TrainerService.loadTrainersAndUsers("1").then((res) => {
+      setNewState({ trainersAndUsers: res.data });
+    });
+  };
+
   useEffect(() => {
-    edzoJelentkezesekBetoltese();
+    if (props.with === "admin") {
+      const token = localStorage.getItem("token");
+      const id = localStorage.getItem("id");
+      if (token && id) {
+        UserService.authUser(token).then((res) => {
+          if (res) {
+            AdminService.getAdmindata(id).then((res) => {
+              if (!res.data) {
+                history.push("/homePage");
+              } else {
+                edzoJelentkezesekBetoltese();
+              }
+            });
+          }
+        });
+      }
+    } else {
+      edzokBetoltese();
+    }
+
     if (props.onInit) {
       props.onInit();
     }
@@ -97,43 +125,47 @@ const TrainersAndUsers = (props) => {
                   alt="profile_pic"
                 ></img>
               </div>
-              {trainer.userId ? (
+              {props.with === "admin" && (
                 <div
                   className={`d-flex mt-4 m-auto 
-                  ${isMobile ? "h1 mb-5" : "h3"}`}
+                    ${isMobile ? "h1 mb-5" : "h3"}`}
                 >
-                  {!trainer.hiteles && (
-                    <div className="text-success crsrp">
-                      <FontAwesomeIcon
-                        icon={faCheck}
-                        onClick={() => {
-                          edzoHitelesitese(trainer.id);
-                        }}
-                      />
+                  {trainer.userId ? (
+                    <>
+                      {!trainer.hiteles && (
+                        <div className="text-success crsrp">
+                          <FontAwesomeIcon
+                            icon={faCheck}
+                            onClick={() => {
+                              edzoHitelesitese(trainer.id);
+                            }}
+                          />
+                        </div>
+                      )}
+                      <div className="text-danger crsrp ms-5">
+                        <FontAwesomeIcon
+                          icon={faX}
+                          onClick={() => {
+                            edzoTorlese(trainer.id);
+                          }}
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <div
+                      className={`d-flex mt-4 m-auto 
+                        ${isMobile ? "h1 mb-5" : "h3"}`}
+                    >
+                      <div className="text-danger crsrp ms-5">
+                        <FontAwesomeIcon
+                          icon={faX}
+                          onClick={() => {
+                            felhasznaloTorlese(trainer.id);
+                          }}
+                        />
+                      </div>
                     </div>
                   )}
-                  <div className="text-danger crsrp ms-5">
-                    <FontAwesomeIcon
-                      icon={faX}
-                      onClick={() => {
-                        edzoTorlese(trainer.id);
-                      }}
-                    />
-                  </div>
-                </div>
-              ) : (
-                <div
-                  className={`d-flex mt-4 m-auto 
-                ${isMobile ? "h1 mb-5" : "h3"}`}
-                >
-                  <div className="text-danger crsrp ms-5">
-                    <FontAwesomeIcon
-                      icon={faX}
-                      onClick={() => {
-                        felhasznaloTorlese(trainer.id);
-                      }}
-                    />
-                  </div>
                 </div>
               )}
             </div>
@@ -194,4 +226,4 @@ const TrainersAndUsers = (props) => {
     </div>
   );
 };
-export default TrainersAndUsers;
+export default withRouter(TrainersAndUsers);
