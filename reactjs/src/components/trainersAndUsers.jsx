@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { withRouter, useHistory } from "react-router-dom";
+import { withRouter, useHistory, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { faX } from "@fortawesome/free-solid-svg-icons";
@@ -17,7 +17,7 @@ const TrainersAndUsers = (props) => {
   });
 
   const edzoHitelesitese = (id) => {
-    TrainerService.getTrainer(id).then((res) => {
+    TrainerService.getTrainerById(id).then((res) => {
       let tmpTrainer = res.data;
       tmpTrainer.hiteles = true;
       TrainerService.saveTrainer(tmpTrainer).then(() => {
@@ -115,7 +115,14 @@ const TrainersAndUsers = (props) => {
                 className={`mb-2 
                   ${isMobile ? "h1 m-auto" : "h4"}`}
               >
-                {trainer.vezetekNev} {trainer.keresztNev}{" "}
+                <Link
+                  to={{
+                    pathname: "/profilePage",
+                    state: { id: trainer.userId, visited: true },
+                  }}
+                >
+                  {trainer.vezetekNev} {trainer.keresztNev}
+                </Link>{" "}
                 {UserService.getAge(trainer.szulIdo)}
               </div>
               <div>

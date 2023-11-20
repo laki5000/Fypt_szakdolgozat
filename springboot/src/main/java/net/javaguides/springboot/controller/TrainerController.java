@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,9 +36,19 @@ public class TrainerController {
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")
-	@GetMapping("/trainers/load")
-	public TrainerDto getTrainer(@RequestHeader("Id") String Id){
-		Trainer trainer = trainerRepository.findById(Long.parseLong(Id));
+	@GetMapping("/trainers/load/id/{id}")
+	public TrainerDto getTrainerById(@PathVariable Long id){
+		Optional<Trainer> trainer = trainerRepository.findById(id);
+		if(trainer != null) {
+			return new TrainerDto(trainer.get());
+		}
+		return null;
+	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@GetMapping("/trainers/load/byuserid/{user_id}")
+	public TrainerDto getTrainerByUserId(@PathVariable Long user_id){
+		Trainer trainer = trainerRepository.findByUserId(user_id);
 		if(trainer != null) {
 			return new TrainerDto(trainer);
 		}
@@ -47,18 +56,8 @@ public class TrainerController {
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")
-	@GetMapping("/trainers/load/byuserid")
-	public TrainerDto getTrainerByUserId(@RequestHeader("UserId") String UserId){
-		Trainer trainer = trainerRepository.findByUserId(Long.parseLong(UserId));
-		if(trainer != null) {
-			return new TrainerDto(trainer);
-		}
-		return null;
-	}
-	
-	@CrossOrigin(origins = "http://localhost:3000")
-	@GetMapping("/trainers/load/applications")
-	public List<TrainerAndUserDto> loadTrainersAndUsers(@RequestHeader("Hiteles") String hiteles) {
+	@GetMapping("/trainers/load/applications/{hiteles}")
+	public List<TrainerAndUserDto> loadTrainersAndUsers(@PathVariable String hiteles) {
 		boolean hitelesBool;
 		if(hiteles.equals("0")) {
 			hitelesBool = false;

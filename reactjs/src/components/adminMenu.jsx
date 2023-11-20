@@ -46,7 +46,7 @@ const AdminMenu = (props) => {
           ${isMobile ? "w-100 flex-column" : "w-50 flex-row"}`}
       >
         <div
-          className={`border border-primary p-5 crsrp text-light text-center 
+          className={`border border-primary p-5 crsrp text-light m-auto text-center 
             ${isMobile ? "w-75 mt-5 mb-5" : "w-25 me-5 ms-5"}`}
           onClick={() => {
             HandleTrainerApplciationsButton();
@@ -55,7 +55,7 @@ const AdminMenu = (props) => {
           Edző jelentkezések
         </div>
         <div
-          className={`border border-primary p-5 crsrp text-light text-center 
+          className={`border border-primary p-5 crsrp text-light m-auto text-center 
             ${isMobile ? "w-75 mt-5 mb-5" : "w-25 me-5 ms-5"}`}
           onClick={() => {
             HandleAllTrainersButton();
@@ -64,7 +64,7 @@ const AdminMenu = (props) => {
           Összes edző
         </div>
         <div
-          className={`border border-primary p-5 crsrp text-light text-center
+          className={`border border-primary p-5 crsrp text-light m-auto text-center
             ${isMobile ? "w-75 mt-5 mb-5" : "w-25 me-5 ms-5"}`}
           onClick={() => {
             HandleAllUsersButton();

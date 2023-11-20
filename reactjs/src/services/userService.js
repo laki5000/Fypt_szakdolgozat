@@ -14,18 +14,10 @@ const UserService = {
     return axios.get(LOAD_ALL_USER_API_URL);
   },
   getUserdata: (id) => {
-    return axios.get(LOAD_USER_API_URL, {
-      headers: {
-        ID: id,
-      },
-    });
+    return axios.get(LOAD_USER_API_URL + "/" + id);
   },
   getUserdataByEmail: (email) => {
-    return axios.get(LOAD_BY_EMAIL_USER_API_URL, {
-      headers: {
-        Email: email,
-      },
-    });
+    return axios.get(LOAD_BY_EMAIL_USER_API_URL + "/" + email);
   },
   authUser: (token) => {
     return axios.get(AUTH_USER_API_URL, {

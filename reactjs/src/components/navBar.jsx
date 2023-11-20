@@ -46,7 +46,10 @@ const NavBar = (props) => {
         props.history.push("/loginPage");
         break;
       case "profilePage":
-        props.history.push("/profilePage");
+        props.history.push({
+          pathname: "/profilePage",
+          state: { id: localStorage.getItem("id") },
+        });
         break;
       case "adminPage":
         props.history.push("/adminPage");

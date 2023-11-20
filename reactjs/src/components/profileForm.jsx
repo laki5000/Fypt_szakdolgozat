@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useLocation } from "react-router-dom";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { faX } from "@fortawesome/free-solid-svg-icons";
@@ -9,6 +11,9 @@ import DetectMobile from "../services/detectMobile";
 
 const ProfileForm = (props) => {
   const isMobile = DetectMobile();
+  const location = useLocation();
+
+  const [visited, setvisited] = useState();
 
   const [actualState, setNewState] = useState({
     vezetek_nev_input_visibility: false,
@@ -528,66 +533,76 @@ const ProfileForm = (props) => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
-    if (token && id) {
-      if (UserService.authUser(token)) {
-        UserService.getUserdata(id).then((res) => {
-          setNewState((prevState) => ({
-            ...prevState,
-            vezetek_nev: res.data.vezetekNev,
-            vezetek_nev_tmp: res.data.vezetekNev,
-            kereszt_nev: res.data.keresztNev,
-            kereszt_nev_tmp: res.data.keresztNev,
-            nem: res.data.nem,
-            nem_tmp: res.data.nem,
-            szul_hely: res.data.szulHely,
-            szul_hely_tmp: res.data.szulHely,
-            szul_ido: res.data.szulIdo,
-            szul_ido_tmp: res.data.szulIdo,
-            iranyitoszam: res.data.iranyitoSzam,
-            iranyitoszam_tmp: res.data.iranyitoSzam,
-            lakhely_varos: res.data.lakhelyVaros,
-            lakhely_varos_tmp: res.data.lakhelyVaros,
-            email: res.data.eMail,
-            email_tmp: res.data.eMail,
-            jelszo: res.data.jelszo,
-            jelszo_tmp: res.data.jelszo,
-            magassag: res.data.magassag,
-            magassag_tmp: res.data.magassag,
-            testsuly: res.data.testsuly,
-            testsuly_tmp: res.data.testsuly,
-            id: id,
-          }));
-          TrainerService.getTrainerByUserId(id).then((resp) => {
-            if (resp.data) {
-              setNewState((prevState) => ({
-                ...prevState,
-                edzo: true,
-                kiket_vallal: resp.data.kiketVallal,
-                specializacio: resp.data.specializacio,
-                vegzettseg: resp.data.vegzettseg,
-                hol: resp.data.hol,
-                online: resp.data.online,
-                tapasztalat: resp.data.tapasztalat,
-                telefonszam: resp.data.telefonszam,
-                bemutatkozas: resp.data.bemutatkozas,
-                hiteles: resp.data.hiteles,
-                trainer_id: resp.data.id,
-                kiket_vallal_tmp: resp.data.kiketVallal,
-                specializacio_tmp: resp.data.specializacio,
-                vegzettseg_tmp: resp.data.vegzettseg,
-                hol_tmp: resp.data.hol,
-                online_tmp: resp.data.online,
-                tapasztalat_tmp: resp.data.tapasztalat,
-                telefonszam_tmp: resp.data.telefonszam,
-                bemutatkozas_tmp: resp.data.bemutatkozas,
-              }));
-            }
-          });
-        });
+    const id = location.state ? location.state.id : localStorage.getItem("id");
+    if (location.state) {
+      if (location.state.visited) {
+        setvisited(true);
+      } else {
+        setvisited(false);
       }
+    } else {
+      setvisited(false);
     }
-  }, []);
+
+    if (id) {
+      UserService.getUserdata(id).then((res) => {
+        setNewState((prevState) => ({
+          ...prevState,
+          vezetek_nev: res.data.vezetekNev,
+          vezetek_nev_tmp: res.data.vezetekNev,
+          kereszt_nev: res.data.keresztNev,
+          kereszt_nev_tmp: res.data.keresztNev,
+          nem: res.data.nem,
+          nem_tmp: res.data.nem,
+          szul_hely: res.data.szulHely,
+          szul_hely_tmp: res.data.szulHely,
+          szul_ido: res.data.szulIdo,
+          szul_ido_tmp: res.data.szulIdo,
+          iranyitoszam: res.data.iranyitoSzam,
+          iranyitoszam_tmp: res.data.iranyitoSzam,
+          lakhely_varos: res.data.lakhelyVaros,
+          lakhely_varos_tmp: res.data.lakhelyVaros,
+          email: res.data.eMail,
+          email_tmp: res.data.eMail,
+          jelszo: res.data.jelszo,
+          jelszo_tmp: res.data.jelszo,
+          magassag: res.data.magassag,
+          magassag_tmp: res.data.magassag,
+          testsuly: res.data.testsuly,
+          testsuly_tmp: res.data.testsuly,
+          id: id,
+        }));
+        TrainerService.getTrainerByUserId(id).then((resp) => {
+          if (resp.data) {
+            setNewState((prevState) => ({
+              ...prevState,
+              edzo: true,
+              kiket_vallal: resp.data.kiketVallal,
+              specializacio: resp.data.specializacio,
+              vegzettseg: resp.data.vegzettseg,
+              hol: resp.data.hol,
+              online: resp.data.online,
+              tapasztalat: resp.data.tapasztalat,
+              telefonszam: resp.data.telefonszam,
+              bemutatkozas: resp.data.bemutatkozas,
+              hiteles: resp.data.hiteles,
+              trainer_id: resp.data.id,
+              kiket_vallal_tmp: resp.data.kiketVallal,
+              specializacio_tmp: resp.data.specializacio,
+              vegzettseg_tmp: resp.data.vegzettseg,
+              hol_tmp: resp.data.hol,
+              online_tmp: resp.data.online,
+              tapasztalat_tmp: resp.data.tapasztalat,
+              telefonszam_tmp: resp.data.telefonszam,
+              bemutatkozas_tmp: resp.data.bemutatkozas,
+            }));
+          }
+        });
+      });
+    } else {
+      props.history.push("/loginPage");
+    }
+  }, [location.state]);
 
   return (
     <div className="bg-dark pb-5">
@@ -683,14 +698,16 @@ const ProfileForm = (props) => {
                     ${isMobile ? "h2" : "h6"}`}
                 >
                   <div>{actualState.vezetek_nev}</div>
-                  <div className="ms-1 crsrp">
-                    <FontAwesomeIcon
-                      icon={faPencil}
-                      onClick={() => {
-                        changeField("vezetek_nev");
-                      }}
-                    />
-                  </div>
+                  {!visited && (
+                    <div className="ms-1 crsrp">
+                      <FontAwesomeIcon
+                        icon={faPencil}
+                        onClick={() => {
+                          changeField("vezetek_nev");
+                        }}
+                      />
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -746,14 +763,16 @@ const ProfileForm = (props) => {
                     ${isMobile ? "h2" : "h6"}`}
                 >
                   <div>{actualState.kereszt_nev}</div>
-                  <div className="ms-1 crsrp">
-                    <FontAwesomeIcon
-                      icon={faPencil}
-                      onClick={() => {
-                        changeField("kereszt_nev");
-                      }}
-                    />
-                  </div>
+                  {!visited && (
+                    <div className="ms-1 crsrp">
+                      <FontAwesomeIcon
+                        icon={faPencil}
+                        onClick={() => {
+                          changeField("kereszt_nev");
+                        }}
+                      />
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -815,14 +834,16 @@ const ProfileForm = (props) => {
                     ${isMobile ? "h2" : "h6"}`}
                 >
                   <div>{actualState.nem}</div>
-                  <div className="ms-1 crsrp">
-                    <FontAwesomeIcon
-                      icon={faPencil}
-                      onClick={() => {
-                        changeField("nem");
-                      }}
-                    />
-                  </div>
+                  {!visited && (
+                    <div className="ms-1 crsrp">
+                      <FontAwesomeIcon
+                        icon={faPencil}
+                        onClick={() => {
+                          changeField("nem");
+                        }}
+                      />
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -887,14 +908,16 @@ const ProfileForm = (props) => {
                   <div>
                     {actualState.szul_hely + ", " + actualState.szul_ido}
                   </div>
-                  <div className="ms-1 crsrp">
-                    <FontAwesomeIcon
-                      icon={faPencil}
-                      onClick={() => {
-                        changeField("szul_hely_ido");
-                      }}
-                    />
-                  </div>
+                  {!visited && (
+                    <div className="ms-1 crsrp">
+                      <FontAwesomeIcon
+                        icon={faPencil}
+                        onClick={() => {
+                          changeField("szul_hely_ido");
+                        }}
+                      />
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -961,14 +984,16 @@ const ProfileForm = (props) => {
                       ", " +
                       actualState.lakhely_varos}
                   </div>
-                  <div className="ms-1 crsrp">
-                    <FontAwesomeIcon
-                      icon={faPencil}
-                      onClick={() => {
-                        changeField("iranyitoszam_varos");
-                      }}
-                    />
-                  </div>
+                  {!visited && (
+                    <div className="ms-1 crsrp">
+                      <FontAwesomeIcon
+                        icon={faPencil}
+                        onClick={() => {
+                          changeField("iranyitoszam_varos");
+                        }}
+                      />
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -1024,80 +1049,84 @@ const ProfileForm = (props) => {
                     ${isMobile ? "h2" : "h6"}`}
                 >
                   <div>{actualState.email}</div>
-                  <div className="ms-1 crsrp">
-                    <FontAwesomeIcon
-                      icon={faPencil}
-                      onClick={() => {
-                        changeField("e-mail");
-                      }}
-                    />
-                  </div>
+                  {!visited && (
+                    <div className="ms-1 crsrp">
+                      <FontAwesomeIcon
+                        icon={faPencil}
+                        onClick={() => {
+                          changeField("e-mail");
+                        }}
+                      />
+                    </div>
+                  )}
                 </div>
               )}
             </div>
-            <div
-              className={`d-flex 
-                ${isMobile ? "mb-3" : ""}`}
-            >
+            {!visited && (
               <div
-                className={`me-2
-                  ${isMobile ? "h2" : "h6"}`}
+                className={`d-flex 
+                ${isMobile ? "mb-3" : ""}`}
               >
-                Jelszó:
-              </div>
-              {actualState.jelszo_input_visibility ? (
-                <div className="d-flex">
-                  <div
-                    className={`w-50
-                      ${isMobile ? "h2" : "h6"}`}
-                  >
-                    <input
-                      className="w-100"
-                      name="jelszo"
-                      value={actualState.jelszo_tmp}
-                      onChange={changeJelszoHandler}
-                    />
-                  </div>
-                  <div
-                    className={`crsrp text-success
-                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
-                  >
-                    <FontAwesomeIcon
-                      icon={faCheck}
-                      onClick={() => {
-                        saveField("jelszo");
-                      }}
-                    />
-                  </div>
-                  <div
-                    className={`crsrp text-danger
-                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
-                  >
-                    <FontAwesomeIcon
-                      icon={faX}
-                      onClick={() => {
-                        clearChanges("jelszo");
-                      }}
-                    />
-                  </div>
-                </div>
-              ) : (
                 <div
-                  className={`d-flex 
-                    ${isMobile ? "h2" : "h6"}`}
+                  className={`me-2
+                  ${isMobile ? "h2" : "h6"}`}
                 >
-                  <div>{actualState.jelszo}</div>
-                  <div className="ms-1 crsrp">
-                    <FontAwesomeIcon
-                      icon={faPencil}
-                      onClick={() => {
-                        changeField("jelszo");
-                      }}
-                    />
-                  </div>
+                  Jelszó:
                 </div>
-              )}
-            </div>
+                {actualState.jelszo_input_visibility ? (
+                  <div className="d-flex">
+                    <div
+                      className={`w-50
+                      ${isMobile ? "h2" : "h6"}`}
+                    >
+                      <input
+                        className="w-100"
+                        name="jelszo"
+                        value={actualState.jelszo_tmp}
+                        onChange={changeJelszoHandler}
+                      />
+                    </div>
+                    <div
+                      className={`crsrp text-success
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                    >
+                      <FontAwesomeIcon
+                        icon={faCheck}
+                        onClick={() => {
+                          saveField("jelszo");
+                        }}
+                      />
+                    </div>
+                    <div
+                      className={`crsrp text-danger
+                      ${isMobile ? "h1 me-2 ms-2" : "h6 ms-1"}`}
+                    >
+                      <FontAwesomeIcon
+                        icon={faX}
+                        onClick={() => {
+                          clearChanges("jelszo");
+                        }}
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    className={`d-flex 
+                    ${isMobile ? "h2" : "h6"}`}
+                  >
+                    <div>{actualState.jelszo}</div>
+                    <div className="ms-1 crsrp">
+                      <FontAwesomeIcon
+                        icon={faPencil}
+                        onClick={() => {
+                          changeField("jelszo");
+                        }}
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
             <div
               className={`d-flex 
                 ${isMobile ? "mb-3" : ""}`}
@@ -1151,14 +1180,16 @@ const ProfileForm = (props) => {
                     ${isMobile ? "h2" : "h6"}`}
                 >
                   <div>{actualState.magassag + " cm"}</div>
-                  <div className="ms-1 crsrp">
-                    <FontAwesomeIcon
-                      icon={faPencil}
-                      onClick={() => {
-                        changeField("magassag");
-                      }}
-                    />
-                  </div>
+                  {!visited && (
+                    <div className="ms-1 crsrp">
+                      <FontAwesomeIcon
+                        icon={faPencil}
+                        onClick={() => {
+                          changeField("magassag");
+                        }}
+                      />
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -1215,14 +1246,16 @@ const ProfileForm = (props) => {
                     ${isMobile ? "h2" : "h6"}`}
                 >
                   <div>{actualState.testsuly + " kg"}</div>
-                  <div className="ms-1 crsrp">
-                    <FontAwesomeIcon
-                      icon={faPencil}
-                      onClick={() => {
-                        changeField("testsuly");
-                      }}
-                    />
-                  </div>
+                  {!visited && (
+                    <div className="ms-1 crsrp">
+                      <FontAwesomeIcon
+                        icon={faPencil}
+                        onClick={() => {
+                          changeField("testsuly");
+                        }}
+                      />
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -1287,14 +1320,16 @@ const ProfileForm = (props) => {
                     ${isMobile ? "h2" : "h6"}`}
                     >
                       <div>{actualState.kiket_vallal}</div>
-                      <div className="ms-1 crsrp">
-                        <FontAwesomeIcon
-                          icon={faPencil}
-                          onClick={() => {
-                            changeField("kiket_vallal");
-                          }}
-                        />
-                      </div>
+                      {!visited && (
+                        <div className="ms-1 crsrp">
+                          <FontAwesomeIcon
+                            icon={faPencil}
+                            onClick={() => {
+                              changeField("kiket_vallal");
+                            }}
+                          />
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
@@ -1350,14 +1385,16 @@ const ProfileForm = (props) => {
                     ${isMobile ? "h2" : "h6"}`}
                     >
                       <div>{actualState.specializacio}</div>
-                      <div className="ms-1 crsrp">
-                        <FontAwesomeIcon
-                          icon={faPencil}
-                          onClick={() => {
-                            changeField("specializacio");
-                          }}
-                        />
-                      </div>
+                      {!visited && (
+                        <div className="ms-1 crsrp">
+                          <FontAwesomeIcon
+                            icon={faPencil}
+                            onClick={() => {
+                              changeField("specializacio");
+                            }}
+                          />
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
@@ -1413,14 +1450,16 @@ const ProfileForm = (props) => {
                     ${isMobile ? "h2" : "h6"}`}
                     >
                       <div>{actualState.vegzettseg}</div>
-                      <div className="ms-1 crsrp">
-                        <FontAwesomeIcon
-                          icon={faPencil}
-                          onClick={() => {
-                            changeField("vegzettseg");
-                          }}
-                        />
-                      </div>
+                      {!visited && (
+                        <div className="ms-1 crsrp">
+                          <FontAwesomeIcon
+                            icon={faPencil}
+                            onClick={() => {
+                              changeField("vegzettseg");
+                            }}
+                          />
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
@@ -1476,14 +1515,16 @@ const ProfileForm = (props) => {
                     ${isMobile ? "h2" : "h6"}`}
                     >
                       <div>{actualState.hol}</div>
-                      <div className="ms-1 crsrp">
-                        <FontAwesomeIcon
-                          icon={faPencil}
-                          onClick={() => {
-                            changeField("hol");
-                          }}
-                        />
-                      </div>
+                      {!visited && (
+                        <div className="ms-1 crsrp">
+                          <FontAwesomeIcon
+                            icon={faPencil}
+                            onClick={() => {
+                              changeField("hol");
+                            }}
+                          />
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
@@ -1545,14 +1586,16 @@ const ProfileForm = (props) => {
                     ${isMobile ? "h2" : "h6"}`}
                     >
                       {actualState.online ? <div>Igen</div> : <div>Nem</div>}
-                      <div className="ms-1 crsrp">
-                        <FontAwesomeIcon
-                          icon={faPencil}
-                          onClick={() => {
-                            changeField("online");
-                          }}
-                        />
-                      </div>
+                      {!visited && (
+                        <div className="ms-1 crsrp">
+                          <FontAwesomeIcon
+                            icon={faPencil}
+                            onClick={() => {
+                              changeField("online");
+                            }}
+                          />
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
@@ -1608,14 +1651,16 @@ const ProfileForm = (props) => {
                     ${isMobile ? "h2" : "h6"}`}
                     >
                       <div>{actualState.tapasztalat}</div>
-                      <div className="ms-1 crsrp">
-                        <FontAwesomeIcon
-                          icon={faPencil}
-                          onClick={() => {
-                            changeField("tapasztalat");
-                          }}
-                        />
-                      </div>
+                      {!visited && (
+                        <div className="ms-1 crsrp">
+                          <FontAwesomeIcon
+                            icon={faPencil}
+                            onClick={() => {
+                              changeField("tapasztalat");
+                            }}
+                          />
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
@@ -1672,14 +1717,16 @@ const ProfileForm = (props) => {
                     ${isMobile ? "h2" : "h6"}`}
                     >
                       <div>{actualState.telefonszam}</div>
-                      <div className="ms-1 crsrp">
-                        <FontAwesomeIcon
-                          icon={faPencil}
-                          onClick={() => {
-                            changeField("telefonszam");
-                          }}
-                        />
-                      </div>
+                      {!visited && (
+                        <div className="ms-1 crsrp">
+                          <FontAwesomeIcon
+                            icon={faPencil}
+                            onClick={() => {
+                              changeField("telefonszam");
+                            }}
+                          />
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
@@ -1735,14 +1782,16 @@ const ProfileForm = (props) => {
                     ${isMobile ? "h2" : "h6"}`}
                     >
                       <div>{actualState.bemutatkozas}</div>
-                      <div className="ms-1 crsrp">
-                        <FontAwesomeIcon
-                          icon={faPencil}
-                          onClick={() => {
-                            changeField("bemutatkozas");
-                          }}
-                        />
-                      </div>
+                      {!visited && (
+                        <div className="ms-1 crsrp">
+                          <FontAwesomeIcon
+                            icon={faPencil}
+                            onClick={() => {
+                              changeField("bemutatkozas");
+                            }}
+                          />
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
@@ -1775,4 +1824,4 @@ const ProfileForm = (props) => {
     </div>
   );
 };
-export default ProfileForm;
+export default withRouter(ProfileForm);
