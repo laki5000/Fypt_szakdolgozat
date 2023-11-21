@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-
-import Trainers from "../components/trainers";
+import TrainersAndUsers from "../components/trainersAndUsers";
 
 const TrainersPage = (props) => {
   useEffect(() => {
@@ -9,7 +8,7 @@ const TrainersPage = (props) => {
 
   return (
     <div>
-      <Trainers />
+      <TrainersAndUsers />
     </div>
   );
 };

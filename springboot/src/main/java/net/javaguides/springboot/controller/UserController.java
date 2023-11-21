@@ -50,11 +50,11 @@ public class UserController {
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")
-	@GetMapping("/users/load")
-	public UserDto getUser(@RequestHeader("Id") String id){
-		User user = userRepository.findById(Long.parseLong(id));
+	@GetMapping("/users/load/{id}")
+	public UserDto getUserById(@PathVariable Long id){
+		Optional<User> user = userRepository.findById(id);
 		if(user != null) {
-			return new UserDto(user);
+			return new UserDto(user.get());
 		}
 		return null;
 	}
@@ -71,8 +71,8 @@ public class UserController {
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")
-	@GetMapping("/users/load/byemail")
-	public UserDto getUserByEmail(@RequestHeader("Email") String email){
+	@GetMapping("/users/load/byemail/{email}")
+	public UserDto getUserByEmail(@PathVariable String email){
 		User user = userRepository.findByeMail(email);
 		if(user != null) {
 			return new UserDto(user);

@@ -3,7 +3,7 @@ package net.javaguides.springboot.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,8 +18,8 @@ public class AdminController {
 	private AdminRepository adminRepository;
 
 	@CrossOrigin(origins = "http://localhost:3000")
-	@GetMapping("/admins/load")
-	public AdminDto getAdmin(@RequestHeader("UserId") String user_id){
+	@GetMapping("/admins/load/{user_id}")
+	public AdminDto getAdmin(@PathVariable String user_id){
 		Admin admin = adminRepository.findByUserId(user_id);
 		if(admin != null) {
 			return new AdminDto(admin);
