@@ -1,38 +1,55 @@
 package net.javaguides.springboot.dto;
 
+import java.util.Date;
+
 import net.javaguides.springboot.model.User;
 
 public class UserDto {
 	private long id;
-	private String vezetekNev;
-	private String keresztNev;
-	private String nem;
-	private String szulHely;
-	private String szulIdo;
-	private String iranyitoSzam;
-	private String lakhelyVaros;
-	private String eMail;
-	private String jelszo;
-	private String magassag;
-	private String testsuly;
+	private String lastname;
+	private String firstname;
+	private int gender;
+	private String birthplace;
+	private Date dateofbirth;
+	private String city;
+	private String email;
+	private String password;
+	private int weight;
+	private int height;
 	
 	public UserDto() {
 		
 	}
+
+	public UserDto(long id, String lastname, String firstname, int gender, String birthplace, Date dateofbirth,
+			String city, String email, String password, int weight, int height) {
+		super();
+		this.id = id;
+		this.lastname = lastname;
+		this.firstname = firstname;
+		this.gender = gender;
+		this.birthplace = birthplace;
+		this.dateofbirth = dateofbirth;
+		this.city = city;
+		this.email = email;
+		this.password = password;
+		this.weight = weight;
+		this.height = height;
+	}
 	
 	public UserDto(User user) {
+		super();
 		this.id = user.getId();
-		this.vezetekNev = user.getVezetekNev();
-		this.keresztNev = user.getKeresztNev();
-		this.nem = user.getNem();
-		this.szulHely = user.getSzulHely();
-		this.szulIdo = user.getSzulIdo();
-		this.iranyitoSzam = user.getIranyitoSzam();
-		this.lakhelyVaros = user.getLakhelyVaros();
-		this.eMail = user.geteMail();
-		this.jelszo = user.getJelszo();
-		this.magassag = user.getMagassag();
-		this.testsuly = user.getTestsuly();
+		this.lastname = user.getLastname();
+		this.firstname = user.getFirstname();
+		this.gender = user.getGender();
+		this.birthplace = user.getBirthplace();
+		this.dateofbirth = user.getDateofbirth();
+		this.city = user.getCity();
+		this.email = user.getEmail();
+		this.password = user.getPassword();
+		this.weight = user.getWeight();
+		this.height = user.getHeight();
 	}
 
 	public long getId() {
@@ -43,91 +60,83 @@ public class UserDto {
 		this.id = id;
 	}
 
-	public String getVezetekNev() {
-		return vezetekNev;
+	public String getLastname() {
+		return lastname;
 	}
 
-	public void setVezetekNev(String vezetekNev) {
-		this.vezetekNev = vezetekNev;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
-	public String getKeresztNev() {
-		return keresztNev;
+	public String getFirstname() {
+		return firstname;
 	}
 
-	public void setKeresztNev(String keresztNev) {
-		this.keresztNev = keresztNev;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
-	public String getNem() {
-		return nem;
+	public int getGender() {
+		return gender;
 	}
 
-	public void setNem(String nem) {
-		this.nem = nem;
+	public void setGender(int gender) {
+		this.gender = gender;
 	}
 
-	public String getSzulHely() {
-		return szulHely;
+	public String getBirthplace() {
+		return birthplace;
 	}
 
-	public void setSzulHely(String szulHely) {
-		this.szulHely = szulHely;
+	public void setBirthplace(String birthplace) {
+		this.birthplace = birthplace;
 	}
 
-	public String getSzulIdo() {
-		return szulIdo;
+	public Date getDateofbirth() {
+		return dateofbirth;
 	}
 
-	public void setSzulIdo(String szulIdo) {
-		this.szulIdo = szulIdo;
+	public void setDateofbirth(Date dateofbirth) {
+		this.dateofbirth = dateofbirth;
 	}
 
-	public String getIranyitoSzam() {
-		return iranyitoSzam;
+	public String getCity() {
+		return city;
 	}
 
-	public void setIranyitoSzam(String iranyitoSzam) {
-		this.iranyitoSzam = iranyitoSzam;
+	public void setCity(String city) {
+		this.city = city;
 	}
 
-	public String getLakhelyVaros() {
-		return lakhelyVaros;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setLakhelyVaros(String lakhelyVaros) {
-		this.lakhelyVaros = lakhelyVaros;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public String geteMail() {
-		return eMail;
+	public String getPassword() {
+		return password;
 	}
 
-	public void seteMail(String eMail) {
-		this.eMail = eMail;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getJelszo() {
-		return jelszo;
+	public int getWeight() {
+		return weight;
 	}
 
-	public void setJelszo(String jelszo) {
-		this.jelszo = jelszo;
+	public void setWeight(int weight) {
+		this.weight = weight;
 	}
 
-	public String getMagassag() {
-		return magassag;
+	public int getHeight() {
+		return height;
 	}
 
-	public void setMagassag(String magassag) {
-		this.magassag = magassag;
-	}
-
-	public String getTestsuly() {
-		return testsuly;
-	}
-
-	public void setTestsuly(String testsuly) {
-		this.testsuly = testsuly;
+	public void setHeight(int height) {
+		this.height = height;
 	}
 }

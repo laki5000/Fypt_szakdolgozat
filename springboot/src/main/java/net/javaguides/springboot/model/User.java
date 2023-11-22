@@ -1,11 +1,15 @@
 package net.javaguides.springboot.model;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import net.javaguides.springboot.dto.UserDto;
+
 
 @Entity
 @Table(name = "users")
@@ -14,152 +18,154 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@Column(name = "vezetek_nev")
-	private String vezetekNev;
+	@Column(name = "lastname")
+	private String lastname;
 	
-	@Column(name = "kereszt_nev")
-	private String keresztNev;
+	@Column(name = "firstname")
+	private String firstname;
 	
-	@Column(name = "nem")
-	private String nem;
+	@Column(name="gender")
+	private int gender;
 	
-	@Column(name = "szul_hely")
-	private String szulHely;
+	@Column(name = "birthplace")
+	private String birthplace;
 	
-	@Column(name = "szul_ido")
-	private String szulIdo;
+	@Column(name = "dateofbirth")
+	private Date dateofbirth;
 	
-	@Column(name = "iranyitoszam")
-	private String iranyitoSzam;
-	
-	@Column(name = "lakhely_varos")
-	private String lakhelyVaros;
+	@Column(name = "city")
+	private String city;
 	
 	@Column(name = "email")
-	private String eMail;
+	private String email;
 	
-	@Column(name = "jelszo")
-	private String jelszo;
+	@Column(name = "password")
+	private String password;
 	
-	@Column(name = "magassag")
-	private String magassag;
+	@Column(name = "weight")
+	private int weight;
 	
-	@Column(name = "testsuly")
-	private String testsuly;
+	@Column(name = "height")
+	private int height;
 	
 	public User() {
 		
 	}
-	
-	public User(String vezetekNev, String keresztNev, String nem, String szulHely, String szulIdo, String iranyitoSzam,
-			String lakhelyVaros, String eMail, String password, String magassag, String testsuly) {
+
+	public User(String lastname, String firstname, int gender, String birthplace, Date dateofbirth,
+			String city, String email, String password, int weight, int height) {
 		super();
-		this.vezetekNev = vezetekNev;
-		this.keresztNev = keresztNev;
-		this.nem = nem;
-		this.szulHely = szulHely;
-		this.szulIdo = szulIdo;
-		this.iranyitoSzam = iranyitoSzam;
-		this.lakhelyVaros = lakhelyVaros;
-		this.eMail = eMail;
-		this.jelszo = password;
-		this.magassag = magassag;
-		this.testsuly = testsuly;
+		this.lastname = lastname;
+		this.firstname = firstname;
+		this.gender = gender;
+		this.birthplace = birthplace;
+		this.dateofbirth = dateofbirth;
+		this.city = city;
+		this.email = email;
+		this.password = password;
+		this.weight = weight;
+		this.height = height;
 	}
 	
+	public User(UserDto userdto) {
+		super();
+		this.lastname = userdto.getLastname();
+		this.firstname = userdto.getFirstname();
+		this.gender = userdto.getGender();
+		this.birthplace = userdto.getBirthplace();
+		this.dateofbirth = userdto.getDateofbirth();
+		this.city = userdto.getCity();
+		this.email = userdto.getEmail();
+		this.password = userdto.getPassword();
+		this.weight = userdto.getWeight();
+		this.height = userdto.getHeight();
+	}
+
 	public long getId() {
 		return id;
 	}
-	
+
 	public void setId(long id) {
 		this.id = id;
 	}
-	
-	public String getVezetekNev() {
-		return vezetekNev;
-	}
-	
-	public void setVezetekNev(String vezetekNev) {
-		this.vezetekNev = vezetekNev;
-	}
-	
-	public String getKeresztNev() {
-		return keresztNev;
-	}
-	
-	public void setKeresztNev(String keresztNev) {
-		this.keresztNev = keresztNev;
-	}
-	
-	public String getNem() {
-		return nem;
-	}
-	
-	public void setNem(String nem) {
-		this.nem = nem;
-	}
-	
-	public String getSzulHely() {
-		return szulHely;
-	}
-	
-	public void setSzulHely(String szulHely) {
-		this.szulHely = szulHely;
-	}
-	
-	public String getSzulIdo() {
-		return szulIdo;
-	}
-	
-	public void setSzulIdo(String szulIdo) {
-		this.szulIdo = szulIdo;
-	}
-	
-	public String getIranyitoSzam() {
-		return iranyitoSzam;
-	}
-	
-	public void setIranyitoSzam(String iranyitoSzam) {
-		this.iranyitoSzam = iranyitoSzam;
-	}
-	
-	public String getLakhelyVaros() {
-		return lakhelyVaros;
-	}
-	
-	public void setLakhelyVaros(String lakhelyVaros) {
-		this.lakhelyVaros = lakhelyVaros;
-	}
-	
-	public String geteMail() {
-		return eMail;
-	}
-	
-	public void seteMail(String eMail) {
-		this.eMail = eMail;
-	}
-	
-	public String getJelszo() {
-		return jelszo;
-	}
-	
-	public void setJelszo(String jelszo) {
-		this.jelszo = jelszo;
+
+	public String getLastname() {
+		return lastname;
 	}
 
-	public String getMagassag() {
-		return magassag;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
-	public void setMagassag(String magassag) {
-		this.magassag = magassag;
+	public String getFirstname() {
+		return firstname;
 	}
 
-	public String getTestsuly() {
-		return testsuly;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
-	public void setTestsuly(String testsuly) {
-		this.testsuly = testsuly;
+	public int getGender() {
+		return gender;
+	}
+
+	public void setGender(int gender) {
+		this.gender = gender;
+	}
+
+	public String getBirthplace() {
+		return birthplace;
+	}
+
+	public void setBirthplace(String birthplace) {
+		this.birthplace = birthplace;
+	}
+
+	public Date getDateofbirth() {
+		return dateofbirth;
+	}
+
+	public void setDateofbirth(Date dateofbirth) {
+		this.dateofbirth = dateofbirth;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public int getWeight() {
+		return weight;
+	}
+
+	public void setWeight(int weight) {
+		this.weight = weight;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
 	}
 }
