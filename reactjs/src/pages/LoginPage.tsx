@@ -5,7 +5,7 @@ import LoginForm from "../components/LoginForm.tsx";
 
 const HomePage = (props) => {
   React.useEffect(() => {
-    if (props.isLoggedIn) {
+    if (localStorage.getItem("token") && localStorage.getItem("userid")) {
       props.history.push("/home");
     }
   }, []);

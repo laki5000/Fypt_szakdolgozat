@@ -33,7 +33,6 @@ const LoginForm = (props) => {
     };
     UserService.loginUser(user).then((res) => {
       if (res.data) {
-        localStorage.setItem("userid", res.data[0]);
         localStorage.setItem("token", res.data[1]);
         props.setNewState(res.data[0], res.data[1]);
         props.setIsLoggedIn();

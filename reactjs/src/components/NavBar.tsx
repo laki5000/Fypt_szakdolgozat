@@ -34,18 +34,18 @@ const NavBar = (props) => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (page) => {
     setAnchorElNav(null);
+    handleButtonClick(page);
   };
 
-  const handleCloseUserMenu = (mode) => {
+  const handleCloseUserMenu = (page) => {
     setAnchorElUser(null);
 
-    switch (mode) {
+    switch (page) {
       case "logout":
         props.setIsLoggedIn();
         props.setNewState();
-        localStorage.removeItem("userid");
         localStorage.removeItem("token");
         props.history.push("/home");
         break;
@@ -56,6 +56,19 @@ const NavBar = (props) => {
     switch (page) {
       case "Bejelentkezés":
         props.history.push("/login");
+        break;
+      case "Kezdőlap":
+        props.history.push("/home");
+        break;
+      case "Edzőink":
+        props.history.push("/trainers");
+        break;
+      case "Csatlakozz":
+        props.history.push("/join");
+        break;
+      case "Rólunk":
+        props.history.push("/about");
+        break;
     }
   };
 
@@ -116,7 +129,12 @@ const NavBar = (props) => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem
+                  key={page}
+                  onClick={() => {
+                    handleCloseNavMenu(page);
+                  }}
+                >
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -126,7 +144,9 @@ const NavBar = (props) => {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => {
+                  handleCloseNavMenu(page);
+                }}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page}

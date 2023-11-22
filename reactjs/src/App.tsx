@@ -13,6 +13,9 @@ import Line from "./components/Line.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 import RegisterPage from "./pages/RegisterPage.tsx";
+import TrainersPage from "./pages/TrainersPage.tsx";
+import JoinPage from "./pages/JoinPage.tsx";
+import AboutPage from "./pages/AboutPage.tsx";
 import UserService from "./services/UserService.ts";
 
 const App = (props) => {
@@ -154,16 +157,17 @@ const App = (props) => {
   }, [snackBarVisibility.success2]);
 
   React.useEffect(() => {
-    const userid_tmp = localStorage.getItem("userid");
     const token_tmp = localStorage.getItem("token");
-    if (userid_tmp && token_tmp) {
+    if (token_tmp) {
       UserService.authUser(token_tmp).then((res) => {
         if (res.data) {
           setIsLoggedIn(true);
           setNewState({
-            userid: userid_tmp,
+            userid: res.data,
             token: token_tmp,
           });
+        } else {
+          localStorage.removeItem("token");
         }
       });
     }
@@ -295,7 +299,6 @@ const App = (props) => {
             setNewState={(userid, token) => {
               setNewState({ userid: userid, token: token });
             }}
-            isLoggedIn={isLoggedIn}
           />
         </Route>
         <Route path="/register">
@@ -303,11 +306,19 @@ const App = (props) => {
             openAlert={(type) => {
               handleOpenAlert(type);
             }}
-            isLoggedIn={isLoggedIn}
           />
         </Route>
         <Route path="/home">
           <HomePage />
+        </Route>
+        <Route path="/trainers">
+          <TrainersPage />
+        </Route>
+        <Route path="/join">
+          <JoinPage />
+        </Route>
+        <Route path="/about">
+          <AboutPage />
         </Route>
       </Switch>
     </Router>

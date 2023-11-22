@@ -39,7 +39,7 @@ public class UserController {
 		if(u != null) {
 			String[] data = new String[2];
 			data[0] = "" + u.getId();
-			data[1] = jtp.createToken(u.getEmail());
+			data[1] = jtp.createToken("" + u.getId());
 			return data;
 		}
 		else {
@@ -55,11 +55,11 @@ public class UserController {
 	
 	@CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/users/auth")
-    public boolean authUser(@RequestHeader("Authorization") String token) {
+    public String authUser(@RequestHeader("Authorization") String token) {
         if (jtp.validateToken(token)) {
-            return true;
+        	return jtp.getUsernameFromToken(token);
         } else {
-            return false;
+            return null;
         }
     }
 }
