@@ -14,8 +14,6 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import Snackbar from "@mui/material/Snackbar";
-import Alert from "@mui/material/Alert";
 import UserService from "../services/UserService.ts";
 
 const RegisterForm = (props) => {
@@ -30,16 +28,6 @@ const RegisterForm = (props) => {
     email2: "",
     password: "",
     password2: "",
-  });
-
-  const [snackBarVisibility, setSnackBarVisibility] = React.useState({
-    err1: false,
-    err2: false,
-    err3: false,
-    err4: false,
-    err5: false,
-    err6: false,
-    success: false,
   });
 
   const handleLastNameChanged = (event) => {
@@ -82,34 +70,6 @@ const RegisterForm = (props) => {
     setNewState({ ...actualState, password2: event.target.value });
   };
 
-  const handleCloseErr1 = () => {
-    setSnackBarVisibility({ ...snackBarVisibility, err1: false });
-  };
-
-  const handleCloseErr2 = () => {
-    setSnackBarVisibility({ ...snackBarVisibility, err2: false });
-  };
-
-  const handleCloseErr3 = () => {
-    setSnackBarVisibility({ ...snackBarVisibility, err3: false });
-  };
-
-  const handleCloseErr4 = () => {
-    setSnackBarVisibility({ ...snackBarVisibility, err4: false });
-  };
-
-  const handleCloseErr5 = () => {
-    setSnackBarVisibility({ ...snackBarVisibility, err5: false });
-  };
-
-  const handleCloseErr6 = () => {
-    setSnackBarVisibility({ ...snackBarVisibility, err6: false });
-  };
-
-  const handleCloseSuccess = () => {
-    setSnackBarVisibility({ ...snackBarVisibility, success: false });
-  };
-
   const handleSubmit = () => {
     if (
       actualState.lastname &&
@@ -132,7 +92,7 @@ const RegisterForm = (props) => {
             if (actualState.password.length >= 6) {
               UserService.getUserByEmail(actualState.email).then((res) => {
                 if (res.data.content.length > 0) {
-                  setSnackBarVisibility({ ...snackBarVisibility, err6: true });
+                  props.openAlert("err6");
                 } else {
                   let user = {
                     lastname: actualState.lastname,
@@ -146,150 +106,33 @@ const RegisterForm = (props) => {
                   };
                   UserService.saveUser(user).then((res) => {
                     if (res.data) {
-                      setSnackBarVisibility({
-                        ...snackBarVisibility,
-                        success: true,
-                      });
-                      setNewState({
-                        lastname: "",
-                        firstname: "",
-                        gender: "",
-                        birthplace: "",
-                        dateofbirth: "",
-                        city: "",
-                        email: "",
-                        email2: "",
-                        password: "",
-                        password2: "",
-                      });
+                      props.openAlert("success1");
+                      setTimeout(() => {
+                        props.history.push("/login");
+                      }, 1000);
                     }
                   });
                 }
               });
             } else {
-              setSnackBarVisibility({ ...snackBarVisibility, err5: true });
+              props.openAlert("err5");
             }
           } else {
-            setSnackBarVisibility({ ...snackBarVisibility, err4: true });
+            props.openAlert("err4");
           }
         } else {
-          setSnackBarVisibility({ ...snackBarVisibility, err3: true });
+          props.openAlert("err3");
         }
       } else {
-        setSnackBarVisibility({ ...snackBarVisibility, err2: true });
+        props.openAlert("err2");
       }
     } else {
-      setSnackBarVisibility({ ...snackBarVisibility, err1: true });
+      props.openAlert("err1");
     }
   };
 
-  React.useEffect(() => {
-    setTimeout(() => {
-      setSnackBarVisibility({ ...snackBarVisibility, err1: false });
-    }, 3000);
-  }, [snackBarVisibility.err1]);
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      setSnackBarVisibility({ ...snackBarVisibility, err2: false });
-    }, 3000);
-  }, [snackBarVisibility.err2]);
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      setSnackBarVisibility({ ...snackBarVisibility, err3: false });
-    }, 3000);
-  }, [snackBarVisibility.err3]);
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      setSnackBarVisibility({ ...snackBarVisibility, err4: false });
-    }, 3000);
-  }, [snackBarVisibility.err4]);
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      setSnackBarVisibility({ ...snackBarVisibility, err5: false });
-    }, 3000);
-  }, [snackBarVisibility.err5]);
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      setSnackBarVisibility({ ...snackBarVisibility, err6: false });
-    }, 3000);
-  }, [snackBarVisibility.err6]);
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      setSnackBarVisibility({ ...snackBarVisibility, success: false });
-    }, 3000);
-  }, [snackBarVisibility.success]);
-
   return (
     <Box sx={{ pb: 5 }} style={{ backgroundColor: "#332D2D" }}>
-      <Snackbar open={snackBarVisibility.err1}>
-        <Alert
-          onClose={handleCloseErr1}
-          severity="error"
-          sx={{ width: "100%" }}
-        >
-          Minden mező kitöltése kötelező!
-        </Alert>
-      </Snackbar>
-      <Snackbar open={snackBarVisibility.err2}>
-        <Alert
-          onClose={handleCloseErr2}
-          severity="error"
-          sx={{ width: "100%" }}
-        >
-          A két email nem egyezik!
-        </Alert>
-      </Snackbar>
-      <Snackbar open={snackBarVisibility.err3}>
-        <Alert
-          onClose={handleCloseErr3}
-          severity="error"
-          sx={{ width: "100%" }}
-        >
-          A két jelszó nem egyezik!
-        </Alert>
-      </Snackbar>
-      <Snackbar open={snackBarVisibility.err4}>
-        <Alert
-          onClose={handleCloseErr4}
-          severity="error"
-          sx={{ width: "100%" }}
-        >
-          Hibás e-mail formátum!
-        </Alert>
-      </Snackbar>
-      <Snackbar open={snackBarVisibility.err5}>
-        <Alert
-          onClose={handleCloseErr5}
-          severity="error"
-          sx={{ width: "100%" }}
-        >
-          A jelszónak legalább 6 karakter hosszúnak kell lennie!
-        </Alert>
-      </Snackbar>
-      <Snackbar open={snackBarVisibility.err6}>
-        <Alert
-          onClose={handleCloseErr6}
-          severity="error"
-          sx={{ width: "100%" }}
-        >
-          Ez az e-mail cím már foglalt!
-        </Alert>
-      </Snackbar>
-      <Snackbar open={snackBarVisibility.success}>
-        <Alert
-          onClose={handleCloseSuccess}
-          severity="success"
-          sx={{ width: "100%" }}
-        >
-          Sikeres regisztráció, mostmár bejelentkezhetsz!
-        </Alert>
-      </Snackbar>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box

@@ -10,4 +10,5 @@ import net.javaguides.springboot.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
 	Page<User> findByEmail(String email, Pageable pageable);
+	User findByEmailAndPassword(String email, String password);
 }

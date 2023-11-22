@@ -16,7 +16,6 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 
 const pages = ["Kezdőlap", "Edzőink", "Csatlakozz", "Rólunk"];
-const settings = ["Admin Profil", "Profil", "Logout"];
 
 const NavBar = (props) => {
   const [isLoggedIn, setIsLoggedIn] = React.useState();
@@ -39,8 +38,18 @@ const NavBar = (props) => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (mode) => {
     setAnchorElUser(null);
+
+    switch (mode) {
+      case "logout":
+        props.setIsLoggedIn();
+        props.setNewState();
+        localStorage.removeItem("userid");
+        localStorage.removeItem("token");
+        props.history.push("/home");
+        break;
+    }
   };
 
   const handleButtonClick = (page) => {
@@ -148,11 +157,13 @@ const NavBar = (props) => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
+                <MenuItem
+                  onClick={() => {
+                    handleCloseUserMenu("logout");
+                  }}
+                >
+                  <Typography textAlign="center">Kijelentkezés</Typography>
+                </MenuItem>
               </Menu>
             </Box>
           ) : (

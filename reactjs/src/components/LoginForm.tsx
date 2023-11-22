@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { withRouter } from "react-router-dom";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -9,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
+import UserService from "../services/UserService.ts";
 
 const LoginForm = (props) => {
   const [actualState, setNewState] = React.useState({
@@ -25,8 +27,23 @@ const LoginForm = (props) => {
   };
 
   const handleSubmit = () => {
-    console.log({
-      actualState,
+    let user = {
+      email: actualState.email,
+      password: actualState.password,
+    };
+    UserService.loginUser(user).then((res) => {
+      if (res.data) {
+        localStorage.setItem("userid", res.data[0]);
+        localStorage.setItem("token", res.data[1]);
+        props.setNewState(res.data[0], res.data[1]);
+        props.setIsLoggedIn();
+        props.openAlert("success2");
+        setTimeout(() => {
+          props.history.push("/home");
+        }, 1000);
+      } else {
+        props.openAlert("err7");
+      }
     });
   };
 
@@ -108,4 +125,4 @@ const LoginForm = (props) => {
     </Box>
   );
 };
-export default LoginForm;
+export default withRouter(LoginForm);
