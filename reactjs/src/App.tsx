@@ -286,7 +286,7 @@ const App = (props) => {
           severity="success"
           sx={{ width: "100%" }}
         >
-          Sikeres regisztráció, mostmár bejelentkezhetsz!
+          Sikeres regisztráció!
         </Alert>
       </Snackbar>
       <Snackbar open={snackBarVisibility.success2}>
