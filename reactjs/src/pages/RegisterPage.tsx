@@ -5,7 +5,7 @@ import RegisterForm from "../components/RegisterForm.tsx";
 
 const RegisterPage = (props) => {
   React.useEffect(() => {
-    if (localStorage.getItem("token") && localStorage.getItem("userid")) {
+    if (localStorage.getItem("token")) {
       props.history.push("/home");
     }
   }, []);

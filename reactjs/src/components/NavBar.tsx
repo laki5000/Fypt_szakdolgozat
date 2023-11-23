@@ -14,10 +14,18 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
+import PersonIcon from "@mui/icons-material/Person";
+import LogoutIcon from "@mui/icons-material/Logout";
+import TrainerService from "../services/TrainerService.ts";
+import UserService from "../services/UserService.ts";
 
 const pages = ["Kezdőlap", "Edzőink", "Csatlakozz", "Rólunk"];
 
 const NavBar = (props) => {
+  const [actualState, setNewState] = React.useState({
+    lastname: "",
+    firstname: "",
+  });
   const [isLoggedIn, setIsLoggedIn] = React.useState();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -41,15 +49,7 @@ const NavBar = (props) => {
 
   const handleCloseUserMenu = (page) => {
     setAnchorElUser(null);
-
-    switch (page) {
-      case "logout":
-        props.setIsLoggedIn();
-        props.setNewState();
-        localStorage.removeItem("token");
-        props.history.push("/home");
-        break;
-    }
+    handleButtonClick(page);
   };
 
   const handleButtonClick = (page) => {
@@ -64,10 +64,29 @@ const NavBar = (props) => {
         props.history.push("/trainers");
         break;
       case "Csatlakozz":
-        props.history.push("/join");
+        if (localStorage.getItem("token")) {
+          TrainerService.getTrainerByUserid(props.userid).then((res) => {
+            if (res.data.content.length > 0) {
+              props.openAlert("err8");
+            } else {
+              props.history.push("/join");
+            }
+          });
+        } else {
+          props.history.push("/login");
+        }
         break;
       case "Rólunk":
         props.history.push("/about");
+        break;
+      case "Profil":
+        props.history.push("/profile");
+        break;
+      case "Kijelentkezés":
+        props.setIsLoggedIn();
+        props.setNewState();
+        localStorage.removeItem("token");
+        props.history.push("/home");
         break;
     }
   };
@@ -75,6 +94,18 @@ const NavBar = (props) => {
   React.useEffect(() => {
     setIsLoggedIn(props.isLoggedIn);
   }, [props.isLoggedIn]);
+
+  React.useEffect(() => {
+    if (props.userid) {
+      UserService.getUserById(props.userid).then((res) => {
+        setNewState({
+          ...actualState,
+          lastname: res.data.content[0].lastname,
+          firstname: res.data.content[0].firstname,
+        });
+      });
+    }
+  }, [props.userid]);
 
   return (
     <AppBar style={{ backgroundColor: "#332D2D" }} position="static">
@@ -135,7 +166,14 @@ const NavBar = (props) => {
                     handleCloseNavMenu(page);
                   }}
                 >
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography
+                    textAlign="center"
+                    sx={{
+                      fontSize: "20px",
+                    }}
+                  >
+                    {page}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -147,7 +185,12 @@ const NavBar = (props) => {
                 onClick={() => {
                   handleCloseNavMenu(page);
                 }}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{
+                  my: 2,
+                  color: "white",
+                  display: "block",
+                  fontSize: "18px",
+                }}
               >
                 {page}
               </Button>
@@ -177,12 +220,54 @@ const NavBar = (props) => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                <MenuItem
-                  onClick={() => {
-                    handleCloseUserMenu("logout");
+                <Typography
+                  textAlign="center"
+                  sx={{
+                    mb: "10px",
+                    fontSize: "20px",
                   }}
                 >
-                  <Typography textAlign="center">Kijelentkezés</Typography>
+                  {actualState.lastname + " " + actualState.firstname}
+                </Typography>
+                <MenuItem
+                  onClick={() => {
+                    handleCloseUserMenu("Profil");
+                  }}
+                >
+                  <PersonIcon
+                    sx={{
+                      mr: "5px",
+                      fontSize: "22px",
+                    }}
+                  />
+                  <Typography
+                    textAlign="center"
+                    sx={{
+                      fontSize: "20px",
+                    }}
+                  >
+                    Profil
+                  </Typography>
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleCloseUserMenu("Kijelentkezés");
+                  }}
+                >
+                  <LogoutIcon
+                    sx={{
+                      mr: "5px",
+                      fontSize: "22px",
+                    }}
+                  />
+                  <Typography
+                    textAlign="center"
+                    sx={{
+                      fontSize: "20px",
+                    }}
+                  >
+                    Kijelentkezés
+                  </Typography>
                 </MenuItem>
               </Menu>
             </Box>
@@ -193,7 +278,7 @@ const NavBar = (props) => {
               }}
               sx={{ my: 3, color: "white", display: "block", fontSize: 18 }}
             >
-              Bejelentkezés
+              <Typography>Bejelentkezés</Typography>
             </Button>
           )}
         </Toolbar>

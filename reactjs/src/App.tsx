@@ -16,6 +16,7 @@ import RegisterPage from "./pages/RegisterPage.tsx";
 import TrainersPage from "./pages/TrainersPage.tsx";
 import JoinPage from "./pages/JoinPage.tsx";
 import AboutPage from "./pages/AboutPage.tsx";
+import ProfilPage from "./pages/ProfilPage.tsx";
 import UserService from "./services/UserService.ts";
 
 const App = (props) => {
@@ -29,6 +30,7 @@ const App = (props) => {
     err5: false,
     err6: false,
     err7: false,
+    err8: false,
     success1: false,
     success2: false,
   });
@@ -61,6 +63,9 @@ const App = (props) => {
       case "err7":
         setSnackBarVisibility({ ...snackBarVisibility, err7: false });
         break;
+      case "err8":
+        setSnackBarVisibility({ ...snackBarVisibility, err8: false });
+        break;
       case "success1":
         setSnackBarVisibility({ ...snackBarVisibility, success1: false });
         break;
@@ -92,6 +97,9 @@ const App = (props) => {
         break;
       case "err7":
         setSnackBarVisibility({ ...snackBarVisibility, err7: true });
+        break;
+      case "err8":
+        setSnackBarVisibility({ ...snackBarVisibility, err8: true });
         break;
       case "success1":
         setSnackBarVisibility({ ...snackBarVisibility, success1: true });
@@ -143,6 +151,12 @@ const App = (props) => {
       setSnackBarVisibility({ ...snackBarVisibility, err7: false });
     }, 3000);
   }, [snackBarVisibility.err7]);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setSnackBarVisibility({ ...snackBarVisibility, err8: false });
+    }, 3000);
+  }, [snackBarVisibility.err8]);
 
   React.useEffect(() => {
     setTimeout(() => {
@@ -252,6 +266,17 @@ const App = (props) => {
           Hibás e-mail vagy jelszó!
         </Alert>
       </Snackbar>
+      <Snackbar open={snackBarVisibility.err8}>
+        <Alert
+          onClose={() => {
+            handleCloseAlert("err8");
+          }}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
+          Már jelentkeztél edzőnek!
+        </Alert>
+      </Snackbar>
       <Snackbar open={snackBarVisibility.success1}>
         <Alert
           onClose={() => {
@@ -281,7 +306,11 @@ const App = (props) => {
         setNewState={() => {
           setNewState({ userid: "", token: "" });
         }}
+        openAlert={(type) => {
+          handleOpenAlert(type);
+        }}
         isLoggedIn={isLoggedIn}
+        userid={actualState.userid}
       />
       <Line />
       <Switch>
@@ -315,10 +344,18 @@ const App = (props) => {
           <TrainersPage />
         </Route>
         <Route path="/join">
-          <JoinPage />
+          <JoinPage
+            openAlert={(type) => {
+              handleOpenAlert(type);
+            }}
+            userid={actualState.userid}
+          />
         </Route>
         <Route path="/about">
           <AboutPage />
+        </Route>
+        <Route path="/profile">
+          <ProfilPage />
         </Route>
       </Switch>
     </Router>

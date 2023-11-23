@@ -48,12 +48,6 @@ public class UserController {
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")
-	@GetMapping("/users/load/byemail/{email}")
-	public Page<UserDto> getUserByEmail(@PathVariable String email, Pageable pageable) {
-	    return userrepository.findByEmail(email, pageable).map(UserDto::new);
-	}
-	
-	@CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/users/auth")
     public String authUser(@RequestHeader("Authorization") String token) {
         if (jtp.validateToken(token)) {
@@ -62,4 +56,16 @@ public class UserController {
             return null;
         }
     }
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@GetMapping("/users/load/byemail/{email}")
+	public Page<UserDto> getUserByEmail(@PathVariable String email, Pageable pageable) {
+	    return userrepository.findByEmail(email, pageable).map(UserDto::new);
+	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@GetMapping("/users/load/byid/{id}")
+	public Page<UserDto> getUserById(@PathVariable long id, Pageable pageable) {
+	    return userrepository.findById(id, pageable).map(UserDto::new);
+	}
 }

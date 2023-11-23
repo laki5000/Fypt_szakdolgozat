@@ -22,5 +22,8 @@ const UserService = {
   getUserByEmail: (email) => {
     return axios.get(GET_USER_API_URL + "/byemail/" + email);
   },
+  getUserById: (id) => {
+    return axios.get(GET_USER_API_URL + "/byid/" + id);
+  },
 };
 export default UserService;

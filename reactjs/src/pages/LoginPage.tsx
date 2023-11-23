@@ -3,9 +3,9 @@ import { withRouter } from "react-router-dom";
 import Box from "@mui/material/Box";
 import LoginForm from "../components/LoginForm.tsx";
 
-const HomePage = (props) => {
+const LoginPage = (props) => {
   React.useEffect(() => {
-    if (localStorage.getItem("token") && localStorage.getItem("userid")) {
+    if (localStorage.getItem("token")) {
       props.history.push("/home");
     }
   }, []);
@@ -24,4 +24,4 @@ const HomePage = (props) => {
     </Box>
   );
 };
-export default withRouter(HomePage);
+export default withRouter(LoginPage);

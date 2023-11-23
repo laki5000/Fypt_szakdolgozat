@@ -18,6 +18,8 @@ const LoginForm = (props) => {
     password: "",
   });
 
+  const [isButtonDisabled, setIsButtonDisabled] = React.useState(false);
+
   const handleEmailChanged = (event) => {
     setNewState({ ...actualState, email: event.target.value });
   };
@@ -27,6 +29,10 @@ const LoginForm = (props) => {
   };
 
   const handleSubmit = () => {
+    setIsButtonDisabled(true);
+    setTimeout(() => {
+      setIsButtonDisabled(false);
+    }, 1000);
     let user = {
       email: actualState.email,
       password: actualState.password,
@@ -103,6 +109,7 @@ const LoginForm = (props) => {
               onChange={handlePasswordChanged}
             />
             <Button
+              disabled={isButtonDisabled}
               type="submit"
               fullWidth
               variant="contained"

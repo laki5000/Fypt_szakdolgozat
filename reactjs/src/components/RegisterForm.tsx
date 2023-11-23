@@ -30,6 +30,8 @@ const RegisterForm = (props) => {
     password2: "",
   });
 
+  const [isButtonDisabled, setIsButtonDisabled] = React.useState(false);
+
   const handleLastNameChanged = (event) => {
     setNewState({ ...actualState, lastname: event.target.value });
   };
@@ -71,6 +73,10 @@ const RegisterForm = (props) => {
   };
 
   const handleSubmit = () => {
+    setIsButtonDisabled(true);
+    setTimeout(() => {
+      setIsButtonDisabled(false);
+    }, 1000);
     if (
       actualState.lastname &&
       actualState.firstname &&
@@ -304,6 +310,7 @@ const RegisterForm = (props) => {
               onChange={handlePassword2Changed}
             />
             <Button
+              disabled={isButtonDisabled}
               type="submit"
               fullWidth
               variant="contained"

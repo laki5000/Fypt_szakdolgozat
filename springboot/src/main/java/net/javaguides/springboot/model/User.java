@@ -52,9 +52,10 @@ public class User {
 		
 	}
 
-	public User(String lastname, String firstname, int gender, String birthplace, Date dateofbirth,
+	public User(long id, String lastname, String firstname, int gender, String birthplace, Date dateofbirth,
 			String city, String email, String password, int weight, int height) {
 		super();
+		this.id = id;
 		this.lastname = lastname;
 		this.firstname = firstname;
 		this.gender = gender;
@@ -69,6 +70,7 @@ public class User {
 	
 	public User(UserDto userdto) {
 		super();
+		this.id = userdto.getId();
 		this.lastname = userdto.getLastname();
 		this.firstname = userdto.getFirstname();
 		this.gender = userdto.getGender();
