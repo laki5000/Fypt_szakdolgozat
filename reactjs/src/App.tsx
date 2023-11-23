@@ -18,6 +18,7 @@ import JoinPage from "./pages/JoinPage.tsx";
 import AboutPage from "./pages/AboutPage.tsx";
 import ProfilPage from "./pages/ProfilPage.tsx";
 import UserService from "./services/UserService.ts";
+import Footer from "./components/Footer.tsx";
 
 const App = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -358,6 +359,12 @@ const App = (props) => {
           <ProfilPage />
         </Route>
       </Switch>
+      <Footer
+        openAlert={(type) => {
+          handleOpenAlert(type);
+        }}
+        userid={actualState.userid}
+      />
     </Router>
   );
 };
