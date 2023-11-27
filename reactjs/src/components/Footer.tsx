@@ -43,7 +43,11 @@ const Footer = (props) => {
       <Container maxWidth="lg">
         <Grid container direction="column" alignItems="center">
           <Grid item xs={12}>
-            <Typography color="white" variant="h5">
+            <Typography
+              color="white"
+              variant="h5"
+              style={{ marginBottom: "5%" }}
+            >
               Find Your Personal Trainer
             </Typography>
           </Grid>

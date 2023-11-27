@@ -43,9 +43,11 @@ const LoginForm = (props) => {
         props.setNewState(res.data[0], res.data[1]);
         props.setIsLoggedIn();
         props.openAlert("success2");
-        setTimeout(() => {
-          props.history.push("/home");
-        }, 1000);
+        if (window.location.pathname !== "/profile") {
+          setTimeout(() => {
+            props.history.push("/home");
+          }, 1000);
+        }
       } else {
         props.openAlert("err7");
       }

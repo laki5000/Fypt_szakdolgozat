@@ -53,7 +53,7 @@ const HomeForm = () => {
           </Box>
         </Typography>
         <Typography variant="h6" style={{ color: "white" }}>
-          Regisztrálj most, és kezd el utadat az egészség és jó közérzet felé!
+          Regisztrálj most, és kezdd el utadat az egészség és jó közérzet felé!
         </Typography>
       </Container>
     </Box>

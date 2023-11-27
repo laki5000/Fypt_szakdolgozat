@@ -5,7 +5,7 @@ import LoginForm from "../components/LoginForm.tsx";
 
 const LoginPage = (props) => {
   React.useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (window.location.pathname !== "/profile") {
       props.history.push("/home");
     }
   }, []);

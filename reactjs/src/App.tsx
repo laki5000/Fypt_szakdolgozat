@@ -16,7 +16,7 @@ import RegisterPage from "./pages/RegisterPage.tsx";
 import TrainersPage from "./pages/TrainersPage.tsx";
 import JoinPage from "./pages/JoinPage.tsx";
 import AboutPage from "./pages/AboutPage.tsx";
-import ProfilPage from "./pages/ProfilPage.tsx";
+import ProfilePage from "./pages/ProfilePage.tsx";
 import UserService from "./services/UserService.ts";
 import Footer from "./components/Footer.tsx";
 
@@ -356,7 +356,21 @@ const App = (props) => {
           <AboutPage />
         </Route>
         <Route path="/profile">
-          <ProfilPage />
+          {isLoggedIn ? (
+            <ProfilePage userid={actualState.userid} isLoggedIn={isLoggedIn} />
+          ) : (
+            <LoginPage
+              setIsLoggedIn={() => {
+                setIsLoggedIn(true);
+              }}
+              openAlert={(type) => {
+                handleOpenAlert(type);
+              }}
+              setNewState={(userid, token) => {
+                setNewState({ userid: userid, token: token });
+              }}
+            />
+          )}
         </Route>
       </Switch>
       <Footer
