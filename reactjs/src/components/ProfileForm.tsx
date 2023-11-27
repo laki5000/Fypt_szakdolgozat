@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
@@ -18,6 +19,7 @@ import MenuItem from "@mui/material/MenuItem";
 import UserService from "../services/UserService.ts";
 import OtherService from "../services/OtherService.ts";
 import UploadButton from "./UploadButton.tsx";
+import TrainerService from "../services/TrainerService.ts";
 
 const ProfileForm = (props) => {
   const [actualState, setNewState] = React.useState({
@@ -63,6 +65,26 @@ const ProfileForm = (props) => {
       setIsButtonDisabled(false);
     }, 1000);
     setOtherState({ ...otherState, datachange: true });
+  };
+
+  const handleDeleteProfileButton = async () => {
+    const userResponse = window.confirm(
+      "Biztosan törölni szeretnéd a profilt?"
+    );
+
+    if (userResponse) {
+      if (props.isTrainer) {
+        TrainerService.getTrainerByUserid(actualState.id).then((res) => {
+          TrainerService.deleteTrainer(res.data.content[0].id);
+        });
+      }
+      UserService.deleteUser(actualState.id).then(() => {
+        props.setIsLoggedIn();
+        props.setNewState();
+        localStorage.removeItem("token");
+        props.history.push("/home");
+      });
+    }
   };
 
   const handleDiscardChangesButton = () => {
@@ -229,7 +251,7 @@ const ProfileForm = (props) => {
             sx={{ paddingBottom: 3 }}
             variant="h3"
           >
-            Profil
+            {props.isTrainer && "Edző "}Profil
           </Typography>
           <Avatar
             style={{ margin: "auto" }}
@@ -514,7 +536,13 @@ const ProfileForm = (props) => {
               >
                 Adatok módosítása
               </Button>
-              <Button disabled={isButtonDisabled} color="error">
+              <Button
+                disabled={isButtonDisabled}
+                color="error"
+                onClick={() => {
+                  handleDeleteProfileButton();
+                }}
+              >
                 Profil törlése
               </Button>
             </Box>
@@ -544,4 +572,4 @@ const ProfileForm = (props) => {
     </Box>
   );
 };
-export default ProfileForm;
+export default withRouter(ProfileForm);

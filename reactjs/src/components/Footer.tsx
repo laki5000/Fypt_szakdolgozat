@@ -14,8 +14,8 @@ const Footer = (props) => {
         break;
       case "Csatlakozz":
         if (localStorage.getItem("token")) {
-          TrainerService.getTrainerByUserid(props.userid).then((res) => {
-            if (res.data.content.length > 0) {
+          TrainerService.getTrainerByUserid(props.userid).then(() => {
+            if (props.isTrainer) {
               props.openAlert("err8");
             } else {
               props.history.push("/join");

@@ -11,6 +11,7 @@ import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import UserService from "../services/UserService.ts";
+import TrainerService from "../services/TrainerService.ts";
 
 const LoginForm = (props) => {
   const [actualState, setNewState] = React.useState({
@@ -42,7 +43,13 @@ const LoginForm = (props) => {
         localStorage.setItem("token", res.data[1]);
         props.setNewState(res.data[0], res.data[1]);
         props.setIsLoggedIn();
+        props.setIsTrainer();
         props.openAlert("success2");
+        TrainerService.getTrainerByUserid(res.data[0]).then((resp) => {
+          if (resp.data.content.length > 0) {
+            props.setIsTrainer();
+          }
+        });
         if (window.location.pathname !== "/profile") {
           setTimeout(() => {
             props.history.push("/home");

@@ -1,9 +1,13 @@
 package net.javaguides.springboot.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -68,4 +72,17 @@ public class UserController {
 	public Page<UserDto> getUserById(@PathVariable long id, Pageable pageable) {
 	    return userrepository.findById(id, pageable).map(UserDto::new);
 	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@DeleteMapping("/users/delete/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        Optional<User> optionalUser = userrepository.findById(id);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            userrepository.delete(user);
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

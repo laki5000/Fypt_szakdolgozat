@@ -5,10 +5,12 @@ import LoginForm from "../components/LoginForm.tsx";
 
 const LoginPage = (props) => {
   React.useEffect(() => {
-    if (window.location.pathname !== "/profile") {
-      props.history.push("/home");
+    if (props.isLoggedIn) {
+      if (window.location.pathname !== "/profile") {
+        props.history.push("/home");
+      }
     }
-  }, []);
+  }, [props.isLoggedIn]);
 
   return (
     <Box>
@@ -19,6 +21,9 @@ const LoginPage = (props) => {
         }}
         setNewState={(userid, token) => {
           props.setNewState(userid, token);
+        }}
+        setIsTrainer={() => {
+          props.setIsTrainer();
         }}
       />
     </Box>

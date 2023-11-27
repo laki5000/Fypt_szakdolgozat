@@ -9,6 +9,13 @@ const ProfilePage = (props) => {
       openAlert={(type) => {
         props.openAlert(type);
       }}
+      isTrainer={props.isTrainer}
+      setIsLoggedIn={() => {
+        props.setIsLoggedIn();
+      }}
+      setNewState={() => {
+        props.setNewState();
+      }}
     />
   );
 };

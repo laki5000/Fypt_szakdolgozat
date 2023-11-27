@@ -26,7 +26,6 @@ const NavBar = (props) => {
     lastname: "",
     firstname: "",
   });
-  const [isLoggedIn, setIsLoggedIn] = React.useState();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -67,8 +66,8 @@ const NavBar = (props) => {
         break;
       case "Csatlakozz":
         if (localStorage.getItem("token")) {
-          TrainerService.getTrainerByUserid(props.userid).then((res) => {
-            if (res.data.content.length > 0) {
+          TrainerService.getTrainerByUserid(props.userid).then(() => {
+            if (props.isTrainer) {
               props.openAlert("err8");
             } else {
               props.history.push("/join");
@@ -92,10 +91,6 @@ const NavBar = (props) => {
         break;
     }
   };
-
-  React.useEffect(() => {
-    setIsLoggedIn(props.isLoggedIn);
-  }, [props.isLoggedIn]);
 
   React.useEffect(() => {
     if (props.userid) {
@@ -210,7 +205,7 @@ const NavBar = (props) => {
             ))}
           </Box>
 
-          {isLoggedIn ? (
+          {props.isLoggedIn ? (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

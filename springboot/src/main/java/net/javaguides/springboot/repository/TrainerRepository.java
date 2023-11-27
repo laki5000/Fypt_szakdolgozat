@@ -10,5 +10,4 @@ import net.javaguides.springboot.model.Trainer;
 @Repository
 public interface TrainerRepository extends JpaRepository<Trainer, Long>{
 	Page<Trainer> findByUserid(long userid, Pageable pageable);
-
 }

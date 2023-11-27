@@ -5,10 +5,10 @@ import RegisterForm from "../components/RegisterForm.tsx";
 
 const RegisterPage = (props) => {
   React.useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (props.isLoggedIn) {
       props.history.push("/home");
     }
-  }, []);
+  }, [props.isLoggedIn]);
 
   return (
     <Box>

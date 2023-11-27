@@ -19,9 +19,12 @@ import AboutPage from "./pages/AboutPage.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
 import UserService from "./services/UserService.ts";
 import Footer from "./components/Footer.tsx";
+import TrainerService from "./services/TrainerService.ts";
 
 const App = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const [isTrainer, setIsTrainer] = useState(false);
 
   const [snackBarVisibility, setSnackBarVisibility] = React.useState({
     err1: false,
@@ -194,6 +197,12 @@ const App = (props) => {
             userid: res.data,
             token: token_tmp,
           });
+
+          TrainerService.getTrainerByUserid(res.data).then((res) => {
+            if (res.data.content.length > 0) {
+              setIsTrainer(true);
+            }
+          });
         } else {
           localStorage.removeItem("token");
         }
@@ -335,6 +344,7 @@ const App = (props) => {
           handleOpenAlert(type);
         }}
         isLoggedIn={isLoggedIn}
+        isTrainer={isTrainer}
         userid={actualState.userid}
       />
       <Line />
@@ -353,6 +363,10 @@ const App = (props) => {
             setNewState={(userid, token) => {
               setNewState({ userid: userid, token: token });
             }}
+            isLoggedIn={isLoggedIn}
+            setIsTrainer={() => {
+              setIsTrainer(true);
+            }}
           />
         </Route>
         <Route path="/register">
@@ -360,6 +374,7 @@ const App = (props) => {
             openAlert={(type) => {
               handleOpenAlert(type);
             }}
+            isLoggedIn={isLoggedIn}
           />
         </Route>
         <Route path="/home">
@@ -374,6 +389,7 @@ const App = (props) => {
               handleOpenAlert(type);
             }}
             userid={actualState.userid}
+            isTrainer={isTrainer}
           />
         </Route>
         <Route path="/about">
@@ -384,8 +400,15 @@ const App = (props) => {
             <ProfilePage
               userid={actualState.userid}
               isLoggedIn={isLoggedIn}
+              isTrainer={isTrainer}
               openAlert={(type) => {
                 handleOpenAlert(type);
+              }}
+              setIsLoggedIn={() => {
+                setIsLoggedIn(false);
+              }}
+              setNewState={() => {
+                setNewState({ userid: "", token: "" });
               }}
             />
           ) : (
@@ -399,6 +422,10 @@ const App = (props) => {
               setNewState={(userid, token) => {
                 setNewState({ userid: userid, token: token });
               }}
+              isLoggedIn={isLoggedIn}
+              setIsTrainer={() => {
+                setIsTrainer(true);
+              }}
             />
           )}
         </Route>
@@ -408,6 +435,8 @@ const App = (props) => {
           handleOpenAlert(type);
         }}
         userid={actualState.userid}
+        isTrainer={isTrainer}
+        isLoggedIn={isLoggedIn}
       />
     </Router>
   );
