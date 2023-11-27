@@ -35,6 +35,8 @@ const NavBar = (props) => {
     null
   );
 
+  const [imageExists, setImageExists] = React.useState(false);
+
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -105,6 +107,17 @@ const NavBar = (props) => {
         });
       });
     }
+
+    const img = new Image();
+    img.src = props.userid + ".jpg";
+
+    img.onload = () => {
+      setImageExists(true);
+    };
+
+    img.onerror = () => {
+      setImageExists(false);
+    };
   }, [props.userid]);
 
   return (
@@ -199,9 +212,16 @@ const NavBar = (props) => {
 
           {isLoggedIn ? (
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
+              <Tooltip title="">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="profile_pic_def.jpg" />
+                  <Avatar
+                    alt="Profile Picture"
+                    src={
+                      imageExists
+                        ? props.userid + ".jpg"
+                        : "profile_pic_def.jpg"
+                    }
+                  />
                 </IconButton>
               </Tooltip>
               <Menu

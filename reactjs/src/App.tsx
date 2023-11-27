@@ -34,6 +34,7 @@ const App = (props) => {
     err8: false,
     success1: false,
     success2: false,
+    success3: false,
   });
 
   const [actualState, setNewState] = React.useState({
@@ -73,6 +74,9 @@ const App = (props) => {
       case "success2":
         setSnackBarVisibility({ ...snackBarVisibility, success2: false });
         break;
+      case "success3":
+        setSnackBarVisibility({ ...snackBarVisibility, success3: false });
+        break;
     }
   };
 
@@ -107,6 +111,9 @@ const App = (props) => {
         break;
       case "success2":
         setSnackBarVisibility({ ...snackBarVisibility, success2: true });
+        break;
+      case "success3":
+        setSnackBarVisibility({ ...snackBarVisibility, success3: true });
         break;
     }
   };
@@ -170,6 +177,12 @@ const App = (props) => {
       setSnackBarVisibility({ ...snackBarVisibility, success2: false });
     }, 3000);
   }, [snackBarVisibility.success2]);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setSnackBarVisibility({ ...snackBarVisibility, success3: false });
+    }, 3000);
+  }, [snackBarVisibility.success3]);
 
   React.useEffect(() => {
     const token_tmp = localStorage.getItem("token");
@@ -300,6 +313,17 @@ const App = (props) => {
           Sikeres bejelentkezés!
         </Alert>
       </Snackbar>
+      <Snackbar open={snackBarVisibility.success3}>
+        <Alert
+          onClose={() => {
+            handleCloseAlert("success3");
+          }}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Sikeresen megváltoztattad az adataidat!
+        </Alert>
+      </Snackbar>
       <NavBar
         setIsLoggedIn={() => {
           setIsLoggedIn(false);
@@ -357,7 +381,13 @@ const App = (props) => {
         </Route>
         <Route path="/profile">
           {isLoggedIn ? (
-            <ProfilePage userid={actualState.userid} isLoggedIn={isLoggedIn} />
+            <ProfilePage
+              userid={actualState.userid}
+              isLoggedIn={isLoggedIn}
+              openAlert={(type) => {
+                handleOpenAlert(type);
+              }}
+            />
           ) : (
             <LoginPage
               setIsLoggedIn={() => {
