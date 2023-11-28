@@ -1,15 +1,19 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import FileService from "../services/FileService.ts";
 
 interface UploadButtonProps {
   userid: string;
+  openAlert: (message: string) => void;
 }
 
 const UploadButton: React.FC<UploadButtonProps> = (props) => {
   const [selectedImage, setSelectedImage] = React.useState<File | null>(null);
 
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const file = event.target.files?.[0];
     if (file) {
       setSelectedImage(file);
@@ -17,17 +21,13 @@ const UploadButton: React.FC<UploadButtonProps> = (props) => {
       const formData = new FormData();
       formData.append("file", file);
 
-      fetch("http://localhost:8080/api/files/upload/" + props.userid, {
-        method: "POST",
-        body: formData,
-      })
-        .then((response) => response.text())
-        .then((result) => {
-          console.log(result);
-        })
-        .catch((error) => {
-          console.error("Error uploading file:", error);
-        });
+      FileService.uploadImage(props.userid, formData).then((res) => {
+        if (res.data === "error") {
+          props.openAlert("err9");
+        } else if (res.data === "success") {
+          props.openAlert("success4");
+        }
+      });
     }
   };
 

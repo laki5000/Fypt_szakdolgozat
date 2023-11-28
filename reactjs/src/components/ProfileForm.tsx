@@ -86,6 +86,8 @@ const ProfileForm = (props) => {
 
   const [isButtonDisabled, setIsButtonDisabled] = React.useState(false);
 
+  const [isLoading, setIsLoading] = React.useState(true);
+
   const handleChangeDataButton = () => {
     setIsButtonDisabled(true);
     setTimeout(() => {
@@ -382,6 +384,7 @@ const ProfileForm = (props) => {
           weight: res.data.content[0].weight,
           height: res.data.content[0].height,
         });
+        setIsLoading(false);
       });
     }
   };
@@ -425,18 +428,18 @@ const ProfileForm = (props) => {
   }, [props.userid]);
 
   React.useEffect(() => {
+    if (props.isTrainer) {
+      setStatesOnlyTrainer();
+    }
+  }, [props.isTrainer]);
+
+  React.useEffect(() => {
     setTmps();
   }, [actualState]);
 
   React.useEffect(() => {
     setTmpsOnlyTrainer();
   }, [actualStateOnlyTrainer]);
-
-  React.useEffect(() => {
-    if (props.isTrainer) {
-      setStatesOnlyTrainer();
-    }
-  }, [props.isTrainer]);
 
   return (
     <Box sx={{ pb: 5, pt: 5 }} style={{ backgroundColor: "#332D2D" }}>
@@ -456,7 +459,12 @@ const ProfileForm = (props) => {
             src={imageExists ? props.userid + ".jpg" : "profile_pic_def.jpg"}
           />
           <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <UploadButton userid={props.userid} />
+            <UploadButton
+              userid={props.userid}
+              openAlert={(type) => {
+                props.openAlert(type);
+              }}
+            />
           </Box>
           <Typography
             style={{ textAlign: "center" }}

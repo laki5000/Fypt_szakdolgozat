@@ -23,9 +23,9 @@ public class FileStorageService {
                 Files.delete(filePath);
             }
             Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-            return "File uploaded successfully!";
+            return "success";
         } else {
-            return "Error: Only JPG files can be uploaded.";
+            return "error";
         }
     }
 
