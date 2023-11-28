@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -24,11 +24,11 @@ import Footer from "./components/Footer.tsx";
 import TrainerService from "./services/TrainerService.ts";
 
 const App = (props) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
-  const [isTrainer, setIsTrainer] = useState(false);
+  const [isTrainer, setIsTrainer] = React.useState(false);
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   const [snackBarVisibility, setSnackBarVisibility] = React.useState({
     message: "",
@@ -266,6 +266,9 @@ const App = (props) => {
           <JoinPage
             openAlert={(type) => {
               handleOpenAlert(type);
+            }}
+            setIsTrainer={() => {
+              setIsTrainer(true);
             }}
             userid={actualState.userid}
             isTrainer={isTrainer}

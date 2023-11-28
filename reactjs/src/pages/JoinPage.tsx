@@ -20,6 +20,9 @@ const JoinPage = (props) => {
         openAlert={(type) => {
           props.openAlert(type);
         }}
+        setIsTrainer={() => {
+          props.setIsTrainer();
+        }}
         userid={props.userid}
       />
     </Box>

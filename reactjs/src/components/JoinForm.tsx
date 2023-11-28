@@ -84,6 +84,7 @@ const RegisterForm = (props) => {
       };
       TrainerService.saveTrainer(trainer).then((res) => {
         if (res.data) {
+          props.setIsTrainer();
           props.openAlert("success1");
           setTimeout(() => {
             props.history.push("/home");
