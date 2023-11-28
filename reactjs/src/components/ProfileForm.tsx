@@ -456,7 +456,7 @@ const ProfileForm = (props) => {
             src={imageExists ? props.userid + ".jpg" : "profile_pic_def.jpg"}
           />
           <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <UploadButton />
+            <UploadButton userid={props.userid} />
           </Box>
           <Typography
             style={{ textAlign: "center" }}
