@@ -66,9 +66,14 @@ const NavBar = (props) => {
         break;
       case "Csatlakozz":
         if (localStorage.getItem("token")) {
-          TrainerService.getTrainerByUserid(props.userid).then(() => {
+          TrainerService.getTrainerByUserid(props.userid).then((res) => {
             if (props.isTrainer) {
-              props.openAlert("err8");
+              if (res.data.content.length > 0) {
+                props.openAlert("err8");
+              } else {
+                props.setIsTrainer();
+                props.history.push("/join");
+              }
             } else {
               props.history.push("/join");
             }
@@ -86,6 +91,7 @@ const NavBar = (props) => {
       case "Kijelentkezés":
         props.setIsLoggedIn();
         props.setNewState();
+        props.setIsTrainer();
         localStorage.removeItem("token");
         props.history.push("/home");
         break;

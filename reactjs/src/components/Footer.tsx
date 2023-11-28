@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Container, Grid, Typography, Link } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import { withRouter } from "react-router-dom";
 import TrainerService from "../services/TrainerService.ts";
 
@@ -14,9 +14,14 @@ const Footer = (props) => {
         break;
       case "Csatlakozz":
         if (localStorage.getItem("token")) {
-          TrainerService.getTrainerByUserid(props.userid).then(() => {
+          TrainerService.getTrainerByUserid(props.userid).then((res) => {
             if (props.isTrainer) {
-              props.openAlert("err8");
+              if (res.data.content.length > 0) {
+                props.openAlert("err8");
+              } else {
+                props.setIsTrainer();
+                props.history.push("/join");
+              }
             } else {
               props.history.push("/join");
             }

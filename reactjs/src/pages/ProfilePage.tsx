@@ -16,6 +16,9 @@ const ProfilePage = (props) => {
       setNewState={() => {
         props.setNewState();
       }}
+      setIsTrainer={() => {
+        props.setIsTrainer();
+      }}
     />
   );
 };

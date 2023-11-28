@@ -205,6 +205,7 @@ const App = (props) => {
           });
         } else {
           localStorage.removeItem("token");
+          setIsTrainer(false);
         }
       });
     }
@@ -340,6 +341,9 @@ const App = (props) => {
         setNewState={() => {
           setNewState({ userid: "", token: "" });
         }}
+        setIsTrainer={() => {
+          setIsTrainer(false);
+        }}
         openAlert={(type) => {
           handleOpenAlert(type);
         }}
@@ -410,6 +414,9 @@ const App = (props) => {
               setNewState={() => {
                 setNewState({ userid: "", token: "" });
               }}
+              setIsTrainer={() => {
+                setIsTrainer(false);
+              }}
             />
           ) : (
             <LoginPage
@@ -433,6 +440,9 @@ const App = (props) => {
       <Footer
         openAlert={(type) => {
           handleOpenAlert(type);
+        }}
+        setIsTrainer={() => {
+          setIsTrainer(false);
         }}
         userid={actualState.userid}
         isTrainer={isTrainer}

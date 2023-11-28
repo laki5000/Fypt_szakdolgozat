@@ -16,6 +16,9 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import Checkbox from "@mui/material/Checkbox";
+import InputAdornment from "@mui/material/InputAdornment";
+import { TextareaAutosize } from "@mui/base/TextareaAutosize";
 import UserService from "../services/UserService.ts";
 import OtherService from "../services/OtherService.ts";
 import UploadButton from "./UploadButton.tsx";
@@ -36,6 +39,18 @@ const ProfileForm = (props) => {
     height: "",
   });
 
+  const [actualStateOnlyTrainer, setNewStateOnlyTrainer] = React.useState({
+    id: "",
+    userid: "",
+    target: "",
+    targetcity: "",
+    online: false,
+    diet: false,
+    trainingtype: "",
+    phone: "",
+    introduction: "",
+  });
+
   const [tmpStates, setTmpStates] = React.useState({
     id: "",
     lastname: "",
@@ -48,6 +63,18 @@ const ProfileForm = (props) => {
     password: "",
     weight: "",
     height: "",
+  });
+
+  const [tmpStatesOnlyTrainer, setTmpStatesOnlyTrainer] = React.useState({
+    id: "",
+    userid: "",
+    target: "",
+    targetcity: "",
+    online: false,
+    diet: false,
+    trainingtype: "",
+    phone: "",
+    introduction: "",
   });
 
   const [otherState, setOtherState] = React.useState({
@@ -94,6 +121,10 @@ const ProfileForm = (props) => {
     }, 1000);
     setOtherState({ ...otherState, datachange: false });
     setTmps();
+
+    if (props.isTrainer) {
+      setTmpsOnlyTrainer();
+    }
   };
 
   const handleSaveChangesButton = () => {
@@ -101,48 +132,116 @@ const ProfileForm = (props) => {
     setTimeout(() => {
       setIsButtonDisabled(false);
     }, 1000);
-    if (
-      tmpStates.lastname &&
-      tmpStates.firstname &&
-      tmpStates.gender &&
-      tmpStates.birthplace &&
-      tmpStates.dateofbirth &&
-      tmpStates.city &&
-      tmpStates.email &&
-      tmpStates.password &&
-      tmpStates.weight &&
-      tmpStates.height
-    ) {
-      if (tmpStates.email.includes("@") && tmpStates.email.includes(".")) {
-        if (tmpStates.password.length >= 6) {
-          let user = {
-            id: tmpStates.id,
-            lastname: tmpStates.lastname,
-            firstname: tmpStates.firstname,
-            gender: tmpStates.gender,
-            birthplace: tmpStates.birthplace,
-            dateofbirth: tmpStates.dateofbirth,
-            city: tmpStates.city,
-            email: tmpStates.email,
-            password: tmpStates.password,
-            weight: tmpStates.weight,
-            height: tmpStates.height,
-          };
-          UserService.saveUser(user).then((res) => {
-            if (res.data) {
-              setOtherState({ ...otherState, datachange: false });
-              setStates();
-              props.openAlert("success3");
-            }
-          });
+    if (props.isTrainer) {
+      if (
+        tmpStates.lastname &&
+        tmpStates.firstname &&
+        tmpStates.gender &&
+        tmpStates.birthplace &&
+        tmpStates.dateofbirth &&
+        tmpStates.city &&
+        tmpStates.email &&
+        tmpStates.password &&
+        tmpStates.weight &&
+        tmpStates.height &&
+        tmpStatesOnlyTrainer.introduction &&
+        tmpStatesOnlyTrainer.phone &&
+        tmpStatesOnlyTrainer.target &&
+        tmpStatesOnlyTrainer.targetcity &&
+        tmpStatesOnlyTrainer.trainingtype
+      ) {
+        if (tmpStates.email.includes("@") && tmpStates.email.includes(".")) {
+          if (tmpStates.password.length >= 6) {
+            let user = {
+              id: tmpStates.id,
+              lastname: tmpStates.lastname,
+              firstname: tmpStates.firstname,
+              gender: tmpStates.gender,
+              birthplace: tmpStates.birthplace,
+              dateofbirth: tmpStates.dateofbirth,
+              city: tmpStates.city,
+              email: tmpStates.email,
+              password: tmpStates.password,
+              weight: tmpStates.weight,
+              height: tmpStates.height,
+            };
+
+            let trainer = {
+              id: tmpStatesOnlyTrainer.id,
+              userid: tmpStatesOnlyTrainer.userid,
+              target: tmpStatesOnlyTrainer.target,
+              targetcity: tmpStatesOnlyTrainer.targetcity,
+              online: tmpStatesOnlyTrainer.online,
+              diet: tmpStatesOnlyTrainer.diet,
+              trainingtype: tmpStatesOnlyTrainer.trainingtype,
+              phone: tmpStatesOnlyTrainer.phone,
+              introduction: tmpStatesOnlyTrainer.introduction,
+            };
+            UserService.saveUser(user).then((res) => {
+              if (res.data) {
+                TrainerService.saveTrainer(trainer).then((res2) => {
+                  if (res2.data) {
+                    setOtherState({ ...otherState, datachange: false });
+                    setStates();
+                    setStatesOnlyTrainer();
+                    props.openAlert("success3");
+                  }
+                });
+              }
+            });
+          } else {
+            props.openAlert("err5");
+          }
         } else {
-          props.openAlert("err5");
+          props.openAlert("err4");
         }
       } else {
-        props.openAlert("err4");
+        props.openAlert("err1");
       }
     } else {
-      props.openAlert("err1");
+      if (
+        tmpStates.lastname &&
+        tmpStates.firstname &&
+        tmpStates.gender &&
+        tmpStates.birthplace &&
+        tmpStates.dateofbirth &&
+        tmpStates.city &&
+        tmpStates.email &&
+        tmpStates.password &&
+        tmpStates.weight &&
+        tmpStates.height
+      ) {
+        if (tmpStates.email.includes("@") && tmpStates.email.includes(".")) {
+          if (tmpStates.password.length >= 6) {
+            let user = {
+              id: tmpStates.id,
+              lastname: tmpStates.lastname,
+              firstname: tmpStates.firstname,
+              gender: tmpStates.gender,
+              birthplace: tmpStates.birthplace,
+              dateofbirth: tmpStates.dateofbirth,
+              city: tmpStates.city,
+              email: tmpStates.email,
+              password: tmpStates.password,
+              weight: tmpStates.weight,
+              height: tmpStates.height,
+            };
+            UserService.saveUser(user).then((res) => {
+              if (res.data) {
+                setOtherState({ ...otherState, datachange: false });
+                setStates();
+                props.openAlert("success3");
+              }
+            });
+          } else {
+            props.openAlert("err5");
+          }
+        } else {
+          props.openAlert("err4");
+        }
+      } else {
+        props.openAlert("err1");
+      }
     }
   };
 
@@ -186,6 +285,55 @@ const ProfileForm = (props) => {
     setTmpStates({ ...tmpStates, height: event.target.value });
   };
 
+  const handleTargetChanged = (event) => {
+    setTmpStatesOnlyTrainer({
+      ...tmpStatesOnlyTrainer,
+      target: event.target.value,
+    });
+  };
+
+  const handleTargetCityChanged = (event) => {
+    setTmpStatesOnlyTrainer({
+      ...tmpStatesOnlyTrainer,
+      targetcity: event.target.value,
+    });
+  };
+
+  const handleOnlineChanged = (event) => {
+    setTmpStatesOnlyTrainer({
+      ...tmpStatesOnlyTrainer,
+      online: !tmpStatesOnlyTrainer.online,
+    });
+  };
+
+  const handleDietChanged = (event) => {
+    setTmpStatesOnlyTrainer({
+      ...tmpStatesOnlyTrainer,
+      diet: !tmpStatesOnlyTrainer.diet,
+    });
+  };
+
+  const handleTrainingTypeChanged = (event) => {
+    setTmpStatesOnlyTrainer({
+      ...tmpStatesOnlyTrainer,
+      trainingtype: event.target.value,
+    });
+  };
+
+  const handlePhoneChanged = (event) => {
+    setTmpStatesOnlyTrainer({
+      ...tmpStatesOnlyTrainer,
+      phone: event.target.value,
+    });
+  };
+
+  const handleIntroductionChanged = (event) => {
+    setTmpStatesOnlyTrainer({
+      ...tmpStatesOnlyTrainer,
+      introduction: event.target.value,
+    });
+  };
+
   const setTmps = () => {
     setTmpStates({
       id: actualState.id,
@@ -199,6 +347,21 @@ const ProfileForm = (props) => {
       password: actualState.password,
       weight: actualState.weight.toString(),
       height: actualState.height.toString(),
+    });
+  };
+
+  const setTmpsOnlyTrainer = () => {
+    setTmpStatesOnlyTrainer({
+      ...actualStateOnlyTrainer,
+      id: actualStateOnlyTrainer.id,
+      userid: actualStateOnlyTrainer.userid,
+      target: actualStateOnlyTrainer.target.toString(),
+      targetcity: actualStateOnlyTrainer.targetcity,
+      online: actualStateOnlyTrainer.online,
+      diet: actualStateOnlyTrainer.diet,
+      trainingtype: actualStateOnlyTrainer.trainingtype,
+      phone: actualStateOnlyTrainer.phone,
+      introduction: actualStateOnlyTrainer.introduction,
     });
   };
 
@@ -223,6 +386,29 @@ const ProfileForm = (props) => {
     }
   };
 
+  const setStatesOnlyTrainer = () => {
+    if (props.userid) {
+      TrainerService.getTrainerByUserid(props.userid).then((res) => {
+        if (res.data.content.length > 0) {
+          setNewStateOnlyTrainer({
+            ...actualStateOnlyTrainer,
+            id: res.data.content[0].id,
+            userid: res.data.content[0].userid,
+            target: res.data.content[0].target,
+            targetcity: res.data.content[0].targetcity,
+            online: res.data.content[0].online,
+            diet: res.data.content[0].diet,
+            trainingtype: res.data.content[0].trainingtype,
+            phone: res.data.content[0].phone,
+            introduction: res.data.content[0].introduction,
+          });
+        } else {
+          props.setIsTrainer();
+        }
+      });
+    }
+  };
+
   React.useEffect(() => {
     setStates();
 
@@ -241,6 +427,16 @@ const ProfileForm = (props) => {
   React.useEffect(() => {
     setTmps();
   }, [actualState]);
+
+  React.useEffect(() => {
+    setTmpsOnlyTrainer();
+  }, [actualStateOnlyTrainer]);
+
+  React.useEffect(() => {
+    if (props.isTrainer) {
+      setStatesOnlyTrainer();
+    }
+  }, [props.isTrainer]);
 
   return (
     <Box sx={{ pb: 5, pt: 5 }} style={{ backgroundColor: "#332D2D" }}>
@@ -312,6 +508,31 @@ const ProfileForm = (props) => {
               <ListItem>
                 <ListItemText>Magasság</ListItemText>
               </ListItem>
+              {props.isTrainer && (
+                <Box>
+                  <ListItem>
+                    <ListItemText>Kiket vállal?</ListItemText>
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText>Hol?</ListItemText>
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText>Online tréninget vállal?</ListItemText>
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText>Étrendkészítést vállal?</ListItemText>
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText>Specializáció</ListItemText>
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText>Telefonszám</ListItemText>
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText>Bemutatkozás</ListItemText>
+                  </ListItem>
+                </Box>
+              )}
             </List>
             <List>
               <ListItem>
@@ -450,7 +671,7 @@ const ProfileForm = (props) => {
                     id="password"
                     name="password"
                     variant="standard"
-                    style={{ backgroundColor: "white", height: "24px" }}
+                    style={{ backgroundColor: "white", height: "32px" }}
                     value={tmpStates.password}
                     onChange={handlePasswordChanged}
                   />
@@ -469,21 +690,21 @@ const ProfileForm = (props) => {
                     />
                   </Box>
                 ) : (
-                  <ListItemText>
-                    <Box>
+                  <Box sx={{ display: "flex", flexDirection: "row" }}>
+                    <ListItemText>
                       {"*".repeat(actualState.password.length)}
-                      <VisibilityIcon
-                        sx={{ marginLeft: "10px" }}
-                        style={{ cursor: "pointer" }}
-                        onClick={() => {
-                          setOtherState({
-                            ...otherState,
-                            ispasswordvisible: !otherState.ispasswordvisible,
-                          });
-                        }}
-                      />
-                    </Box>
-                  </ListItemText>
+                    </ListItemText>
+                    <VisibilityIcon
+                      sx={{ marginLeft: "10px" }}
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        setOtherState({
+                          ...otherState,
+                          ispasswordvisible: !otherState.ispasswordvisible,
+                        });
+                      }}
+                    />
+                  </Box>
                 )}
               </ListItem>
               <ListItem>
@@ -524,6 +745,160 @@ const ProfileForm = (props) => {
                   )}
                 </ListItemText>
               </ListItem>
+              {props.isTrainer && (
+                <Box>
+                  <ListItem>
+                    {otherState.datachange ? (
+                      <FormControl>
+                        <InputLabel
+                          variant="standard"
+                          id="demo-simple-select-label"
+                        >
+                          Nem
+                        </InputLabel>
+                        <Select
+                          labelId="demo-simple-select-label"
+                          id="target"
+                          name="target"
+                          style={{ backgroundColor: "white", height: "32px" }}
+                          sx={{ borderRadius: "7px" }}
+                          value={tmpStatesOnlyTrainer.target}
+                          onChange={handleTargetChanged}
+                        >
+                          <MenuItem value="0">Férfiak</MenuItem>
+                          <MenuItem value="1">Nők</MenuItem>
+                          <MenuItem value="2">Mindenki</MenuItem>
+                        </Select>
+                      </FormControl>
+                    ) : (
+                      <ListItemText>
+                        {parseInt(actualStateOnlyTrainer.target) === 0 &&
+                          "Férfiak"}
+                        {parseInt(actualStateOnlyTrainer.target) === 1 && "Nők"}
+                        {parseInt(actualStateOnlyTrainer.target) === 2 &&
+                          "Mindenki"}
+                      </ListItemText>
+                    )}
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText>
+                      {otherState.datachange ? (
+                        <TextField
+                          id="targetcity"
+                          name="targetcity"
+                          variant="standard"
+                          style={{ backgroundColor: "white", height: "24px" }}
+                          value={tmpStatesOnlyTrainer.targetcity}
+                          onChange={handleTargetCityChanged}
+                        />
+                      ) : (
+                        actualStateOnlyTrainer.targetcity
+                      )}
+                    </ListItemText>
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText>
+                      {otherState.datachange ? (
+                        <Checkbox
+                          checked={tmpStatesOnlyTrainer.online}
+                          onChange={handleOnlineChanged}
+                          inputProps={{ "aria-label": "controlled" }}
+                          sx={{
+                            color: "#3B71CA",
+                            "&.Mui-checked": {
+                              color: "#3B71CA",
+                            },
+                          }}
+                          style={{ height: "22px" }}
+                        />
+                      ) : actualStateOnlyTrainer.online ? (
+                        "Igen"
+                      ) : (
+                        "Nem"
+                      )}
+                    </ListItemText>
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText>
+                      {otherState.datachange ? (
+                        <Checkbox
+                          checked={tmpStatesOnlyTrainer.diet}
+                          onChange={handleDietChanged}
+                          inputProps={{ "aria-label": "controlled" }}
+                          sx={{
+                            color: "#3B71CA",
+                            "&.Mui-checked": {
+                              color: "#3B71CA",
+                            },
+                          }}
+                          style={{ height: "22px" }}
+                        />
+                      ) : actualStateOnlyTrainer.diet ? (
+                        "Igen"
+                      ) : (
+                        "Nem"
+                      )}
+                    </ListItemText>
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText>
+                      {otherState.datachange ? (
+                        <TextField
+                          id="trainingtype"
+                          name="trainingtype"
+                          variant="standard"
+                          style={{ backgroundColor: "white", height: "24px" }}
+                          value={tmpStatesOnlyTrainer.trainingtype}
+                          onChange={handleTrainingTypeChanged}
+                        />
+                      ) : (
+                        actualStateOnlyTrainer.trainingtype
+                      )}
+                    </ListItemText>
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText>
+                      {otherState.datachange ? (
+                        <TextField
+                          type="number"
+                          id="phone"
+                          name="phone"
+                          variant="standard"
+                          style={{ backgroundColor: "white", height: "24px" }}
+                          value={tmpStatesOnlyTrainer.phone}
+                          onChange={handlePhoneChanged}
+                          InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                +36
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+                      ) : (
+                        "+36" + actualStateOnlyTrainer.phone
+                      )}
+                    </ListItemText>
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText>
+                      {otherState.datachange ? (
+                        <FormControl margin="normal" fullWidth>
+                          <TextareaAutosize
+                            minRows={5}
+                            placeholder="Bemutatkozás*"
+                            style={{ resize: "none" }}
+                            value={tmpStatesOnlyTrainer.introduction}
+                            onChange={handleIntroductionChanged}
+                          />
+                        </FormControl>
+                      ) : (
+                        actualStateOnlyTrainer.introduction
+                      )}
+                    </ListItemText>
+                  </ListItem>
+                </Box>
+              )}
             </List>
           </Box>
           {!otherState.datachange ? (
