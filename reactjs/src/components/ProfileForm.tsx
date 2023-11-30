@@ -1,7 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
@@ -330,10 +329,17 @@ const ProfileForm = (props) => {
   };
 
   const handleIntroductionChanged = (event) => {
-    setTmpStatesOnlyTrainer({
-      ...tmpStatesOnlyTrainer,
-      introduction: event.target.value,
-    });
+    if (event.target.value <= 225) {
+      setTmpStatesOnlyTrainer({
+        ...tmpStatesOnlyTrainer,
+        introduction: event.target.value,
+      });
+    } else {
+      setTmpStatesOnlyTrainer({
+        ...tmpStatesOnlyTrainer,
+        introduction: event.target.value.slice(0, 255),
+      });
+    }
   };
 
   const setTmps = () => {
@@ -442,473 +448,497 @@ const ProfileForm = (props) => {
   }, [actualStateOnlyTrainer]);
 
   return (
-    <Box sx={{ pb: 5, pt: 5 }} style={{ backgroundColor: "#332D2D" }}>
-      <Container component="main" maxWidth="md">
-        <Card sx={{ p: 3 }}>
-          <Typography
-            style={{ textAlign: "center" }}
-            sx={{ paddingBottom: 3 }}
-            variant="h3"
-          >
-            {props.isTrainer && "Edző "}Profil
-          </Typography>
-          <Avatar
-            style={{ margin: "auto" }}
-            sx={{ width: 256, height: 256 }}
-            alt="profile picture"
-            src={imageExists ? props.userid + ".jpg" : "profile_pic_def.jpg"}
-          />
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <UploadButton
-              userid={props.userid}
-              openAlert={(type) => {
-                props.openAlert(type);
-              }}
-            />
-          </Box>
-          <Typography
-            style={{ textAlign: "center" }}
-            sx={{ paddingTop: 3 }}
-            variant="h3"
-          >
-            {actualState.lastname +
-              " " +
-              actualState.firstname +
-              " (" +
-              OtherService.getAge(actualState.dateofbirth) +
-              ")"}
-          </Typography>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-            }}
-          >
-            <List>
+    <Card sx={{ p: 3 }}>
+      <Typography
+        style={{ textAlign: "center" }}
+        sx={{ paddingBottom: 3 }}
+        variant="h3"
+      >
+        {props.isTrainer && "Edző "}Profil
+      </Typography>
+      <Avatar
+        style={{ margin: "auto" }}
+        sx={{ width: 256, height: 256 }}
+        alt="profile picture"
+        src={imageExists ? props.userid + ".jpg" : "profile_pic_def.jpg"}
+      />
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <UploadButton
+          userid={props.userid}
+          openAlert={(type) => {
+            props.openAlert(type);
+          }}
+        />
+      </Box>
+      <Typography
+        style={{ textAlign: "center" }}
+        sx={{ paddingTop: 3 }}
+        variant="h3"
+      >
+        {actualState.lastname +
+          " " +
+          actualState.firstname +
+          " (" +
+          OtherService.getAge(actualState.dateofbirth) +
+          ")"}
+      </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+        }}
+      >
+        <List>
+          <ListItem>
+            <ListItemText style={{ maxWidth: "169.55px" }}>
+              Vezetéknév
+            </ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText style={{ maxWidth: "169.55px" }}>
+              Keresztnév
+            </ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText style={{ maxWidth: "169.55px" }}>Nem</ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText style={{ maxWidth: "169.55px" }}>
+              Születési hely
+            </ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText style={{ maxWidth: "169.55px" }}>
+              Születési idő
+            </ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText style={{ maxWidth: "169.55px" }}>
+              Lakhely
+            </ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText style={{ maxWidth: "169.55px" }}>E-mail</ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText style={{ maxWidth: "169.55px" }}>Jelszó</ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText style={{ maxWidth: "169.55px" }}>
+              Testsúly
+            </ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText style={{ maxWidth: "169.55px" }}>
+              Magasság
+            </ListItemText>
+          </ListItem>
+          {props.isTrainer && (
+            <Box>
               <ListItem>
-                <ListItemText>Vezetéknév</ListItemText>
+                <ListItemText style={{ maxWidth: "169.55px" }}>
+                  Kiket vállal?
+                </ListItemText>
               </ListItem>
               <ListItem>
-                <ListItemText>Keresztnév</ListItemText>
+                <ListItemText style={{ maxWidth: "169.55px" }}>
+                  Hol?
+                </ListItemText>
               </ListItem>
               <ListItem>
-                <ListItemText>Nem</ListItemText>
+                <ListItemText style={{ maxWidth: "169.55px" }}>
+                  Online tréninget vállal?
+                </ListItemText>
               </ListItem>
               <ListItem>
-                <ListItemText>Születési hely</ListItemText>
+                <ListItemText style={{ maxWidth: "169.55px" }}>
+                  Étrendkészítést vállal?
+                </ListItemText>
               </ListItem>
               <ListItem>
-                <ListItemText>Születési idő</ListItemText>
+                <ListItemText style={{ maxWidth: "169.55px" }}>
+                  Specializáció
+                </ListItemText>
               </ListItem>
               <ListItem>
-                <ListItemText>Lakhely</ListItemText>
+                <ListItemText style={{ maxWidth: "169.55px" }}>
+                  Telefonszám
+                </ListItemText>
               </ListItem>
               <ListItem>
-                <ListItemText>E-mail</ListItemText>
+                <ListItemText style={{ maxWidth: "169.55px" }}>
+                  Bemutatkozás
+                </ListItemText>
               </ListItem>
-              <ListItem>
-                <ListItemText>Jelszó</ListItemText>
-              </ListItem>
-              <ListItem>
-                <ListItemText>Testsúly</ListItemText>
-              </ListItem>
-              <ListItem>
-                <ListItemText>Magasság</ListItemText>
-              </ListItem>
-              {props.isTrainer && (
-                <Box>
-                  <ListItem>
-                    <ListItemText>Kiket vállal?</ListItemText>
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText>Hol?</ListItemText>
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText>Online tréninget vállal?</ListItemText>
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText>Étrendkészítést vállal?</ListItemText>
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText>Specializáció</ListItemText>
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText>Telefonszám</ListItemText>
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText>Bemutatkozás</ListItemText>
-                  </ListItem>
-                </Box>
+            </Box>
+          )}
+        </List>
+        <List>
+          <ListItem>
+            <ListItemText style={{ maxWidth: "169.55px" }}>
+              {otherState.datachange ? (
+                <TextField
+                  id="lastname"
+                  name="lastname"
+                  variant="standard"
+                  style={{ backgroundColor: "white", height: "24px" }}
+                  value={tmpStates.lastname}
+                  onChange={handleLastNameChanged}
+                />
+              ) : (
+                actualState.lastname
               )}
-            </List>
-            <List>
-              <ListItem>
-                <ListItemText>
-                  {otherState.datachange ? (
-                    <TextField
-                      id="lastname"
-                      name="lastname"
-                      variant="standard"
-                      style={{ backgroundColor: "white", height: "24px" }}
-                      value={tmpStates.lastname}
-                      onChange={handleLastNameChanged}
-                    />
-                  ) : (
-                    actualState.lastname
-                  )}
+            </ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText style={{ maxWidth: "169.55px" }}>
+              {otherState.datachange ? (
+                <TextField
+                  id="firstname"
+                  name="firstname"
+                  variant="standard"
+                  style={{ backgroundColor: "white", height: "24px" }}
+                  value={tmpStates.firstname}
+                  onChange={handleFirstNameChanged}
+                />
+              ) : (
+                actualState.firstname
+              )}
+            </ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText style={{ maxWidth: "169.55px" }}>
+              {otherState.datachange ? (
+                <FormControl>
+                  <InputLabel variant="standard" id="demo-simple-select-label">
+                    Nem
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="gender"
+                    name="gender"
+                    style={{ backgroundColor: "white", height: "24px" }}
+                    sx={{ borderRadius: "7px" }}
+                    value={tmpStates.gender}
+                    onChange={handleGenderChanged}
+                  >
+                    <MenuItem value="0">Férfi</MenuItem>
+                    <MenuItem value="1">Nő</MenuItem>
+                  </Select>
+                </FormControl>
+              ) : parseInt(actualState.gender) === 0 ? (
+                "Férfi"
+              ) : (
+                "Nő"
+              )}
+            </ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText style={{ maxWidth: "169.55px" }}>
+              {otherState.datachange ? (
+                <TextField
+                  id="birthplace"
+                  name="birthplace"
+                  variant="standard"
+                  style={{ backgroundColor: "white", height: "24px" }}
+                  value={tmpStates.birthplace}
+                  onChange={handleBirthPlaceChanged}
+                />
+              ) : (
+                actualState.birthplace
+              )}
+            </ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText style={{ maxWidth: "169.55px" }}>
+              {otherState.datachange ? (
+                <TextField
+                  id="dateofbirth"
+                  name="dateofbirth"
+                  variant="standard"
+                  style={{ backgroundColor: "white", height: "24px" }}
+                  type="date"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  value={tmpStates.dateofbirth.toString().split("T")[0]}
+                  onChange={handleDateOfBirthChanged}
+                />
+              ) : (
+                actualState.dateofbirth.toString().split("T")[0]
+              )}
+            </ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText style={{ maxWidth: "169.55px" }}>
+              {otherState.datachange ? (
+                <TextField
+                  id="city"
+                  name="city"
+                  variant="standard"
+                  style={{ backgroundColor: "white", height: "24px" }}
+                  value={tmpStates.city}
+                  onChange={handleCityChanged}
+                />
+              ) : (
+                actualState.city
+              )}
+            </ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText style={{ maxWidth: "169.55px" }}>
+              {otherState.datachange ? (
+                <TextField
+                  id="email"
+                  name="email"
+                  variant="standard"
+                  style={{ backgroundColor: "white", height: "24px" }}
+                  value={tmpStates.email}
+                  onChange={handleEmailChanged}
+                />
+              ) : (
+                actualState.email
+              )}
+            </ListItemText>
+          </ListItem>
+          <ListItem>
+            {otherState.datachange ? (
+              <TextField
+                id="password"
+                name="password"
+                variant="standard"
+                style={{ backgroundColor: "white", height: "32px" }}
+                value={tmpStates.password}
+                onChange={handlePasswordChanged}
+              />
+            ) : otherState.ispasswordvisible ? (
+              <Box sx={{ display: "flex", flexDirection: "row" }}>
+                <ListItemText style={{ maxWidth: "169.55px" }}>
+                  {actualState.password}
                 </ListItemText>
-              </ListItem>
-              <ListItem>
-                <ListItemText>
-                  {otherState.datachange ? (
-                    <TextField
-                      id="firstname"
-                      name="firstname"
-                      variant="standard"
-                      style={{ backgroundColor: "white", height: "24px" }}
-                      value={tmpStates.firstname}
-                      onChange={handleFirstNameChanged}
-                    />
-                  ) : (
-                    actualState.firstname
-                  )}
+                <VisivilityOffIcon
+                  sx={{ marginLeft: "10px" }}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    setOtherState({
+                      ...otherState,
+                      ispasswordvisible: !otherState.ispasswordvisible,
+                    });
+                  }}
+                />
+              </Box>
+            ) : (
+              <Box sx={{ display: "flex", flexDirection: "row" }}>
+                <ListItemText style={{ maxWidth: "169.55px" }}>
+                  {"*".repeat(actualState.password.length)}
                 </ListItemText>
-              </ListItem>
-              <ListItem>
-                <ListItemText>
-                  {otherState.datachange ? (
-                    <FormControl>
-                      <InputLabel
-                        variant="standard"
-                        id="demo-simple-select-label"
-                      >
-                        Nem
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-label"
-                        id="gender"
-                        name="gender"
-                        style={{ backgroundColor: "white", height: "24px" }}
-                        sx={{ borderRadius: "7px" }}
-                        value={tmpStates.gender}
-                        onChange={handleGenderChanged}
-                      >
-                        <MenuItem value="0">Férfi</MenuItem>
-                        <MenuItem value="1">Nő</MenuItem>
-                      </Select>
-                    </FormControl>
-                  ) : parseInt(actualState.gender) === 0 ? (
-                    "Férfi"
-                  ) : (
-                    "Nő"
-                  )}
-                </ListItemText>
-              </ListItem>
-              <ListItem>
-                <ListItemText>
-                  {otherState.datachange ? (
-                    <TextField
-                      id="birthplace"
-                      name="birthplace"
-                      variant="standard"
-                      style={{ backgroundColor: "white", height: "24px" }}
-                      value={tmpStates.birthplace}
-                      onChange={handleBirthPlaceChanged}
-                    />
-                  ) : (
-                    actualState.birthplace
-                  )}
-                </ListItemText>
-              </ListItem>
-              <ListItem>
-                <ListItemText>
-                  {otherState.datachange ? (
-                    <TextField
-                      id="dateofbirth"
-                      name="dateofbirth"
-                      variant="standard"
-                      style={{ backgroundColor: "white", height: "24px" }}
-                      type="date"
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      value={tmpStates.dateofbirth.toString().split("T")[0]}
-                      onChange={handleDateOfBirthChanged}
-                    />
-                  ) : (
-                    actualState.dateofbirth.toString().split("T")[0]
-                  )}
-                </ListItemText>
-              </ListItem>
-              <ListItem>
-                <ListItemText>
-                  {otherState.datachange ? (
-                    <TextField
-                      id="city"
-                      name="city"
-                      variant="standard"
-                      style={{ backgroundColor: "white", height: "24px" }}
-                      value={tmpStates.city}
-                      onChange={handleCityChanged}
-                    />
-                  ) : (
-                    actualState.city
-                  )}
-                </ListItemText>
-              </ListItem>
-              <ListItem>
-                <ListItemText>
-                  {otherState.datachange ? (
-                    <TextField
-                      id="email"
-                      name="email"
-                      variant="standard"
-                      style={{ backgroundColor: "white", height: "24px" }}
-                      value={tmpStates.email}
-                      onChange={handleEmailChanged}
-                    />
-                  ) : (
-                    actualState.email
-                  )}
-                </ListItemText>
-              </ListItem>
+                <VisibilityIcon
+                  sx={{ marginLeft: "10px" }}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    setOtherState({
+                      ...otherState,
+                      ispasswordvisible: !otherState.ispasswordvisible,
+                    });
+                  }}
+                />
+              </Box>
+            )}
+          </ListItem>
+          <ListItem>
+            <ListItemText style={{ maxWidth: "169.55px" }}>
+              {otherState.datachange ? (
+                <TextField
+                  id="weight"
+                  name="weight"
+                  variant="standard"
+                  type="number"
+                  style={{ backgroundColor: "white", height: "24px" }}
+                  value={tmpStates.weight}
+                  onChange={handleWeightChanged}
+                />
+              ) : parseInt(actualState.weight) === 0 ? (
+                "Nincs megadva"
+              ) : (
+                actualState.weight + " kg"
+              )}
+            </ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText style={{ maxWidth: "169.55px" }}>
+              {otherState.datachange ? (
+                <TextField
+                  id="height"
+                  name="height"
+                  variant="standard"
+                  type="number"
+                  style={{ backgroundColor: "white", height: "24px" }}
+                  value={tmpStates.height}
+                  onChange={handleHeightChanged}
+                />
+              ) : parseInt(actualState.height) === 0 ? (
+                "Nincs megadva"
+              ) : (
+                actualState.height + " cm"
+              )}
+            </ListItemText>
+          </ListItem>
+          {props.isTrainer && (
+            <Box>
               <ListItem>
                 {otherState.datachange ? (
-                  <TextField
-                    id="password"
-                    name="password"
-                    variant="standard"
-                    style={{ backgroundColor: "white", height: "32px" }}
-                    value={tmpStates.password}
-                    onChange={handlePasswordChanged}
-                  />
-                ) : otherState.ispasswordvisible ? (
-                  <Box sx={{ display: "flex", flexDirection: "row" }}>
-                    <ListItemText>{actualState.password}</ListItemText>
-                    <VisivilityOffIcon
-                      sx={{ marginLeft: "10px" }}
-                      style={{ cursor: "pointer" }}
-                      onClick={() => {
-                        setOtherState({
-                          ...otherState,
-                          ispasswordvisible: !otherState.ispasswordvisible,
-                        });
-                      }}
-                    />
-                  </Box>
+                  <FormControl>
+                    <InputLabel
+                      variant="standard"
+                      id="demo-simple-select-label"
+                    >
+                      Nem
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="target"
+                      name="target"
+                      style={{ backgroundColor: "white", height: "32px" }}
+                      sx={{ borderRadius: "7px" }}
+                      value={tmpStatesOnlyTrainer.target}
+                      onChange={handleTargetChanged}
+                    >
+                      <MenuItem value="0">Férfiak</MenuItem>
+                      <MenuItem value="1">Nők</MenuItem>
+                      <MenuItem value="2">Mindenki</MenuItem>
+                    </Select>
+                  </FormControl>
                 ) : (
-                  <Box sx={{ display: "flex", flexDirection: "row" }}>
-                    <ListItemText>
-                      {"*".repeat(actualState.password.length)}
-                    </ListItemText>
-                    <VisibilityIcon
-                      sx={{ marginLeft: "10px" }}
-                      style={{ cursor: "pointer" }}
-                      onClick={() => {
-                        setOtherState({
-                          ...otherState,
-                          ispasswordvisible: !otherState.ispasswordvisible,
-                        });
-                      }}
-                    />
-                  </Box>
+                  <ListItemText style={{ maxWidth: "169.55px" }}>
+                    {parseInt(actualStateOnlyTrainer.target) === 0 && "Férfiak"}
+                    {parseInt(actualStateOnlyTrainer.target) === 1 && "Nők"}
+                    {parseInt(actualStateOnlyTrainer.target) === 2 &&
+                      "Mindenki"}
+                  </ListItemText>
                 )}
               </ListItem>
               <ListItem>
-                <ListItemText>
+                <ListItemText style={{ maxWidth: "169.55px" }}>
                   {otherState.datachange ? (
                     <TextField
-                      id="weight"
-                      name="weight"
+                      id="targetcity"
+                      name="targetcity"
                       variant="standard"
-                      type="number"
                       style={{ backgroundColor: "white", height: "24px" }}
-                      value={tmpStates.weight}
-                      onChange={handleWeightChanged}
+                      value={tmpStatesOnlyTrainer.targetcity}
+                      onChange={handleTargetCityChanged}
                     />
-                  ) : parseInt(actualState.weight) === 0 ? (
-                    "Nincs megadva"
                   ) : (
-                    actualState.weight + " kg"
+                    actualStateOnlyTrainer.targetcity
                   )}
                 </ListItemText>
               </ListItem>
               <ListItem>
-                <ListItemText>
+                <ListItemText style={{ maxWidth: "169.55px" }}>
                   {otherState.datachange ? (
-                    <TextField
-                      id="height"
-                      name="height"
-                      variant="standard"
-                      type="number"
-                      style={{ backgroundColor: "white", height: "24px" }}
-                      value={tmpStates.height}
-                      onChange={handleHeightChanged}
+                    <Checkbox
+                      checked={tmpStatesOnlyTrainer.online}
+                      onChange={handleOnlineChanged}
+                      inputProps={{ "aria-label": "controlled" }}
+                      sx={{
+                        color: "#3B71CA",
+                        "&.Mui-checked": {
+                          color: "#3B71CA",
+                        },
+                      }}
+                      style={{ height: "22px" }}
                     />
-                  ) : parseInt(actualState.height) === 0 ? (
-                    "Nincs megadva"
+                  ) : actualStateOnlyTrainer.online ? (
+                    "Igen"
                   ) : (
-                    actualState.height + " cm"
+                    "Nem"
                   )}
                 </ListItemText>
               </ListItem>
-              {props.isTrainer && (
-                <Box>
-                  <ListItem>
-                    {otherState.datachange ? (
-                      <FormControl>
-                        <InputLabel
-                          variant="standard"
-                          id="demo-simple-select-label"
-                        >
-                          Nem
-                        </InputLabel>
-                        <Select
-                          labelId="demo-simple-select-label"
-                          id="target"
-                          name="target"
-                          style={{ backgroundColor: "white", height: "32px" }}
-                          sx={{ borderRadius: "7px" }}
-                          value={tmpStatesOnlyTrainer.target}
-                          onChange={handleTargetChanged}
-                        >
-                          <MenuItem value="0">Férfiak</MenuItem>
-                          <MenuItem value="1">Nők</MenuItem>
-                          <MenuItem value="2">Mindenki</MenuItem>
-                        </Select>
-                      </FormControl>
-                    ) : (
-                      <ListItemText>
-                        {parseInt(actualStateOnlyTrainer.target) === 0 &&
-                          "Férfiak"}
-                        {parseInt(actualStateOnlyTrainer.target) === 1 && "Nők"}
-                        {parseInt(actualStateOnlyTrainer.target) === 2 &&
-                          "Mindenki"}
-                      </ListItemText>
-                    )}
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText>
-                      {otherState.datachange ? (
-                        <TextField
-                          id="targetcity"
-                          name="targetcity"
-                          variant="standard"
-                          style={{ backgroundColor: "white", height: "24px" }}
-                          value={tmpStatesOnlyTrainer.targetcity}
-                          onChange={handleTargetCityChanged}
-                        />
-                      ) : (
-                        actualStateOnlyTrainer.targetcity
-                      )}
-                    </ListItemText>
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText>
-                      {otherState.datachange ? (
-                        <Checkbox
-                          checked={tmpStatesOnlyTrainer.online}
-                          onChange={handleOnlineChanged}
-                          inputProps={{ "aria-label": "controlled" }}
-                          sx={{
-                            color: "#3B71CA",
-                            "&.Mui-checked": {
-                              color: "#3B71CA",
-                            },
-                          }}
-                          style={{ height: "22px" }}
-                        />
-                      ) : actualStateOnlyTrainer.online ? (
-                        "Igen"
-                      ) : (
-                        "Nem"
-                      )}
-                    </ListItemText>
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText>
-                      {otherState.datachange ? (
-                        <Checkbox
-                          checked={tmpStatesOnlyTrainer.diet}
-                          onChange={handleDietChanged}
-                          inputProps={{ "aria-label": "controlled" }}
-                          sx={{
-                            color: "#3B71CA",
-                            "&.Mui-checked": {
-                              color: "#3B71CA",
-                            },
-                          }}
-                          style={{ height: "22px" }}
-                        />
-                      ) : actualStateOnlyTrainer.diet ? (
-                        "Igen"
-                      ) : (
-                        "Nem"
-                      )}
-                    </ListItemText>
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText>
-                      {otherState.datachange ? (
-                        <TextField
-                          id="trainingtype"
-                          name="trainingtype"
-                          variant="standard"
-                          style={{ backgroundColor: "white", height: "24px" }}
-                          value={tmpStatesOnlyTrainer.trainingtype}
-                          onChange={handleTrainingTypeChanged}
-                        />
-                      ) : (
-                        actualStateOnlyTrainer.trainingtype
-                      )}
-                    </ListItemText>
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText>
-                      {otherState.datachange ? (
-                        <TextField
-                          type="number"
-                          id="phone"
-                          name="phone"
-                          variant="standard"
-                          style={{ backgroundColor: "white", height: "24px" }}
-                          value={tmpStatesOnlyTrainer.phone}
-                          onChange={handlePhoneChanged}
-                          InputProps={{
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                +36
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                      ) : (
-                        "+36" + actualStateOnlyTrainer.phone
-                      )}
-                    </ListItemText>
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText>
-                      {otherState.datachange ? (
-                        <FormControl margin="normal" fullWidth>
-                          <TextareaAutosize
-                            minRows={5}
-                            placeholder="Bemutatkozás*"
-                            style={{ resize: "none" }}
-                            value={tmpStatesOnlyTrainer.introduction}
-                            onChange={handleIntroductionChanged}
-                          />
-                        </FormControl>
-                      ) : (
-                        actualStateOnlyTrainer.introduction
-                      )}
-                    </ListItemText>
-                  </ListItem>
-                </Box>
-              )}
-            </List>
-          </Box>
+              <ListItem>
+                <ListItemText style={{ maxWidth: "169.55px" }}>
+                  {otherState.datachange ? (
+                    <Checkbox
+                      checked={tmpStatesOnlyTrainer.diet}
+                      onChange={handleDietChanged}
+                      inputProps={{ "aria-label": "controlled" }}
+                      sx={{
+                        color: "#3B71CA",
+                        "&.Mui-checked": {
+                          color: "#3B71CA",
+                        },
+                      }}
+                      style={{ height: "22px" }}
+                    />
+                  ) : actualStateOnlyTrainer.diet ? (
+                    "Igen"
+                  ) : (
+                    "Nem"
+                  )}
+                </ListItemText>
+              </ListItem>
+              <ListItem>
+                <ListItemText style={{ maxWidth: "169.55px" }}>
+                  {otherState.datachange ? (
+                    <TextField
+                      id="trainingtype"
+                      name="trainingtype"
+                      variant="standard"
+                      style={{ backgroundColor: "white", height: "24px" }}
+                      value={tmpStatesOnlyTrainer.trainingtype}
+                      onChange={handleTrainingTypeChanged}
+                    />
+                  ) : (
+                    actualStateOnlyTrainer.trainingtype
+                  )}
+                </ListItemText>
+              </ListItem>
+              <ListItem>
+                <ListItemText style={{ maxWidth: "169.55px" }}>
+                  {otherState.datachange ? (
+                    <TextField
+                      type="number"
+                      id="phone"
+                      name="phone"
+                      variant="standard"
+                      style={{ backgroundColor: "white", height: "24px" }}
+                      value={tmpStatesOnlyTrainer.phone}
+                      onChange={handlePhoneChanged}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">+36</InputAdornment>
+                        ),
+                      }}
+                    />
+                  ) : (
+                    "+36" + actualStateOnlyTrainer.phone
+                  )}
+                </ListItemText>
+              </ListItem>
+              <ListItem>
+                <ListItemText style={{ maxWidth: "169.55px" }}>
+                  {otherState.datachange ? (
+                    <FormControl margin="normal" fullWidth>
+                      <TextareaAutosize
+                        minRows={5}
+                        placeholder="Bemutatkozás*"
+                        style={{ resize: "none" }}
+                        value={tmpStatesOnlyTrainer.introduction}
+                        onChange={handleIntroductionChanged}
+                      />
+                    </FormControl>
+                  ) : (
+                    actualStateOnlyTrainer.introduction
+                  )}
+                </ListItemText>
+              </ListItem>
+            </Box>
+          )}
+        </List>
+      </Box>
+      {props.mode !== "dialog" && (
+        <Box>
           {!otherState.datachange ? (
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <Button
@@ -950,9 +980,9 @@ const ProfileForm = (props) => {
               </Button>
             </Box>
           )}
-        </Card>
-      </Container>
-    </Box>
+        </Box>
+      )}
+    </Card>
   );
 };
 export default withRouter(ProfileForm);

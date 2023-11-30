@@ -58,7 +58,14 @@ const RegisterForm = (props) => {
   };
 
   const handleIntroductionChanged = (event) => {
-    setNewState({ ...actualState, introduction: event.target.value });
+    if (event.target.value <= 225) {
+      setNewState({ ...actualState, introduction: event.target.value });
+    } else {
+      setNewState({
+        ...actualState,
+        introduction: event.target.value.slice(0, 255),
+      });
+    }
   };
 
   const handleSubmit = () => {

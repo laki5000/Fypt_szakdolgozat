@@ -92,8 +92,12 @@ const NavBar = (props) => {
         props.setIsLoggedIn();
         props.setNewState();
         props.setIsTrainer();
+        props.setIsAdmin();
         localStorage.removeItem("token");
         props.history.push("/home");
+        break;
+      case "Admin":
+        props.history.push("/admin");
         break;
     }
   };
@@ -250,6 +254,28 @@ const NavBar = (props) => {
                 >
                   {actualState.lastname + " " + actualState.firstname}
                 </Typography>
+                {props.isAdmin && (
+                  <MenuItem
+                    onClick={() => {
+                      handleCloseUserMenu("Admin");
+                    }}
+                  >
+                    <PersonIcon
+                      sx={{
+                        mr: "5px",
+                        fontSize: "22px",
+                      }}
+                    />
+                    <Typography
+                      textAlign="center"
+                      sx={{
+                        fontSize: "20px",
+                      }}
+                    >
+                      Admin Menü
+                    </Typography>
+                  </MenuItem>
+                )}
                 <MenuItem
                   onClick={() => {
                     handleCloseUserMenu("Profil");
@@ -270,6 +296,7 @@ const NavBar = (props) => {
                     Profil
                   </Typography>
                 </MenuItem>
+
                 <MenuItem
                   onClick={() => {
                     handleCloseUserMenu("Kijelentkezés");

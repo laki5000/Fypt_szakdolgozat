@@ -12,6 +12,7 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import UserService from "../services/UserService.ts";
 import TrainerService from "../services/TrainerService.ts";
+import AdminService from "../services/AdminService.ts";
 
 const LoginForm = (props) => {
   const [actualState, setNewState] = React.useState({
@@ -48,6 +49,11 @@ const LoginForm = (props) => {
         TrainerService.getTrainerByUserid(res.data[0]).then((resp) => {
           if (resp.data.content.length > 0) {
             props.setIsTrainer();
+          }
+        });
+        AdminService.getAdminByUserid(res.data[0]).then((resp) => {
+          if (resp.data.content.length > 0) {
+            props.setIsAdmin();
           }
         });
         if (window.location.pathname !== "/profile") {

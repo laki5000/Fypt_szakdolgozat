@@ -25,6 +25,9 @@ const LoginPage = (props) => {
         setIsTrainer={() => {
           props.setIsTrainer();
         }}
+        setIsAdmin={() => {
+          props.setIsAdmin();
+        }}
       />
     </Box>
   );

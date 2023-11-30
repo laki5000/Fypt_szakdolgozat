@@ -170,4 +170,11 @@ public class User {
 	public void setHeight(int height) {
 		this.height = height;
 	}
+	
+	public String[] createUserToken(String tkn) {
+		String[] token = new String[2];
+		token[0] = "" + this.id;
+		token[1] = tkn;
+		return token;
+	}
 }

@@ -26,6 +26,9 @@ const UserService = {
   getUserById: (id) => {
     return axios.get(GET_USER_API_URL + "/byid/" + id);
   },
+  getAllUser: (page, pageSize) => {
+    return axios.get(`${GET_USER_API_URL}/all?page=${page}&size=${pageSize}`);
+  },
   deleteUser: (id) => {
     return axios.delete(DELETE_USER_API_URL + "/" + id);
   },

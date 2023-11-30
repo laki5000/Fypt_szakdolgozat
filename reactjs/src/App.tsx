@@ -22,11 +22,16 @@ import ProfilePage from "./pages/ProfilePage.tsx";
 import UserService from "./services/UserService.ts";
 import Footer from "./components/Footer.tsx";
 import TrainerService from "./services/TrainerService.ts";
+import AdminService from "./services/AdminService.ts";
+import AdminPage from "./pages/AdminPage.tsx";
+import AdminPageUsers from "./pages/AdminPageUsers.tsx";
 
 const App = (props) => {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   const [isTrainer, setIsTrainer] = React.useState(false);
+
+  const [isAdmin, setIsAdmin] = React.useState(false);
 
   const [isLoading, setIsLoading] = React.useState(true);
 
@@ -168,21 +173,30 @@ const App = (props) => {
             token: token_tmp,
           });
 
-          TrainerService.getTrainerByUserid(res.data).then((res) => {
-            if (res.data.content.length > 0) {
+          TrainerService.getTrainerByUserid(res.data).then((resp) => {
+            if (resp.data.content.length > 0) {
               setIsTrainer(true);
+            }
+            setIsLoading(false);
+          });
+
+          AdminService.getAdminByUserid(res.data).then((resp) => {
+            if (resp.data.content.length > 0) {
+              setIsAdmin(true);
+              setIsLoading(false);
             }
           });
         } else {
           localStorage.removeItem("token");
           setIsTrainer(false);
+          setIsAdmin(false);
         }
       });
     }
 
     setTimeout(() => {
       setIsLoading(false);
-    }, 1);
+    }, 1000);
   }, []);
 
   return (
@@ -222,9 +236,13 @@ const App = (props) => {
         openAlert={(type) => {
           handleOpenAlert(type);
         }}
+        setIsAdmin={() => {
+          setIsAdmin(false);
+        }}
         isLoggedIn={isLoggedIn}
         isTrainer={isTrainer}
         userid={actualState.userid}
+        isAdmin={isAdmin}
       />
       <Line />
       <Switch>
@@ -232,29 +250,56 @@ const App = (props) => {
           <Redirect to="/home" />
         </Route>
         <Route path="/login">
-          <LoginPage
-            setIsLoggedIn={() => {
-              setIsLoggedIn(true);
-            }}
-            openAlert={(type) => {
-              handleOpenAlert(type);
-            }}
-            setNewState={(userid, token) => {
-              setNewState({ userid: userid, token: token });
-            }}
-            isLoggedIn={isLoggedIn}
-            setIsTrainer={() => {
-              setIsTrainer(true);
-            }}
-          />
+          {isLoading ? (
+            <Box
+              sx={{ p: 25 }}
+              style={{
+                backgroundColor: "#332D2D",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <CircularProgress />
+            </Box>
+          ) : (
+            <LoginPage
+              setIsLoggedIn={() => {
+                setIsLoggedIn(true);
+              }}
+              openAlert={(type) => {
+                handleOpenAlert(type);
+              }}
+              setNewState={(userid, token) => {
+                setNewState({ userid: userid, token: token });
+              }}
+              setIsAdmin={() => setIsAdmin(true)}
+              setIsTrainer={() => {
+                setIsTrainer(true);
+              }}
+              isLoggedIn={isLoggedIn}
+            />
+          )}
         </Route>
         <Route path="/register">
-          <RegisterPage
-            openAlert={(type) => {
-              handleOpenAlert(type);
-            }}
-            isLoggedIn={isLoggedIn}
-          />
+          {isLoading ? (
+            <Box
+              sx={{ p: 25 }}
+              style={{
+                backgroundColor: "#332D2D",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <CircularProgress />
+            </Box>
+          ) : (
+            <RegisterPage
+              openAlert={(type) => {
+                handleOpenAlert(type);
+              }}
+              isLoggedIn={isLoggedIn}
+            />
+          )}
         </Route>
         <Route path="/home">
           <HomePage />
@@ -263,16 +308,29 @@ const App = (props) => {
           <TrainersPage />
         </Route>
         <Route path="/join">
-          <JoinPage
-            openAlert={(type) => {
-              handleOpenAlert(type);
-            }}
-            setIsTrainer={() => {
-              setIsTrainer(true);
-            }}
-            userid={actualState.userid}
-            isTrainer={isTrainer}
-          />
+          {isLoading ? (
+            <Box
+              sx={{ p: 25 }}
+              style={{
+                backgroundColor: "#332D2D",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <CircularProgress />
+            </Box>
+          ) : (
+            <JoinPage
+              openAlert={(type) => {
+                handleOpenAlert(type);
+              }}
+              setIsTrainer={() => {
+                setIsTrainer(true);
+              }}
+              userid={actualState.userid}
+              isTrainer={isTrainer}
+            />
+          )}
         </Route>
         <Route path="/about">
           <AboutPage />
@@ -293,9 +351,6 @@ const App = (props) => {
             <Box>
               {isLoggedIn ? (
                 <ProfilePage
-                  userid={actualState.userid}
-                  isLoggedIn={isLoggedIn}
-                  isTrainer={isTrainer}
                   openAlert={(type) => {
                     handleOpenAlert(type);
                   }}
@@ -308,6 +363,9 @@ const App = (props) => {
                   setIsTrainer={() => {
                     setIsTrainer(false);
                   }}
+                  userid={actualState.userid}
+                  isLoggedIn={isLoggedIn}
+                  isTrainer={isTrainer}
                 />
               ) : (
                 <LoginPage
@@ -320,13 +378,46 @@ const App = (props) => {
                   setNewState={(userid, token) => {
                     setNewState({ userid: userid, token: token });
                   }}
-                  isLoggedIn={isLoggedIn}
+                  setIsAdmin={() => setIsAdmin(true)}
                   setIsTrainer={() => {
                     setIsTrainer(true);
                   }}
+                  isLoggedIn={isLoggedIn}
                 />
               )}
             </Box>
+          )}
+        </Route>
+        <Route path="/admin">
+          {isLoading ? (
+            <Box
+              sx={{ p: 25 }}
+              style={{
+                backgroundColor: "#332D2D",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <CircularProgress />
+            </Box>
+          ) : (
+            <AdminPage isAdmin={isAdmin} />
+          )}
+        </Route>
+        <Route path="/admin.users">
+          {isLoading ? (
+            <Box
+              sx={{ p: 25 }}
+              style={{
+                backgroundColor: "#332D2D",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <CircularProgress />
+            </Box>
+          ) : (
+            <AdminPageUsers isAdmin={isAdmin} />
           )}
         </Route>
       </Switch>
