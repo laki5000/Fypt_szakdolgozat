@@ -4,7 +4,7 @@ import net.javaguides.springboot.model.Admin;
 
 public class AdminDto {
 	private long id;
-	private String userId;
+	private long userid;
 	
 	public AdminDto() {
 		
@@ -12,7 +12,7 @@ public class AdminDto {
 	
 	public AdminDto(Admin admin) {
 		this.id = admin.getId();
-		this.userId = admin.getUserId();
+		this.userid = admin.getUserid();
 	}
 
 	public long getId() {
@@ -23,11 +23,11 @@ public class AdminDto {
 		this.id = id;
 	}
 
-	public String getUserId() {
-		return userId;
+	public long getUserId() {
+		return userid;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserId(long userid) {
+		this.userid = userid;
 	}
 }

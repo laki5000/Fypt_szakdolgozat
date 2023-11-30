@@ -4,34 +4,44 @@ import net.javaguides.springboot.model.Trainer;
 
 public class TrainerDto {
 	private long id;
-	private String kiketVallal;
-	private String specializacio;
-	private String vegzettseg;
-	private String hol;
+	private long userid;
+	private int target;
+	private String targetcity;
 	private boolean online;
-	private String tapasztalat;
-	private String telefonszam;
-	private String bemutatkozas;
-	private long userId;
-	private boolean hiteles;
+	private boolean diet;
+	private String trainingtype;
+	private String phone;
+	private String introduction;
 	
 	public TrainerDto() {
 		
 	}
+
+	public TrainerDto(long id, long userid, int target, String targetcity, boolean online, boolean diet, String trainingtype, String phone,
+			String introduction) {
+		super();
+		this.id = id;
+		this.userid = userid;
+		this.target = target;
+		this.targetcity = targetcity;
+		this.online = online;
+		this.diet = diet;
+		this.trainingtype = trainingtype;
+		this.phone = phone;
+		this.introduction = introduction;
+	}
 	
 	public TrainerDto(Trainer trainer) {
+		super();
 		this.id = trainer.getId();
-		this.kiketVallal = trainer.getKiketVallal();
-		this.specializacio = trainer.getSpecializacio();
-		this.vegzettseg = trainer.getVegzettseg();
-		this.hol = trainer.getHol();
+		this.userid = trainer.getUserid();
+		this.target = trainer.getTarget();
+		this.targetcity = trainer.getTargetcity();
 		this.online = trainer.isOnline();
-		this.tapasztalat = trainer.getTapasztalat();
-		this.telefonszam = trainer.getTelefonszam();
-		this.bemutatkozas = trainer.getBemutatkozas();
-		this.userId = trainer.getUserId();
-		this.hiteles = trainer.isHiteles();
-		
+		this.diet = trainer.isDiet();
+		this.trainingtype = trainer.getTrainingtype();
+		this.phone = trainer.getPhone();
+		this.introduction = trainer.getIntroduction();
 	}
 
 	public long getId() {
@@ -42,36 +52,28 @@ public class TrainerDto {
 		this.id = id;
 	}
 
-	public String getKiketVallal() {
-		return kiketVallal;
+	public long getUserid() {
+		return userid;
 	}
 
-	public void setKiketVallal(String kiketVallal) {
-		this.kiketVallal = kiketVallal;
+	public void setUserid(long userid) {
+		this.userid = userid;
 	}
 
-	public String getSpecializacio() {
-		return specializacio;
+	public int getTarget() {
+		return target;
 	}
 
-	public void setSpecializacio(String specializacio) {
-		this.specializacio = specializacio;
+	public void setTarget(int target) {
+		this.target = target;
 	}
 
-	public String getVegzettseg() {
-		return vegzettseg;
+	public String getTargetcity() {
+		return targetcity;
 	}
 
-	public void setVegzettseg(String vegzettseg) {
-		this.vegzettseg = vegzettseg;
-	}
-
-	public String getHol() {
-		return hol;
-	}
-
-	public void setHol(String hol) {
-		this.hol = hol;
+	public void setTargetcity(String targetcity) {
+		this.targetcity = targetcity;
 	}
 
 	public boolean isOnline() {
@@ -81,44 +83,36 @@ public class TrainerDto {
 	public void setOnline(boolean online) {
 		this.online = online;
 	}
-
-	public String getTapasztalat() {
-		return tapasztalat;
+	
+	public boolean isDiet() {
+		return diet;
 	}
 
-	public void setTapasztalat(String tapasztalat) {
-		this.tapasztalat = tapasztalat;
+	public void setDiet(boolean diet) {
+		this.diet = diet;
 	}
 
-	public String getTelefonszam() {
-		return telefonszam;
+	public String getTrainingtype() {
+		return trainingtype;
 	}
 
-	public void setTelefonszam(String telefonszam) {
-		this.telefonszam = telefonszam;
+	public void setTrainingtype(String trainingtype) {
+		this.trainingtype = trainingtype;
 	}
 
-	public String getBemutatkozas() {
-		return bemutatkozas;
+	public String getPhone() {
+		return phone;
 	}
 
-	public void setBemutatkozas(String bemutatkozas) {
-		this.bemutatkozas = bemutatkozas;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
-	public long getUserId() {
-		return userId;
+	public String getIntroduction() {
+		return introduction;
 	}
 
-	public void setUserId(long userId) {
-		this.userId = userId;
-	}
-
-	public boolean isHiteles() {
-		return hiteles;
-	}
-
-	public void setHiteles(boolean hiteles) {
-		this.hiteles = hiteles;
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
 	}
 }

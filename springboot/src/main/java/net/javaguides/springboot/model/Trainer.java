@@ -6,6 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import net.javaguides.springboot.dto.TrainerDto;
+
 
 @Entity
 @Table(name = "trainers")
@@ -14,54 +16,59 @@ public class Trainer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@Column(name = "kiket_vallal")
-	private String kiketVallal;
+	@Column(name = "userid")
+	private long userid;
 	
-	@Column(name = "specializacio")
-	private String specializacio;
+	@Column(name = "target")
+	private int target;
 	
-	@Column(name = "vegzettseg")
-	private String vegzettseg;
-	
-	@Column(name = "hol")
-	private String hol;
+	@Column(name = "targetcity")
+	private String targetcity;
 	
 	@Column(name = "online")
 	private boolean online;
 	
-	@Column(name = "tapasztalat")
-	private String tapasztalat;
+	@Column(name = "diet")
+	private boolean diet;
 	
-	@Column(name = "telefonszam")
-	private String telefonszam;
+	@Column(name = "trainingtype")
+	private String trainingtype;
 	
-	@Column(name = "bemutatkozas")
-	private String bemutatkozas;
+	@Column(name = "phone")
+	private String phone;
 	
-	@Column(name = "user_id")
-	private long userId;
-	
-	@Column(name = "hiteles")
-	private boolean hiteles;
+	@Column(name = "introduction")
+	private String introduction;
 	
 	public Trainer() {
 		
 	}
 
-	public Trainer(long id, String kiketVallal, String specializacio, String vegzettseg, String hol, boolean online,
-			String tapasztalat, String telefonszam, String bemutatkozas, long userId, boolean hiteles) {
+	public Trainer(long id, long userid, int target, String targetcity, boolean online, boolean diet, String trainingtype, String phone,
+			String introduction) {
 		super();
 		this.id = id;
-		this.kiketVallal = kiketVallal;
-		this.specializacio = specializacio;
-		this.vegzettseg = vegzettseg;
-		this.hol = hol;
+		this.userid = userid;
+		this.target = target;
+		this.targetcity = targetcity;
 		this.online = online;
-		this.tapasztalat = tapasztalat;
-		this.telefonszam = telefonszam;
-		this.bemutatkozas = bemutatkozas;
-		this.userId = userId;
-		this.hiteles = hiteles;
+		this.diet = diet;
+		this.trainingtype = trainingtype;
+		this.phone = phone;
+		this.introduction = introduction;
+	}
+	
+	public Trainer(TrainerDto trainerdto) {
+		super();
+		this.id = trainerdto.getId();
+		this.userid = trainerdto.getUserid();
+		this.target = trainerdto.getTarget();
+		this.targetcity = trainerdto.getTargetcity();
+		this.online = trainerdto.isOnline();
+		this.diet = trainerdto.isDiet();
+		this.trainingtype = trainerdto.getTrainingtype();
+		this.phone = trainerdto.getPhone();
+		this.introduction = trainerdto.getIntroduction();
 	}
 
 	public long getId() {
@@ -72,36 +79,28 @@ public class Trainer {
 		this.id = id;
 	}
 
-	public String getKiketVallal() {
-		return kiketVallal;
+	public long getUserid() {
+		return userid;
 	}
 
-	public void setKiketVallal(String kiketVallal) {
-		this.kiketVallal = kiketVallal;
+	public void setUserid(long userid) {
+		this.userid = userid;
 	}
 
-	public String getSpecializacio() {
-		return specializacio;
+	public int getTarget() {
+		return target;
 	}
 
-	public void setSpecializacio(String specializacio) {
-		this.specializacio = specializacio;
+	public void setTarget(int target) {
+		this.target = target;
 	}
 
-	public String getVegzettseg() {
-		return vegzettseg;
+	public String getTargetcity() {
+		return targetcity;
 	}
 
-	public void setVegzettseg(String vegzettseg) {
-		this.vegzettseg = vegzettseg;
-	}
-
-	public String getHol() {
-		return hol;
-	}
-
-	public void setHol(String hol) {
-		this.hol = hol;
+	public void setTargetcity(String targetcity) {
+		this.targetcity = targetcity;
 	}
 
 	public boolean isOnline() {
@@ -111,44 +110,36 @@ public class Trainer {
 	public void setOnline(boolean online) {
 		this.online = online;
 	}
-
-	public String getTapasztalat() {
-		return tapasztalat;
+	
+	public boolean isDiet() {
+		return diet;
 	}
 
-	public void setTapasztalat(String tapasztalat) {
-		this.tapasztalat = tapasztalat;
+	public void setDiet(boolean diet) {
+		this.diet = diet;
 	}
 
-	public String getTelefonszam() {
-		return telefonszam;
+	public String getTrainingtype() {
+		return trainingtype;
 	}
 
-	public void setTelefonszam(String telefonszam) {
-		this.telefonszam = telefonszam;
+	public void setTrainingtype(String trainingtype) {
+		this.trainingtype = trainingtype;
 	}
 
-	public String getBemutatkozas() {
-		return bemutatkozas;
+	public String getPhone() {
+		return phone;
 	}
 
-	public void setBemutatkozas(String bemutatkozas) {
-		this.bemutatkozas = bemutatkozas;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
-	public long getUserId() {
-		return userId;
+	public String getIntroduction() {
+		return introduction;
 	}
 
-	public void setUserId(long userId) {
-		this.userId = userId;
-	}
-
-	public boolean isHiteles() {
-		return hiteles;
-	}
-
-	public void setHiteles(boolean hiteles) {
-		this.hiteles = hiteles;
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
 	}
 }

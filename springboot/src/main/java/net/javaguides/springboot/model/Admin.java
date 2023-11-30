@@ -14,16 +14,17 @@ public class Admin {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Column(name = "user_id")
-	private String userId;
+	@Column(name = "userid")
+	private long userid;
 	
 	public Admin() {
 		
 	}
 
-	public Admin(String userId) {
+	public Admin(long id, long userid) {
 		super();
-		this.userId = userId;
+		this.id = id;
+		this.userid = userid;
 	}
 
 	public long getId() {
@@ -34,11 +35,11 @@ public class Admin {
 		this.id = id;
 	}
 
-	public String getUserId() {
-		return userId;
+	public long getUserid() {
+		return userid;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserid(long userid) {
+		this.userid = userid;
 	}
 }
