@@ -18,6 +18,8 @@ const AdminFormUsers = (props) => {
     page: 0,
     pagesize: 10,
     deleted: 0,
+    order: "",
+    field: "",
   });
 
   const columns = [
@@ -69,6 +71,9 @@ const AdminFormUsers = (props) => {
       width: 170,
       field: "További műveletek",
       headerName: "További műveletek",
+      disableColumnMenu: true,
+      sortable: false,
+      filterable: false,
       renderCell: (params) => (
         <Close
           sx={{ color: "red", margin: "auto", cursor: "pointer" }}
@@ -100,13 +105,30 @@ const AdminFormUsers = (props) => {
     }
   };
 
-  const handleSortModelChange = (sortModel) => {
-    console.log(sortModel);
+  const handleSortModelChange = async (model) => {
+    if (model.length > 0) {
+      setPageState((old) => ({
+        ...old,
+        order: model[0].sort,
+        field: model[0].field,
+      }));
+    } else {
+      setPageState((old) => ({
+        ...old,
+        order: "",
+        field: "",
+      }));
+    }
   };
 
   React.useEffect(() => {
     setPageState((old) => ({ ...old, isLoading: true }));
-    UserService.getAllUser(pageState.page, pageState.pagesize).then((res) => {
+    UserService.getAllUser(
+      pageState.page,
+      pageState.pagesize,
+      pageState.field,
+      pageState.order
+    ).then((res) => {
       setPageState((old) => ({
         ...old,
         isLoading: false,
@@ -114,7 +136,13 @@ const AdminFormUsers = (props) => {
         total: res.data.totalElements,
       }));
     });
-  }, [pageState.page, pageState.pagesize, pageState.deleted]);
+  }, [
+    pageState.page,
+    pageState.pagesize,
+    pageState.deleted,
+    pageState.order,
+    pageState.field,
+  ]);
 
   return (
     <Box sx={{ pb: 5, pt: 5 }} style={{ backgroundColor: "#332D2D" }}>
@@ -144,7 +172,7 @@ const AdminFormUsers = (props) => {
           onPageSizeChange={(pageSize) => {
             setPageState((old) => ({ ...old, pagesize: pageSize }));
           }}
-          onSortModelChange={(sortModel) => handleSortModelChange(sortModel)}
+          onSortModelChange={(model) => handleSortModelChange(model)}
           style={{ backgroundColor: "white" }}
         />
       </Container>

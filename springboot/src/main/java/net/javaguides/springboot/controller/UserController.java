@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -72,10 +73,25 @@ public class UserController {
 	
 	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/users/load/all")
-	public Page<UserDto> getAllUser(Pageable pageable, @RequestParam(defaultValue = "10") int size) {
-	    pageable = PageRequest.of(pageable.getPageNumber(), size, pageable.getSort());
-	    return userrepository.findAll(pageable).map(UserDto::new);
+	public Page<UserDto> getAllUser(
+	    @RequestParam(defaultValue = "0") int page,
+	    @RequestParam(defaultValue = "10") int size,
+	    @RequestParam(defaultValue = "id") String sort,
+	    @RequestParam(defaultValue = "asc") String order) {
+
+	    Pageable pageable;
+
+	    if ("name".equals(sort)) {
+	        pageable = PageRequest.of(page, size);
+	        return "asc".equals(order) ? 
+	            userrepository.findAllOrderByFullNameAsc(pageable).map(UserDto::new) :
+	            userrepository.findAllOrderByFullNameDesc(pageable).map(UserDto::new);
+	    } else {
+	        pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(order), sort));
+	        return userrepository.findAll(pageable).map(UserDto::new);
+	    }
 	}
+
 	
 	@CrossOrigin(origins = "http://localhost:3000")
 	@DeleteMapping("/users/delete/{id}")
