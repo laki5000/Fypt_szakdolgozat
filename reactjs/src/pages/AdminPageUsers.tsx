@@ -1,7 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import { withRouter } from "react-router-dom";
-import AdminFormUsers from "../components/AdminFormUsers.tsx";
+import DataGridForm from "../components/DataGridForm.tsx";
 
 const AdminPageUsers = (props) => {
   React.useEffect(() => {
@@ -12,7 +12,7 @@ const AdminPageUsers = (props) => {
 
   return (
     <Box>
-      <AdminFormUsers />
+      <DataGridForm />
     </Box>
   );
 };

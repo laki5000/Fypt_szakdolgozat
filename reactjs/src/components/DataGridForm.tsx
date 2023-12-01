@@ -6,11 +6,11 @@ import UserService from "../services/UserService.ts";
 import ProfileAvatar from "./ProfileAvatar.tsx";
 import Typography from "@mui/material/Typography";
 import OtherService from "../services/OtherService.ts";
-import ProfileDialog from "../components/ProfileDialog.tsx";
+import ProfileDialog from "./ProfileDialog.tsx";
 import Close from "@mui/icons-material/Close";
 import TrainerService from "../services/TrainerService.ts";
 
-const AdminFormUsers = (props) => {
+const DataGridForm = (props) => {
   const [pageState, setPageState] = React.useState({
     isLoading: false,
     data: [],
@@ -96,12 +96,12 @@ const AdminFormUsers = (props) => {
           TrainerService.deleteTrainer(res.data.content[0].id);
         }
       });
-      UserService.deleteUser(id);
-
-      setPageState((old) => ({
-        ...old,
-        deleted: pageState.deleted + 1,
-      }));
+      UserService.deleteUser(id).then((res) => {
+        setPageState((old) => ({
+          ...old,
+          deleted: pageState.deleted + 1,
+        }));
+      });
     }
   };
 
@@ -122,6 +122,7 @@ const AdminFormUsers = (props) => {
   };
 
   React.useEffect(() => {
+    console.log("asd");
     setPageState((old) => ({ ...old, isLoading: true }));
     UserService.getAllUser(
       pageState.page,
@@ -179,4 +180,4 @@ const AdminFormUsers = (props) => {
     </Box>
   );
 };
-export default AdminFormUsers;
+export default DataGridForm;
